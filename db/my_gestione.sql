@@ -120,3 +120,76 @@ CREATE TABLE t_soccorsiIntervenuti (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
+
+INSERT INTO t_provChiamata VALUES ('Selettiva Centrale Trento');
+INSERT INTO t_provChiamata VALUES ('Telefono Centrale Trento');
+INSERT INTO t_provChiamata VALUES ('Radio Centrale Trento');
+INSERT INTO t_provChiamata VALUES ('Selettiva Corpo');
+INSERT INTO t_provChiamata VALUES ('Comandante');
+INSERT INTO t_provChiamata VALUES ('Vicecomandante');
+INSERT INTO t_provChiamata VALUES ('Passante');
+INSERT INTO t_provChiamata VALUES ('Telefono');
+INSERT INTO t_provChiamata VALUES ('Servizi');
+INSERT INTO t_provChiamata VALUES ('Altro');
+
+INSERT INTO t_mezzi VALUES ('VW Interventi Tecnici');
+INSERT INTO t_mezzi VALUES ('VW Pinze');
+INSERT INTO t_mezzi VALUES ('Daily Interventi Tecnici');
+INSERT INTO t_mezzi VALUES ('Autobotte Volvo');
+INSERT INTO t_mezzi VALUES ('Autobotte 180');
+INSERT INTO t_mezzi VALUES ('Minibotte');
+INSERT INTO t_mezzi VALUES ('Autoscala');
+INSERT INTO t_mezzi VALUES ('Snorkel');
+INSERT INTO t_mezzi VALUES ('Autogru MAN');
+INSERT INTO t_mezzi VALUES ('Nissan Terrano');
+INSERT INTO t_mezzi VALUES ('Land Rover TD5');
+INSERT INTO t_mezzi VALUES ('Land Rover TD4');
+INSERT INTO t_mezzi VALUES ('Mitsubishi Pickup');
+INSERT INTO t_mezzi VALUES ('Gommone');
+INSERT INTO t_mezzi VALUES ('Fiat Punto');
+INSERT INTO t_mezzi VALUES ('Daily Trasporto');
+INSERT INTO t_mezzi VALUES ('VW trasp. persone');
+INSERT INTO t_mezzi VALUES ('VW trasp. unione');
+INSERT INTO t_mezzi VALUES ('Carrello trasporto mezzi');
+INSERT INTO t_mezzi VALUES ('Pompa Ziegler');
+INSERT INTO t_mezzi VALUES ('Carrello Ziegler');
+INSERT INTO t_mezzi VALUES ('Carrello incendi boschivi');
+INSERT INTO t_mezzi VALUES ('Pompa Rosenbauer');
+INSERT INTO t_mezzi VALUES ('Carrello gruppo elettrogeno');
+INSERT INTO t_mezzi VALUES ('Idrovora');
+
+INSERT INTO t_soccorsiEsterni VALUES ('CC Pergine');
+INSERT INTO t_soccorsiEsterni VALUES ('CC Borgo');
+INSERT INTO t_soccorsiEsterni VALUES ('Polizia Municipale');
+INSERT INTO t_soccorsiEsterni VALUES ('Polizia Stradale');
+INSERT INTO t_soccorsiEsterni VALUES ('Medico');
+INSERT INTO t_soccorsiEsterni VALUES ('Ambulanza');
+INSERT INTO t_soccorsiEsterni VALUES ('Gestione Strade');
+INSERT INTO t_soccorsiEsterni VALUES ('Servizi forestali');
+INSERT INTO t_soccorsiEsterni VALUES ('AMNU-Serv. fun.');
+INSERT INTO t_soccorsiEsterni VALUES ('CSA');
+
+INSERT INTO t_tipoChiamata VALUES ('Allagamento');
+INSERT INTO t_tipoChiamata VALUES ('Apertura porta');
+INSERT INTO t_tipoChiamata VALUES ('Bonifica insetti');
+INSERT INTO t_tipoChiamata VALUES ('Fuga di gas');
+INSERT INTO t_tipoChiamata VALUES ('Incendio abitazione');
+INSERT INTO t_tipoChiamata VALUES ('Incendio autoveicolo');
+INSERT INTO t_tipoChiamata VALUES ('Incendio sterpaglie');
+INSERT INTO t_tipoChiamata VALUES ('Incendio cassonetto');
+INSERT INTO t_tipoChiamata VALUES ('Altri incendi');
+INSERT INTO t_tipoChiamata VALUES ('Incidente stradale');
+INSERT INTO t_tipoChiamata VALUES ('Inquinamento');
+INSERT INTO t_tipoChiamata VALUES ('Manifestazioni');
+INSERT INTO t_tipoChiamata VALUES ('Prevenzione');
+INSERT INTO t_tipoChiamata VALUES ('Pulizia sede stradale');
+INSERT INTO t_tipoChiamata VALUES ('Recupero carico');
+INSERT INTO t_tipoChiamata VALUES ('Sblocco ascensore');
+INSERT INTO t_tipoChiamata VALUES ('Servizio reperibilità');
+INSERT INTO t_tipoChiamata VALUES ('Soccorso animali');
+INSERT INTO t_tipoChiamata VALUES ('Soccorso persona');
+INSERT INTO t_tipoChiamata VALUES ('Soccorso tecnico generico');
+INSERT INTO t_tipoChiamata VALUES ('Sopralluogo incendio');
+INSERT INTO t_tipoChiamata VALUES ('Supporto elicottero');
+INSERT INTO t_tipoChiamata VALUES ('Taglio Pianta');
+INSERT INTO t_tipoChiamata VALUES ('Altro');
