@@ -20,10 +20,10 @@ if(isset($_POST['password'])){
     // caserma
     if ($password == 'b65959845f63d31058e1319f724bcaff'){
       $_SESSION['include'] = 'php/reports.php';
-        echo "
-        <script>
-        flatAlert('Accesso eseguito con successo', '', 'success', 'index.php');
-        </script>";
+      echo "
+      <script>
+      flatAlert('Accesso eseguito con successo', '', 'success', 'index.php');
+      </script>";
     }else{
       echo "
       <script>

@@ -56,7 +56,7 @@ CREATE TABLE t_soccorsiEsterni (
 ) ENGINE = InnoDB;
 
 
-CREATE TABLE t_rapportoVVF (
+CREATE TABLE t_rapportiVVF (
   ID 		                    BIGINT				NOT NULL 	AUTO_INCREMENT,
   ID_Rapporto               BIGINT				NOT NULL,
   OraUscita                 TIMESTAMP,
@@ -97,7 +97,7 @@ CREATE TABLE t_mezziIntervenuti (
   FK_RapportoVVF    BIGINT,
   FK_Mezzo          BIGINT,
   PRIMARY KEY(ID),
-  FOREIGN KEY(FK_RapportoVVF)    REFERENCES t_rapportoVVF(ID)
+  FOREIGN KEY(FK_RapportoVVF)    REFERENCES t_rapportiVVF(ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   FOREIGN KEY(FK_Mezzo)    REFERENCES t_mezzi(ID)
@@ -110,7 +110,7 @@ CREATE TABLE t_soccorsiIntervenuti (
   FK_RapportoVVF      BIGINT,
   FK_SoccorsiEsterni  BIGINT,
   PRIMARY KEY(ID),
-  FOREIGN KEY(FK_RapportoVVF)    REFERENCES t_rapportoVVF(ID)
+  FOREIGN KEY(FK_RapportoVVF)    REFERENCES t_rapportiVVF(ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   FOREIGN KEY(FK_SoccorsiEsterni)    REFERENCES t_soccorsiEsterni(ID)
