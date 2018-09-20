@@ -6,7 +6,7 @@
       try{
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         // error_reporting per togliere il notice quando non trova isLogged
-        error_reporting(0);
+        //error_reporting(0);
         if (!$_SESSION['include']){
           $_SESSION = array();
           $_SESSION['include'] = 'php/checkPassword.php';
