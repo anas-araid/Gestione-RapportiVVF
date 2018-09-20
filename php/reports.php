@@ -11,15 +11,32 @@
       </tr>
     </thead>
     <tbody>
-      <tr onclick="alert('ciao')">
-        <td>1</td>
-        <td>25/7/2018</td>
-        <td>Incendio</td>
-        <td>Anas</td>
-        <td>Dettagli</td>
-        <td>Elimina</td>
-      </tr>
-
+      <?php
+        include "php/getData.php";
+        $reportQuery = "SELECT * FROM t_rapportiVVF ORDER BY Data DESC";
+        $getAllReports = mysqli_query($db_conn, $reportQuery);
+        if ($getAllReports != false){
+          $reportExists = false;
+          while($ris=mysqli_fetch_array($getAllReports)){
+            $reportExists = true;
+            echo '<tr onclick="">
+                <td>'.$ris['ID_Rapporto'].'</td>
+                <td>'.date('d-m-Y', strtotime($ris['Data'])).'</td>
+                <td>'.getCallType($ris['FK_TipoChiamata']).'</td>
+                <td>'.getFiremanData($ris['FK_Responsabile']).'</td>
+                <td><a href="details.php?id='.$ris['ID'].'">Dettagli</a></td>
+                <td><a href="deleteReport.php?id='.$ris['ID'].'">Elimina</a></td>
+              </tr>';
+          }
+        }
+       ?>
     </tbody>
   </table>
+  <div style="text-align:center">
+    <?php
+    if(!$reportExists){
+      echo "<h5 class='style-gradient-text'>Nessun rapporto d'intervento</h5>";
+    }
+    ?>
+  </div>
 <div>
