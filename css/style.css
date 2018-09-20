@@ -1,0 +1,75 @@
+body, h1, h2, h3, h4, h5, h6, p, a, button{
+  font-family: 'Quicksand', sans-serif;;
+}
+html {
+  background: url(../bg.svg) no-repeat center bottom fixed;
+  background-size: cover;
+}
+.style-parent{
+  display:table;
+  height: 100%;
+  width: 100%;
+}
+.style-child{
+  display:table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.style-card{
+  border:none;
+  border-radius:17px;
+  padding:20px;
+  margin-top:20px;
+}
+.style-gradient-text{
+  background-image: -webkit-linear-gradient(left, #c5003e , #560f50); /* For Chrome and Safari */
+  background-image:    -moz-linear-gradient(left, #c5003e, #560f50); /* For old Fx (3.6 to 15) */
+  background-image:     -ms-linear-gradient(left, #c5003e, #560f50); /* For pre-releases of IE 10*/
+  background-image:      -o-linear-gradient(left, #c5003e, #560f50); /* For old Opera (11.1 to 12.0) */
+  background-image:         linear-gradient(to right, #c5003e, #560f50); /* Standard syntax; must be last */
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.style-gradient{
+  background: -webkit-linear-gradient(left, #c5003e , #560f50); /* For Chrome and Safari */
+  background:    -moz-linear-gradient(left, #c5003e, #560f50); /* For old Fx (3.6 to 15) */
+  background:     -ms-linear-gradient(left, #c5003e, #560f50); /* For pre-releases of IE 10*/
+  background:      -o-linear-gradient(left, #c5003e, #560f50); /* For old Opera (11.1 to 12.0) */
+  background:         linear-gradient(to right, #c5003e, #560f50); /* Standard syntax; must be last */
+}
+.style-gradient-shadow{
+  box-shadow: 0 13px 19px -6px #c5003e;
+  transition: .5s;
+}
+.style-button{
+  text-align: center;
+  border:none;
+  border-radius: 25px;
+  height: 45px;
+  width: 150px;
+  outline: none;
+}
+.style-button:focus {
+  outline: none;
+}
+.style-button:hover{
+  box-shadow: 0 13px 19px -6px #c5003e;
+  transition: .5s;
+  outline: none;
+}
+.tingle-modal-box{
+  border-radius: 25px!important;
+}
+@media (max-width: 540px){
+  .tingle-modal__close{
+    background: -webkit-linear-gradient(left, #c5003e , #560f50); /* For Chrome and Safari */
+    background:    -moz-linear-gradient(left, #c5003e, #560f50); /* For old Fx (3.6 to 15) */
+    background:     -ms-linear-gradient(left, #c5003e, #560f50); /* For pre-releases of IE 10*/
+    background:      -o-linear-gradient(left, #c5003e, #560f50); /* For old Opera (11.1 to 12.0) */
+    background:         linear-gradient(to right, #c5003e, #560f50); /* Standard syntax; must be last */
+  }
+  .tingle-modal-box{
+    border-radius: 0px!important;
+  }
+}
