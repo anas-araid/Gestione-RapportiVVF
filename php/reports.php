@@ -1,4 +1,33 @@
-<div style="max-height:600px;overflow:auto">
+<div style="max-height:600px;min-height:500px;overflow:auto">
+  <div class="mdl-grid" style="width:95%">
+    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+      <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
+              style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
+               onclick="modal.open()">
+               Nuovo
+             <i class="material-icons">note_add</i>
+      </button>
+    </div>
+    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+      <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
+              style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
+               onclick="location.href='php/logout.php'">
+               Esci
+             <i class="material-icons">account_circle</i>
+      </button>
+    </div>
+  </div>
+  <div>
+    <form action="" method="POST" style="text-align:center">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:60%">
+        <input class="mdl-textfield__input" type="text" id="find" name="find">
+        <label class="mdl-textfield__label" for="find">Cerca</label>
+      </div>
+      <button id="btn-search" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--white ">
+        <i class="material-icons style-gradient-text">search</i>
+      </button>
+    </form>
+  </div>
   <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%">
     <thead>
       <tr style="text-align:left">
