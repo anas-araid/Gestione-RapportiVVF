@@ -345,7 +345,10 @@
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
                               style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
-                               onclick="location.href='php/logout.php'">
+                              type="submit"
+                              id="btnSave"
+                              name="btnSave"
+                              onclick="location.href='php/addReport.php'">
                                Salva
                              <i class="material-icons">save</i>
                       </button>
