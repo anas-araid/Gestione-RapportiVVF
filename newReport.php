@@ -46,6 +46,8 @@
                 </h3>
               </div>
             </section>
+
+
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
                 <form action="" method="post" style="text-align:center;max-height:650px;overflow:auto">
@@ -80,7 +82,7 @@
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                               <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="prov_'.$index.'">
-                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="prov_'.$index.'" value="1">
+                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="prov" value="1">
                                 <span class="mdl-radio__label">'.$prov[$index].'</span>
                               </label>
                             </div> ';
@@ -91,11 +93,19 @@
                       }
                      ?>
                   </div>
+
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idChiamata" name="chiamata" required="">
-                         <label class="mdl-textfield__label" for="idChiamata">Evento segnalato dalla chiamata</label>
+                        <select id="IdIntervento" class="mdl-textfield__input" required="">
+                          <?php
+                            $interventi = getCallType(null, $db_conn);
+                            for ($i =0; $i < count($interventi); $i++){
+                              echo '<option value="'.$i.'">'.$interventi[$i].'</option>';
+                            }
+                           ?>
+                        </select>
+                        <label class="mdl-textfield__label" for="IdIntervento">Evento</label>
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
@@ -112,10 +122,85 @@
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idComune" name="comune" required="">
-                         <label class="mdl-textfield__label" for="idComune">Comune</label>
+                        <select id="IdComune" class="mdl-textfield__input"  required="">
+                          <?php
+                            $comuni = getComuni(null, $db_conn);
+                            for ($i =0; $i < count($comuni); $i++){
+                              echo '<option value="'.$i.'">'.$comuni[$i].'</option>';
+                            }
+                           ?>
+                        </select>
+                        <label class="mdl-textfield__label" for="IdComune">Comune</label>
                       </div>
                     </div>
+                    <br>
+
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                      <span>Ora di partenza &nbsp</span>
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
+                         <input class="mdl-textfield__input" type="time" id="IdData" name="data" required="">
+                      </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                      <span>Ora di rientro &nbsp</span>
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
+                         <input class="mdl-textfield__input" type="time" id="IdData" name="data" required="">
+                      </div>
+                    </div>
+                  </div>
+
+                  <h6 class="style-gradient-text">Generalità del colpito:</h6>
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
+                         <input class="mdl-textfield__input" type="text" id="idNome" name="nome">
+                         <label class="mdl-textfield__label style-gradient-text" for="idNome">Nome</label>
+                      </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
+                         <input class="mdl-textfield__input" type="text" id="idCognome" name="cognome">
+                         <label class="mdl-textfield__label style-gradient-text" for="idCognome">Cognome</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--9-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
+                         <input class="mdl-textfield__input" type="text" id="idResidenza" name="residenza" >
+                         <label class="mdl-textfield__label style-gradient-text" for="idResidenza">Residenza</label>
+                      </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--3-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80%">
+                         <input class="mdl-textfield__input" type="date" id="idDataDiNascita" name="dataDiNascita">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
+                         <input class="mdl-textfield__input" type="number" id="idTelefono" name="telefono">
+                         <label class="mdl-textfield__label style-gradient-text" for="idTelefono">Telefono</label>
+                      </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+                         <input class="mdl-textfield__input" type="text" id="idCartaIdentita" name="cartaIdentita" >
+                         <label class="mdl-textfield__label style-gradient-text" for="idCartaIdentita">Carta d'identità</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                         <input class="mdl-textfield__input" type="text" id="idAltro" name="altro" >
+                         <label class="mdl-textfield__label style-gradient-text" for="idAltro">Altro</label>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <h6 class="style-gradient-text">Dettagli:</h6>
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                    
                   </div>
                 </form>
               </div>

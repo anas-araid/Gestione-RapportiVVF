@@ -61,6 +61,10 @@ html {
 .tingle-modal-box{
   border-radius: 25px!important;
 }
+.mdl-textfield__input{
+  border-bottom:1px solid #c5003e!important;
+  color:grey!important;
+}
 @media (max-width: 540px){
   .tingle-modal__close{
     background: -webkit-linear-gradient(left, #c5003e , #560f50); /* For Chrome and Safari */

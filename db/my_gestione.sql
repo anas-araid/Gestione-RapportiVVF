@@ -190,7 +190,7 @@ INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Prevenzione');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Pulizia sede stradale');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Recupero carico');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Sblocco ascensore');
-INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Servizio reperibilità');
+INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Servizio reperibilita');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Soccorso animali');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Soccorso persona');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Soccorso tecnico generico');

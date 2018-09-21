@@ -28,14 +28,25 @@
   }
 
   function getCallType($ID, $db_conn){
-    $sql = "SELECT * FROM t_tipochiamata WHERE (ID='$ID')";
+    if ($ID == null){
+      $sql = "SELECT * FROM t_tipochiamata";
+      $callType = array();
+    }else{
+      $sql = "SELECT * FROM t_tipochiamata WHERE (ID='$ID')";
+      $callType = '';
+    }
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
     }
-    $callType = '';
+    $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
-      $callType = $ris['Tipologia'];
+      if($ID == null){
+        $callType["$i"] = $ris['Tipologia'];
+        $i++;
+      }else{
+        $callType = $ris['Tipologia'];
+      }
     }
     return $callType;
   }
@@ -73,7 +84,30 @@
         $prov["$i"] = $ris['Provenienza'];
         $i++;
       }else{
-        $prov = $ris['Tipologia'];
+        $prov = $ris['Provenienza'];
+      }
+    }
+    return $prov;
+  }
+  function getComuni($ID, $db_conn){
+    if ($ID == null){
+      $sql = "SELECT * FROM t_comuni";
+      $prov = array();
+    }else{
+      $sql = "SELECT * FROM t_comuni WHERE (ID='$ID')";
+      $prov = '';
+    }
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      if($ID == null){
+        $prov["$i"] = $ris['Comune'];
+        $i++;
+      }else{
+        $prov = $ris['Comune'];
       }
     }
     return $prov;
