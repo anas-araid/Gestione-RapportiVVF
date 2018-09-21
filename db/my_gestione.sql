@@ -173,6 +173,11 @@ INSERT INTO t_soccorsiEsterni (Descrizione) VALUES ('Gestione Strade');
 INSERT INTO t_soccorsiEsterni (Descrizione) VALUES ('Servizi forestali');
 INSERT INTO t_soccorsiEsterni (Descrizione) VALUES ('AMNU-Serv. fun.');
 INSERT INTO t_soccorsiEsterni (Descrizione) VALUES ('CSA');
+INSERT INTO t_soccorsiEsterni (Descrizione) VALUES ('Carro attrezzi');
+INSERT INTO t_soccorsiEsterni (Descrizione) VALUES ('Ispettore distrettuale');
+INSERT INTO t_soccorsiEsterni (Descrizione) VALUES ('Perito VVF Trento');
+
+
 
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Allagamento');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Apertura porta');
@@ -198,3 +203,6 @@ INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Sopralluogo incendio');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Supporto elicottero');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Taglio Pianta');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Altro');
+
+
+INSERT INTO t_vigili (Nome, Cognome, Matricola) VALUES ('Anas', 'Araid', '341');

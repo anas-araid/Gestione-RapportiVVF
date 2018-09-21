@@ -52,17 +52,27 @@
   }
 
   function getFiremanData($ID, $db_conn){
-    $sql = "SELECT * FROM t_vigili WHERE (ID='$ID')";
+    $fireman = array();
+    if ($ID == null){
+      $sql = "SELECT * FROM t_vigili";
+    }else{
+      $sql = "SELECT * FROM t_vigili WHERE (ID='$ID')";
+    }
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
     }
-    $fireman = array();
+    $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
-      $fireman['ID'] = $ris['ID'];
-      $fireman['Nome'] = $ris['Nome'];
-      $fireman['Cognome'] = $ris['Cognome'];
-      $fireman['Matricola'] = $ris['Matricola'];
+      if($ID == null){
+        $fireman["$i"] = $ris['Nome']." ".$ris['Cognome'];
+        $i++;
+      }else{
+        $fireman['ID'] = $ris['ID'];
+        $fireman['Nome'] = $ris['Nome'];
+        $fireman['Cognome'] = $ris['Cognome'];
+        $fireman['Matricola'] = $ris['Matricola'];
+      }
     }
     return $fireman;
   }
@@ -134,5 +144,28 @@
       }
     }
     return $mezzi;
+  }
+  function getSoccorsi($ID, $db_conn){
+    if ($ID == null){
+      $sql = "SELECT * FROM t_soccorsiesterni";
+      $soccorsi = array();
+    }else{
+      $sql = "SELECT * FROM t_soccorsiesterni WHERE (ID='$ID')";
+      $soccorsi = '';
+    }
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      if($ID == null){
+        $soccorsi["$i"] = $ris['Descrizione'];
+        $i++;
+      }else{
+        $soccorsi = $ris['Descrizione'];
+      }
+    }
+    return $soccorsi;
   }
 ?>

@@ -230,8 +230,8 @@
                           if ($index < count($mezzi)){
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="prov_'.$index.'">
-                                <input type="checkbox" id="prov_'.$index.'" class="mdl-checkbox__input" name="prov" value="1">
+                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idMezzi_'.$index.'">
+                                <input type="checkbox" id="idMezzi_'.$index.'" class="mdl-checkbox__input" name="mezzo_'."$index".'" value="1">
                                 <span class="mdl-checkbox__label">'.$mezzi[$index].'</span>
                               </label>
                             </div> ';
@@ -243,6 +243,62 @@
                      ?>
                   </div>
 
+
+                  <h6 class="style-gradient-text">Altri soccorsi:</h6>
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                    <?php
+                      $soccorsi = getSoccorsi(null, $db_conn);
+                      //print_r($prov);
+                      $rows = count($soccorsi) / 2;
+                      if(!is_int($rows)){
+                        $rows = (int)$rows + 1;
+                      }
+                      $index = 0;
+                      for ($i=0; $i < $rows;$i++){
+                        for($j=0;$j < 2; $j++){
+                          if ($index < count($soccorsi)){
+                            echo '
+                            <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
+                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idSoccorsi_'.$index.'">
+                                <input type="checkbox" id="idSoccorsi_'.$index.'" class="mdl-checkbox__input" name="soccorsi_'."$index".'" value="1">
+                                <span class="mdl-checkbox__label">'.$soccorsi[$index].'</span>
+                              </label>
+                            </div> ';
+                            $index++;
+                          }
+                        }
+                        echo "<br>";
+                      }
+                     ?>
+                  </div>
+
+                  <h6 class="style-gradient-text">Vigili intervenuti:</h6>
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                    <?php
+                      $vigili = getFiremanData(null, $db_conn);
+                      //print_r($prov);
+                      $rows = count($vigili) / 2;
+                      if(!is_int($rows)){
+                        $rows = (int)$rows + 1;
+                      }
+                      $index = 0;
+                      for ($i=0; $i < $rows;$i++){
+                        for($j=0;$j < 2; $j++){
+                          if ($index < count($vigili)){
+                            echo '
+                            <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
+                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idVigili_'.$index.'">
+                                <input type="checkbox" id="idVigili_'.$index.'" class="mdl-checkbox__input" name="vigili_'."$index".'" value="1">
+                                <span class="mdl-checkbox__label">'.$vigili[$index].'</span>
+                              </label>
+                            </div> ';
+                            $index++;
+                          }
+                        }
+                        echo "<br>";
+                      }
+                     ?>
+                  </div>
 
                   <br>
                   <br>
