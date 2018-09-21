@@ -10,13 +10,6 @@ CREATE TABLE t_vigili (
   PRIMARY KEY(ID)
 ) ENGINE = InnoDB;
 
-CREATE TABLE t_localita (
-  ID 		           BIGINT				NOT NULL 	AUTO_INCREMENT,
-  Via              VARCHAR(50),
-  Comune           VARCHAR(50),
-  PRIMARY KEY(ID)
-) ENGINE = InnoDB;
-
 CREATE TABLE t_provChiamata (
   ID 		           BIGINT				NOT NULL 	AUTO_INCREMENT,
   Provenienza      VARCHAR(50),
@@ -55,6 +48,21 @@ CREATE TABLE t_soccorsiEsterni (
   PRIMARY KEY(ID)
 ) ENGINE = InnoDB;
 
+CREATE TABLE t_comuni (
+  ID 		           BIGINT				NOT NULL 	AUTO_INCREMENT,
+  Comune      VARCHAR(50),
+  PRIMARY KEY(ID)
+) ENGINE = InnoDB;
+
+CREATE TABLE t_localita (
+  ID 		           BIGINT				NOT NULL 	AUTO_INCREMENT,
+  Via              VARCHAR(50),
+  FK_Comune        BIGINT,
+  PRIMARY KEY(ID),
+  FOREIGN KEY(FK_Comune)    REFERENCES t_comuni(ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 CREATE TABLE t_rapportiVVF (
   ID 		                    BIGINT				NOT NULL 	AUTO_INCREMENT,

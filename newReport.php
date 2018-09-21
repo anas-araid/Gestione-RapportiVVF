@@ -48,17 +48,17 @@
             </section>
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
-                <form action="" method="post" style="text-align:center">
+                <form action="" method="post" style="text-align:center;max-height:650px;overflow:auto">
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:60%">
-                         <input class="mdl-textfield__input" type="text" id="IdRapporto" name="IdRapporto" required="">
+                         <input class="mdl-textfield__input" type="text" id="IdRapporto" name="rapporto" required="">
                          <label class="mdl-textfield__label" for="IdRapporto">Inserisci id del rapporto</label>
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="urgente">
-                        <input type="checkbox" id="urgente" class="mdl-checkbox__input">
+                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idUrgente" name="urgente">
+                        <input type="checkbox" id="idUrgente" class="mdl-checkbox__input">
                         <span class="mdl-checkbox__label">Urgente</span>
                       </label>
                     </div>
@@ -80,7 +80,7 @@
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                               <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="prov_'.$index.'">
-                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="options" value="1" checked>
+                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="prov_'.$index.'" value="1">
                                 <span class="mdl-radio__label">'.$prov[$index].'</span>
                               </label>
                             </div> ';
@@ -90,6 +90,32 @@
                         echo "<br>";
                       }
                      ?>
+                  </div>
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
+                         <input class="mdl-textfield__input" type="text" id="idChiamata" name="chiamata" required="">
+                         <label class="mdl-textfield__label" for="idChiamata">Evento segnalato dalla chiamata</label>
+                      </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+                         <input class="mdl-textfield__input" type="date" id="IdData" name="data" required="">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
+                         <input class="mdl-textfield__input" type="text" id="idVia" name="via" required="">
+                         <label class="mdl-textfield__label" for="idVia">Via</label>
+                      </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
+                         <input class="mdl-textfield__input" type="text" id="idComune" name="comune" required="">
+                         <label class="mdl-textfield__label" for="idComune">Comune</label>
+                      </div>
+                    </div>
                   </div>
                 </form>
               </div>
