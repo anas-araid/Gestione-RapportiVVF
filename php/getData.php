@@ -55,4 +55,27 @@
     }
     return $fireman;
   }
+  function getProvChiamata($ID, $db_conn){
+    if ($ID == null){
+      $sql = "SELECT * FROM t_provchiamata";
+      $prov = array();
+    }else{
+      $sql = "SELECT * FROM t_provchiamata WHERE (ID='$ID')";
+      $prov = '';
+    }
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      if($ID == null){
+        $prov["$i"] = $ris['Provenienza'];
+        $i++;
+      }else{
+        $prov = $ris['Tipologia'];
+      }
+    }
+    return $prov;
+  }
 ?>
