@@ -112,4 +112,27 @@
     }
     return $prov;
   }
+  function getMezzi($ID, $db_conn){
+    if ($ID == null){
+      $sql = "SELECT * FROM t_mezzi";
+      $mezzi = array();
+    }else{
+      $sql = "SELECT * FROM t_mezzi WHERE (ID='$ID')";
+      $mezzi = '';
+    }
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      if($ID == null){
+        $mezzi["$i"] = $ris['Descrizione'];
+        $i++;
+      }else{
+        $mezzi = $ris['Descrizione'];
+      }
+    }
+    return $mezzi;
+  }
 ?>

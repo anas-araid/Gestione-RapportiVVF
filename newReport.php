@@ -73,7 +73,6 @@
                       $rows = count($prov) / 2;
                       if(!is_int($rows)){
                         $rows = (int)$rows + 1;
-                        echo $rows;
                       }
                       $index = 0;
                       for ($i=0; $i < $rows;$i++){
@@ -200,8 +199,54 @@
 
                   <h6 class="style-gradient-text">Dettagli:</h6>
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
-                    
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
+                      <div class="mdl-textfield mdl-js-textfield" style="width:90%">
+                        <textarea class="mdl-textfield__input" type="text" rows= "4" id="idOperazioni" name="operazioni" ></textarea>
+                        <label class="mdl-textfield__label style-gradient-text" for="idOperazioni">Operazioni eseguite</label>
+                      </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
+                      <div class="mdl-textfield mdl-js-textfield" style="width:90%">
+                        <textarea class="mdl-textfield__input " type="text" rows= "4" id="idOsservazioni" ></textarea>
+                        <label class="mdl-textfield__label style-gradient-text" for="idOsservazioni">Osservazioni</label>
+                      </div>
+                    </div>
                   </div>
+
+
+
+                  <h6 class="style-gradient-text">Mezzi intervenuti:</h6>
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                    <?php
+                      $mezzi = getMezzi(null, $db_conn);
+                      //print_r($prov);
+                      $rows = count($mezzi) / 2;
+                      if(!is_int($rows)){
+                        $rows = (int)$rows + 1;
+                      }
+                      $index = 0;
+                      for ($i=0; $i < $rows;$i++){
+                        for($j=0;$j < 2; $j++){
+                          if ($index < count($mezzi)){
+                            echo '
+                            <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
+                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="prov_'.$index.'">
+                                <input type="checkbox" id="prov_'.$index.'" class="mdl-checkbox__input" name="prov" value="1">
+                                <span class="mdl-checkbox__label">'.$mezzi[$index].'</span>
+                              </label>
+                            </div> ';
+                            $index++;
+                          }
+                        }
+                        echo "<br>";
+                      }
+                     ?>
+                  </div>
+
+
+                  <br>
+                  <br>
+                  <br>
                 </form>
               </div>
             </section>
