@@ -301,6 +301,57 @@
                   </div>
 
                   <br>
+
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
+                        <select id="IdIntervento" class="mdl-textfield__input" required="">
+                          <?php
+                            $ros = getFiremanData(null, $db_conn);
+                            for ($i =0; $i < count($ros); $i++){
+                              echo '<option value="'.$i.'">'.$ros[$i].'</option>';
+                            }
+                           ?>
+                        </select>
+                        <label class="mdl-textfield__label" for="IdIntervento">Responsabile Operazioni</label>
+                      </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
+                        <select id="IdIntervento" class="mdl-textfield__input" required="">
+                          <?php
+                            $compilatore = getFiremanData(null, $db_conn);
+                            for ($i =0; $i < count($compilatore); $i++){
+                              echo '<option value="'.$i.'">'.$compilatore[$i].'</option>';
+                            }
+                           ?>
+                        </select>
+                        <label class="mdl-textfield__label" for="IdIntervento">Compilatore</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                      <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
+                              style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
+                               onclick="location.href='index.php?back=true'">
+                               Indietro
+                             <i class="material-icons">cancel</i>
+                      </button>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                      <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
+                              style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
+                               onclick="location.href='php/logout.php'">
+                               Salva
+                             <i class="material-icons">save</i>
+                      </button>
+                    </div>
+                  </div>
+
                   <br>
                   <br>
                 </form>
