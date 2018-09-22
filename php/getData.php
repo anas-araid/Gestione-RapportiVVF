@@ -65,7 +65,7 @@
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
       if($ID == null){
-        $fireman["$i"] = $ris['Nome']." ".$ris['Cognome'];
+        $fireman["$i"] = array($ris['ID'], $ris['Nome']." ".$ris['Cognome']);
         $i++;
       }else{
         $fireman['ID'] = $ris['ID'];
@@ -114,7 +114,7 @@
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
       if($ID == null){
-        $prov["$i"] = $ris['Comune'];
+        $prov["$i"] = array($ris['ID'], $ris['Comune']);
         $i++;
       }else{
         $prov = $ris['Comune'];
@@ -137,7 +137,7 @@
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
       if($ID == null){
-        $mezzi["$i"] = $ris['Descrizione'];
+        $mezzi["$i"] = array($ris['ID'], $ris['Descrizione']);
         $i++;
       }else{
         $mezzi = $ris['Descrizione'];
@@ -160,7 +160,7 @@
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
       if($ID == null){
-        $soccorsi["$i"] = $ris['Descrizione'];
+        $soccorsi["$i"] = array($ris['ID'], $ris['Descrizione']);
         $i++;
       }else{
         $soccorsi = $ris['Descrizione'];

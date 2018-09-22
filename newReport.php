@@ -8,6 +8,7 @@
       //error_reporting(0);
       include "php/dbConnection.php";
       include "php/getData.php";
+      include "php/functions.php";
 
       if ($error_message) {
         echo "
@@ -50,7 +51,7 @@
 
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
-                <form action="" method="post" style="text-align:center;max-height:650px;overflow:auto">
+                <form action="php/addReport.php" method="post" style="text-align:center;max-height:650px;overflow:auto">
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:60%">
@@ -59,8 +60,8 @@
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idUrgente" name="urgente">
-                        <input type="checkbox" id="idUrgente" class="mdl-checkbox__input">
+                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idUrgente">
+                        <input type="checkbox" id="idUrgente" class="mdl-checkbox__input" name="urgente">
                         <span class="mdl-checkbox__label">Urgente</span>
                       </label>
                     </div>
@@ -81,7 +82,7 @@
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                               <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="prov_'.$index.'">
-                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="prov" value="1">
+                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="prov" value="'.$index.'">
                                 <span class="mdl-radio__label">'.$prov[$index].'</span>
                               </label>
                             </div> ';
@@ -96,7 +97,7 @@
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                        <select id="IdIntervento" class="mdl-textfield__input" required="">
+                        <select id="IdIntervento" class="mdl-textfield__input" name="intervento" required="">
                           <?php
                             $interventi = getCallType(null, $db_conn);
                             for ($i =0; $i < count($interventi); $i++){
@@ -121,11 +122,11 @@
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                        <select id="IdComune" class="mdl-textfield__input"  required="">
+                        <select id="IdComune" class="mdl-textfield__input" name="comune" required="">
                           <?php
                             $comuni = getComuni(null, $db_conn);
                             for ($i =0; $i < count($comuni); $i++){
-                              echo '<option value="'.$i.'">'.$comuni[$i].'</option>';
+                              echo '<option value="'.$comuni[$i][0].'">'.$comuni[$i][1].'</option>';
                             }
                            ?>
                         </select>
@@ -137,13 +138,13 @@
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <span>Ora di partenza &nbsp</span>
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
-                         <input class="mdl-textfield__input" type="time" id="IdData" name="data" required="">
+                         <input class="mdl-textfield__input" type="time" id="IdOraUscita" name="oraUscita" required="">
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <span>Ora di rientro &nbsp</span>
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
-                         <input class="mdl-textfield__input" type="time" id="IdData" name="data" required="">
+                         <input class="mdl-textfield__input" type="time" id="IdOraRientro" name="oraRientro" required="">
                       </div>
                     </div>
                   </div>
@@ -207,7 +208,7 @@
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
                       <div class="mdl-textfield mdl-js-textfield" style="width:90%">
-                        <textarea class="mdl-textfield__input " type="text" rows= "4" id="idOsservazioni" ></textarea>
+                        <textarea class="mdl-textfield__input " type="text" rows= "4" id="idOsservazioni" name="osservazioni"></textarea>
                         <label class="mdl-textfield__label style-gradient-text" for="idOsservazioni">Osservazioni</label>
                       </div>
                     </div>
@@ -231,8 +232,8 @@
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                               <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idMezzi_'.$index.'">
-                                <input type="checkbox" id="idMezzi_'.$index.'" class="mdl-checkbox__input" name="mezzo_'."$index".'" value="1">
-                                <span class="mdl-checkbox__label">'.$mezzi[$index].'</span>
+                                <input type="checkbox" id="idMezzi_'.$index.'" class="mdl-checkbox__input" name="mezzo_'."$index".'" value="'.$mezzi[$i][0].'">
+                                <span class="mdl-checkbox__label">'.$mezzi[$index][1].'</span>
                               </label>
                             </div> ';
                             $index++;
@@ -260,8 +261,8 @@
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                               <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idSoccorsi_'.$index.'">
-                                <input type="checkbox" id="idSoccorsi_'.$index.'" class="mdl-checkbox__input" name="soccorsi_'."$index".'" value="1">
-                                <span class="mdl-checkbox__label">'.$soccorsi[$index].'</span>
+                                <input type="checkbox" id="idSoccorsi_'.$index.'" class="mdl-checkbox__input" name="soccorsi_'."$index".'" value="'.$soccorsi[$index][0].'">
+                                <span class="mdl-checkbox__label">'.$soccorsi[$index][1].'</span>
                               </label>
                             </div> ';
                             $index++;
@@ -287,9 +288,9 @@
                           if ($index < count($vigili)){
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idVigili_'.$index.'">
-                                <input type="checkbox" id="idVigili_'.$index.'" class="mdl-checkbox__input" name="vigili_'."$index".'" value="1">
-                                <span class="mdl-checkbox__label">'.$vigili[$index].'</span>
+                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idVigile_'.$index.'">
+                                <input type="checkbox" id="idVigile_'.$index.'" class="mdl-checkbox__input" name="vigile_'."$index".'" value="'.$vigili[$index][0].'">
+                                <span class="mdl-checkbox__label">'.$vigili[$index][1].'</span>
                               </label>
                             </div> ';
                             $index++;
@@ -309,7 +310,7 @@
                           <?php
                             $ros = getFiremanData(null, $db_conn);
                             for ($i =0; $i < count($ros); $i++){
-                              echo '<option value="'.$i.'">'.$ros[$i].'</option>';
+                              echo '<option value="'.$ros[$i][0].'">'.$ros[$i][1].'</option>';
                             }
                            ?>
                         </select>
@@ -322,7 +323,7 @@
                           <?php
                             $compilatore = getFiremanData(null, $db_conn);
                             for ($i =0; $i < count($compilatore); $i++){
-                              echo '<option value="'.$i.'">'.$compilatore[$i].'</option>';
+                              echo '<option value="'.$compilatore[$i][0].'">'.$compilatore[$i][1].'</option>';
                             }
                            ?>
                         </select>
@@ -337,6 +338,7 @@
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
                               style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
+                              type="reset"
                                onclick="location.href='index.php?back=true'">
                                Indietro
                              <i class="material-icons">cancel</i>
@@ -347,8 +349,7 @@
                               style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
                               type="submit"
                               id="btnSave"
-                              name="btnSave"
-                              onclick="location.href='php/addReport.php'">
+                              name="btnSave">
                                Salva
                              <i class="material-icons">save</i>
                       </button>
