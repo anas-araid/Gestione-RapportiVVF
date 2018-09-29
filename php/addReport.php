@@ -27,6 +27,9 @@
     $cognome = $_POST['cognome'];
     $residenza = $_POST['residenza'];
     $dataDiNascita = $_POST['dataDiNascita'];
+    if ($dataDiNascita == ''){
+      $dataDiNascita = date_create('1970-01-01')->format('Y-m-d');
+    }
     $telefono = $_POST['telefono'];
     $cartaIdentita = $_POST['cartaIdentita'];
     $altro = $_POST['altro'];
@@ -82,11 +85,10 @@
 
     addGeneralitaColpito($nome, $cognome, $dataDiNascita, $residenza, $telefono, $cartaIdentita, $altro, $db_conn);
     $FK_GeneralitaColpito = getColpito($nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn);
-    echo $FK_GeneralitaColpito;
+
     sleep(2);
     $insertReport = "INSERT INTO t_rapportiVVF (ID_Rapporto, OraUscita, OraRientro, Data, Urgente, OperazioniEseguite, Osservazioni, FK_Localita, FK_GeneralitaColpito, FK_ProvChiamata, FK_TipoChiamata, FK_Responsabile, FK_Compilatore)
                      VALUES ('$idRapporto', '$oraUscita', '$oraRientro', '$data', '$urgente', '$operazioniEseguite', '$osservazioni', '$FK_Localita', '$FK_GeneralitaColpito', '$FK_ProvChiamata', '$FK_TipoChiamata', '$FK_Responsabile', '$FK_Compilatore')";
-    echo $insertReport;
 
     try {
       $saveReport = mysqli_query($db_conn, $insertReport);
@@ -94,8 +96,6 @@
         throw new Exception("Errore salvataggio rapporto", 1);
       }
       $id = getRapporto($idRapporto, $db_conn);
-      echo $id." \n";
-      sleep(2);
 
       // aggiunta mezzi
       for($i=0; $i < count($arrayMezzi); $i++){
@@ -105,6 +105,12 @@
       for($i=0; $i < count($arraySoccorsi); $i++){
         addSoccorsiToRapporto($id, $arraySoccorsi[$i], $db_conn);
       }
+      // aggiunta vigili
+      print_r($arrayVigili);
+      for($i=0; $i < count($arrayVigili); $i++){
+        addVigileToRapporto($id, $arrayVigili[$i], $db_conn);
+      }
+
     } catch (Exception $e) {
       echo "
         <script>

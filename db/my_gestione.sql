@@ -126,6 +126,19 @@ CREATE TABLE t_soccorsiIntervenuti (
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
+CREATE TABLE t_vigiliIntervenuti (
+  ID 		            BIGINT				NOT NULL 	AUTO_INCREMENT,
+  FK_RapportoVVF    BIGINT,
+  FK_Vigile         BIGINT,
+  PRIMARY KEY(ID),
+  FOREIGN KEY(FK_RapportoVVF)    REFERENCES t_rapportiVVF(ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  FOREIGN KEY(FK_Vigile)    REFERENCES t_vigili(ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
 INSERT INTO t_provChiamata (Provenienza) VALUES ('Selettiva Centrale Trento');
 INSERT INTO t_provChiamata (Provenienza) VALUES ('Telefono Centrale Trento');
 INSERT INTO t_provChiamata (Provenienza) VALUES ('Radio Centrale Trento');

@@ -6,7 +6,7 @@
       echo "
         <script>
         alert('Errore nell\'aggiunta della localita : contatta l\'amministratore');
-        window.location.href = '../index.php';
+        //window.location.href = '../index.php';
         </script>";
     }
   }
@@ -41,13 +41,27 @@
   function addSoccorsiToRapporto($ID_Rapporto, $FK_Soccorsi, $db_conn){
     $sql = "INSERT INTO t_soccorsiintervenuti (FK_RapportoVVF, FK_SoccorsiEsterni)
             VALUES ('$ID_Rapporto', '$FK_Soccorsi')";
-    echo $sql;
     try {
       $addMezzi = mysqli_query($db_conn, $sql);
     } catch (Exception $e) {
       echo "
       <script>
       alert('Errore nell\'aggiunta del soccorso : contatta l\'amministratore');
+      //window.location.href = '../index.php';
+      </script>";
+      echo $e;
+    }
+  }
+  function addVigileToRapporto($ID_Rapporto, $FK_Vigile, $db_conn){
+    $sql = "INSERT INTO t_vigiliIntervenuti (FK_RapportoVVF, FK_Vigile)
+            VALUES ('$ID_Rapporto', '$FK_Vigile')";
+    echo $sql;
+    try {
+      $addVigile = mysqli_query($db_conn, $sql);
+    } catch (Exception $e) {
+      echo "
+      <script>
+      alert('Errore nell\'aggiunta del vigile al rapporto: contatta l\'amministratore');
       //window.location.href = '../index.php';
       </script>";
       echo $e;
