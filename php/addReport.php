@@ -1,6 +1,7 @@
 <?php
   session_start();
   include "dbConnection.php";
+  include "getData.php";
   include "functions.php";
   if (isset($_POST['btnSave'])){
     $idRapporto = $_POST['rapporto'];
@@ -32,7 +33,18 @@
     $operazioniEseguite = text_filter(removeAccents(removeQuotes($_POST['operazioni'])));
     $osservazioni = text_filter(removeAccents(removeQuotes($_POST['osservazioni'])));
 
-    
+
+    $arrayMezzi = array();
+    $mezzi = getMezzi(null, $db_conn);
+    $nMezzi = count($mezzi);
+    $j=0;
+    for ($i=0; $i < $nMezzi; $i++){
+      if (isset($_POST['mezzo_'.$i])){
+        $arrayMezzi[$j] = $_POST['mezzo_'.$i];
+        $j++;
+      }
+    }
+    print_r($arrayMezzi);
 
     /*
     $insertReport = "INSERT INTO t_rapportiVVF (ID_Rapporto, OraUscita, OraRientro, Data, Urgente, OperazioniEseguite, Osservazioni, FK_Localita, FK_GeneralitaColpito, FK_ProvChiamata, FK_TipoChiamata, FK_Responsabile, FK_Compilatore)

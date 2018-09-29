@@ -220,7 +220,7 @@
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <?php
                       $mezzi = getMezzi(null, $db_conn);
-                      //print_r($prov);
+                      //print_r($mezzi);
                       $rows = count($mezzi) / 2;
                       if(!is_int($rows)){
                         $rows = (int)$rows + 1;
@@ -232,7 +232,7 @@
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                               <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idMezzi_'.$index.'">
-                                <input type="checkbox" id="idMezzi_'.$index.'" class="mdl-checkbox__input" name="mezzo_'."$index".'" value="'.$mezzi[$i][0].'">
+                                <input type="checkbox" id="idMezzi_'.$index.'" class="mdl-checkbox__input" name="mezzo_'."$index".'" value="'.$mezzi[$index][0].'">
                                 <span class="mdl-checkbox__label">'.$mezzi[$index][1].'</span>
                               </label>
                             </div> ';
