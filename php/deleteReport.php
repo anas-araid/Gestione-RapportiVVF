@@ -7,6 +7,6 @@
   if ($deleteQuery == null){
     die("error");
   }
-  $_SESSION['include'] = 'php/reports.php'
+  $_SESSION['include'] = 'php/reports.php';
   header("location:../index.php");
 ?>

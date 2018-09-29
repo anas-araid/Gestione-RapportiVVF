@@ -106,11 +106,11 @@ CREATE TABLE t_mezziIntervenuti (
   FK_Mezzo          BIGINT,
   PRIMARY KEY(ID),
   FOREIGN KEY(FK_RapportoVVF)    REFERENCES t_rapportiVVF(ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   FOREIGN KEY(FK_Mezzo)    REFERENCES t_mezzi(ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE t_soccorsiIntervenuti (
@@ -119,11 +119,11 @@ CREATE TABLE t_soccorsiIntervenuti (
   FK_SoccorsiEsterni  BIGINT,
   PRIMARY KEY(ID),
   FOREIGN KEY(FK_RapportoVVF)    REFERENCES t_rapportiVVF(ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   FOREIGN KEY(FK_SoccorsiEsterni)    REFERENCES t_soccorsiEsterni(ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE t_vigiliIntervenuti (
@@ -132,11 +132,11 @@ CREATE TABLE t_vigiliIntervenuti (
   FK_Vigile         BIGINT,
   PRIMARY KEY(ID),
   FOREIGN KEY(FK_RapportoVVF)    REFERENCES t_rapportiVVF(ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   FOREIGN KEY(FK_Vigile)    REFERENCES t_vigili(ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 INSERT INTO t_provChiamata (Provenienza) VALUES ('Selettiva Centrale Trento');
@@ -216,6 +216,8 @@ INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Sopralluogo incendio');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Supporto elicottero');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Taglio Pianta');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Altro');
+
+INSERT INTO t_comuni (Comune) VALUES ('Pergine Valsugana');
 
 
 INSERT INTO t_vigili (Nome, Cognome, Matricola) VALUES ('Anas', 'Araid', '341');

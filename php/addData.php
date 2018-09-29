@@ -55,7 +55,6 @@
   function addVigileToRapporto($ID_Rapporto, $FK_Vigile, $db_conn){
     $sql = "INSERT INTO t_vigiliIntervenuti (FK_RapportoVVF, FK_Vigile)
             VALUES ('$ID_Rapporto', '$FK_Vigile')";
-    echo $sql;
     try {
       $addVigile = mysqli_query($db_conn, $sql);
     } catch (Exception $e) {

@@ -106,11 +106,9 @@
         addSoccorsiToRapporto($id, $arraySoccorsi[$i], $db_conn);
       }
       // aggiunta vigili
-      print_r($arrayVigili);
       for($i=0; $i < count($arrayVigili); $i++){
         addVigileToRapporto($id, $arrayVigili[$i], $db_conn);
       }
-
     } catch (Exception $e) {
       echo "
         <script>
@@ -119,7 +117,7 @@
         //window.location.href = '../index.php';
         </script>";
     }
-
+    echo "<script>window.location.href = '../index.php';</script>";
   }else{
     echo "<script>alert('Errore sconosciuto')</script>";
   }
