@@ -42,7 +42,7 @@
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
       if($ID == null){
-        $callType["$i"] = $ris['Tipologia'];
+        $callType["$i"] = array($ris['ID'], $ris['Tipologia']);
         $i++;
       }else{
         $callType = $ris['Tipologia'];
@@ -91,7 +91,7 @@
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
       if($ID == null){
-        $prov["$i"] = $ris['Provenienza'];
+        $prov["$i"] = array($ris['ID'], $ris['Provenienza']);
         $i++;
       }else{
         $prov = $ris['Provenienza'];

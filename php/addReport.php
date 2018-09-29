@@ -8,14 +8,14 @@
     $idRapporto = $_POST['rapporto'];
     if (isset($_POST['urgente'])){
       $urgente = $_POST['urgente'];
-      $urgente = ($urgente == 'on');
+      $urgente = 1;
     }else{
-      $urgente = false;
+      $urgente = 0;
     }
 
-    $segnalataDa = $_POST['prov'];
+    $FK_ProvChiamata = $_POST['prov'];
 
-    $intervento = $_POST['intervento'];
+    $FK_TipoChiamata = $_POST['intervento'];
     $data = $_POST['data'];
     $via = $_POST['via'];
     $comune = $_POST['comune'];
@@ -73,8 +73,8 @@
     }
     //print_r($arrayVigili);
 
-    $IdRos = $_POST['ros'];
-    $IdCompilatore = $_POST['compilatore'];
+    $FK_Responsabile = $_POST['ros'];
+    $FK_Compilatore = $_POST['compilatore'];
 
 
     addLocalita($via, $comune, $db_conn);
@@ -82,23 +82,23 @@
 
     addGeneralitaColpito($nome, $cognome, $dataDiNascita, $residenza, $telefono, $cartaIdentita, $altro, $db_conn);
     $FK_GeneralitaColpito = getColpito($nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn);
-    echo $FK_GeneralitaColpito;
 
-    /*
+    sleep(2);
     $insertReport = "INSERT INTO t_rapportiVVF (ID_Rapporto, OraUscita, OraRientro, Data, Urgente, OperazioniEseguite, Osservazioni, FK_Localita, FK_GeneralitaColpito, FK_ProvChiamata, FK_TipoChiamata, FK_Responsabile, FK_Compilatore)
-                     VALUES ('$date', '$message', '$userID')";
-     $saveReport = mysqli_query($db_conn, $insertQuery);
-     if ($saveReport!=null){
-       header("location:../index.php");
-     }else{
-       echo "
-         <script>
-         alert('Errore relativo all\'invio dei messaggi: contatta l\'amministratore');
-         window.location.href = '../index.php';
-         </script>";
-     }*/
+                     VALUES ('$idRapporto', '$oraUscita', '$oraRientro', '$data', '$urgente', '$operazioniEseguite', '$osservazioni', '$FK_Localita', '$FK_GeneralitaColpito', '$FK_ProvChiamata', '$FK_TipoChiamata', '$FK_Responsabile', '$FK_Compilatore')";
+    echo $insertReport;
+    $saveReport = mysqli_query($db_conn, $insertReport);
+    if ($saveReport!=null){
+     //header("location:../index.php");
+    }else{
+     echo "
+       <script>
+       alert('Errore relativo al salvataggio del rapporto: contatta l\'amministratore');
+       //window.location.href = '../index.php';
+       </script>";
+    }
   }else{
-    echo "<script>alert('lol')</script>";
+    echo "<script>alert('Errore sconosciuto')</script>";
   }
 
  ?>

@@ -82,8 +82,8 @@
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                               <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="prov_'.$index.'">
-                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="prov" value="'.$index.'">
-                                <span class="mdl-radio__label">'.$prov[$index].'</span>
+                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="prov" value="'.$prov[$index][0].'">
+                                <span class="mdl-radio__label">'.$prov[$index][1].'</span>
                               </label>
                             </div> ';
                             $index++;
@@ -101,7 +101,7 @@
                           <?php
                             $interventi = getCallType(null, $db_conn);
                             for ($i =0; $i < count($interventi); $i++){
-                              echo '<option value="'.$i.'">'.$interventi[$i].'</option>';
+                              echo '<option value="'.$interventi[$i][0].'">'.$interventi[$i][1].'</option>';
                             }
                            ?>
                         </select>
