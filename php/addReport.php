@@ -2,6 +2,7 @@
   session_start();
   include "dbConnection.php";
   include "getData.php";
+  include "addData.php";
   include "functions.php";
   if (isset($_POST['btnSave'])){
     $idRapporto = $_POST['rapporto'];
@@ -70,7 +71,7 @@
         $j++;
       }
     }
-    print_r($arrayVigili);
+    //print_r($arrayVigili);
 
     $IdRos = $_POST['ros'];
     $IdCompilatore = $_POST['compilatore'];
@@ -78,8 +79,7 @@
 
     addLocalita($via, $comune, $db_conn);
     $FK_Localita = getLocalita($via, $comune, $db_conn);
-
-
+    
 
 
     /*

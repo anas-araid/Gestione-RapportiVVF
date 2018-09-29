@@ -168,4 +168,16 @@
     }
     return $soccorsi;
   }
+  function getLocalita($via, $comune, $db_conn){
+    $sql = "SELECT * FROM t_localita WHERE (Via='$via') and (FK_Comune='$comune')";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+    $id=null;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $id = $ris['ID'];
+    }
+    return $id;
+  }
 ?>
