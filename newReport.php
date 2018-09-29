@@ -306,7 +306,7 @@
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                        <select id="IdIntervento" class="mdl-textfield__input" required="">
+                        <select id="IdRos" class="mdl-textfield__input" name="ros" required="">
                           <?php
                             $ros = getFiremanData(null, $db_conn);
                             for ($i =0; $i < count($ros); $i++){
@@ -314,12 +314,12 @@
                             }
                            ?>
                         </select>
-                        <label class="mdl-textfield__label" for="IdIntervento">Responsabile Operazioni</label>
+                        <label class="mdl-textfield__label" for="IdRos">Responsabile Operazioni</label>
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                        <select id="IdIntervento" class="mdl-textfield__input" required="">
+                        <select id="IdCompilatore" class="mdl-textfield__input" name="compilatore" required="">
                           <?php
                             $compilatore = getFiremanData(null, $db_conn);
                             for ($i =0; $i < count($compilatore); $i++){
@@ -327,7 +327,7 @@
                             }
                            ?>
                         </select>
-                        <label class="mdl-textfield__label" for="IdIntervento">Compilatore</label>
+                        <label class="mdl-textfield__label" for="IdCompilatore">Compilatore</label>
                       </div>
                     </div>
                   </div>
