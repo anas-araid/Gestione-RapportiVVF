@@ -101,9 +101,9 @@
             echo '<tr onclick="">
                 <td>'.$ris['ID_Rapporto'].'</td>
                 <td>'.date('d-m-Y', strtotime($ris['Data'])).'</td>
-                <td>'.getCallType($ris['FK_TipoChiamata']).'</td>
-                <td>'.getFiremanData($ris['FK_Responsabile']).'</td>
-                <td><a href="details.php?id='.$ris['ID'].'">Dettagli</a></td>
+                <td>'.getCallType($ris['FK_TipoChiamata'], $db_conn).'</td>
+                <td>'.getFiremanData($ris['FK_Responsabile'], $db_conn)['Nome']." ".getFiremanData($ris['FK_Responsabile'], $db_conn)['Cognome'].'</td>
+                <td><a href="edit.php?id='.$ris['ID'].'">Modifica</a></td>
                 <td><a href="deleteReport.php?id='.$ris['ID'].'">Elimina</a></td>
               </tr>';
           }
