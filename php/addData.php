@@ -10,7 +10,18 @@
         </script>";
     }
   }
-
+  function addGeneralitaColpito($Nome, $Cognome, $DataDiNascita, $Residenza, $Telefono, $NCartaIdentita, $Altro, $db_conn){
+    $sql = "INSERT INTO t_generalitacolpiti (Nome, Cognome, DataDiNascita, Residenza, Telefono, NCartaIdentita, Altro)
+            VALUES ('$Nome', '$Cognome', '$DataDiNascita', '$Residenza', '$Telefono', '$NCartaIdentita', '$Altro')";
+    $addColpito = mysqli_query($db_conn, $sql);
+    if ($addColpito==null){
+      echo "
+        <script>
+        alert('Errore nell\'aggiunta del colpito : contatta l\'amministratore');
+        //window.location.href = '../index.php';
+        </script>";
+    }
+  }
 
 
  ?>

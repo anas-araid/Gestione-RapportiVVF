@@ -22,7 +22,7 @@
     $oraUscita = $_POST['oraUscita'];
     $oraRientro = $_POST['oraRientro'];
 
-
+    //generalita colpito
     $nome = $_POST['nome'];
     $cognome = $_POST['cognome'];
     $residenza = $_POST['residenza'];
@@ -79,8 +79,10 @@
 
     addLocalita($via, $comune, $db_conn);
     $FK_Localita = getLocalita($via, $comune, $db_conn);
-    
 
+    addGeneralitaColpito($nome, $cognome, $dataDiNascita, $residenza, $telefono, $cartaIdentita, $altro, $db_conn);
+    $FK_GeneralitaColpito = getColpito($nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn);
+    echo $FK_GeneralitaColpito;
 
     /*
     $insertReport = "INSERT INTO t_rapportiVVF (ID_Rapporto, OraUscita, OraRientro, Data, Urgente, OperazioniEseguite, Osservazioni, FK_Localita, FK_GeneralitaColpito, FK_ProvChiamata, FK_TipoChiamata, FK_Responsabile, FK_Compilatore)

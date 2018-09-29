@@ -180,4 +180,16 @@
     }
     return $id;
   }
+  function getColpito($nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn){
+    $sql = "SELECT * FROM t_generalitacolpiti WHERE (Nome='$nome') and (Cognome='$cognome') and (dataDiNascita='$dataDiNascita') and (NCartaIdentita='$cartaIdentita')";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+    $id=null;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $id = $ris['ID'];
+    }
+    return $id;
+  }
 ?>

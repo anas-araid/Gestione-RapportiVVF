@@ -37,7 +37,7 @@ CREATE TABLE t_generalitaColpiti (
   DataDiNascita    Date,
   Residenza        VARCHAR(50),
   Telefono         BIGINT,
-  NCartaIdentita   BIGINT,
+  NCartaIdentita   VARCHAR(50),
   Altro            VARCHAR(100),
   PRIMARY KEY(ID)
 ) ENGINE = InnoDB;
