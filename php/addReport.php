@@ -60,7 +60,7 @@
     }
     //print_r($arraySoccorsi);
 
-    // arrayMezzi contiene gli id dei mezzi selezionati
+    // arrayVigili contiene gli id dei mezzi selezionati
     $arrayVigili = array();
     $vigili = getFiremanData(null, $db_conn);
     $nVigili = count($vigili);
@@ -82,21 +82,38 @@
 
     addGeneralitaColpito($nome, $cognome, $dataDiNascita, $residenza, $telefono, $cartaIdentita, $altro, $db_conn);
     $FK_GeneralitaColpito = getColpito($nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn);
-
+    echo $FK_GeneralitaColpito;
     sleep(2);
     $insertReport = "INSERT INTO t_rapportiVVF (ID_Rapporto, OraUscita, OraRientro, Data, Urgente, OperazioniEseguite, Osservazioni, FK_Localita, FK_GeneralitaColpito, FK_ProvChiamata, FK_TipoChiamata, FK_Responsabile, FK_Compilatore)
                      VALUES ('$idRapporto', '$oraUscita', '$oraRientro', '$data', '$urgente', '$operazioniEseguite', '$osservazioni', '$FK_Localita', '$FK_GeneralitaColpito', '$FK_ProvChiamata', '$FK_TipoChiamata', '$FK_Responsabile', '$FK_Compilatore')";
     echo $insertReport;
-    $saveReport = mysqli_query($db_conn, $insertReport);
-    if ($saveReport!=null){
-     //header("location:../index.php");
-    }else{
-     echo "
-       <script>
-       alert('Errore relativo al salvataggio del rapporto: contatta l\'amministratore');
-       //window.location.href = '../index.php';
-       </script>";
+
+    try {
+      $saveReport = mysqli_query($db_conn, $insertReport);
+      if ($saveReport == null){
+        throw new Exception("Errore salvataggio rapporto", 1);
+      }
+      $id = getRapporto($idRapporto, $db_conn);
+      echo $id." \n";
+      sleep(2);
+
+      // aggiunta mezzi
+      for($i=0; $i < count($arrayMezzi); $i++){
+        addMezziToRapporto($id, $arrayMezzi[$i], $db_conn);
+      }
+      // aggiunta soccorsi
+      for($i=0; $i < count($arraySoccorsi); $i++){
+        addSoccorsiToRapporto($id, $arraySoccorsi[$i], $db_conn);
+      }
+    } catch (Exception $e) {
+      echo "
+        <script>
+        alert('Errore relativo al salvataggio del rapporto: contatta l\'amministratore');
+        alert('$e');
+        //window.location.href = '../index.php';
+        </script>";
     }
+
   }else{
     echo "<script>alert('Errore sconosciuto')</script>";
   }

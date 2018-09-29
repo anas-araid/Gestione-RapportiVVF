@@ -66,7 +66,7 @@ CREATE TABLE t_localita (
 
 CREATE TABLE t_rapportiVVF (
   ID 		                    BIGINT				NOT NULL 	AUTO_INCREMENT,
-  ID_Rapporto               BIGINT				NOT NULL,
+  ID_Rapporto               BIGINT				NOT NULL  UNIQUE,
   OraUscita                 TIME,
   OraRientro                TIME,
   Data                      DATE,

@@ -192,4 +192,16 @@
     }
     return $id;
   }
+  function getRapporto($ID_Rapporto, $db_conn){
+    $sql = "SELECT * FROM t_rapportiVVF WHERE (ID_Rapporto=$ID_Rapporto)";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+    $id=null;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $id = $ris['ID'];
+    }
+    return $id;
+  }
 ?>
