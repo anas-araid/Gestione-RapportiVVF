@@ -11,7 +11,6 @@
       $report['ID_Rapporto'] = $ris['ID_Rapporto'];
       $report['OraUscita'] = date('H:i', strtotime($ris['OraUscita']));
       $report['OraRientro'] = date('H:i', strtotime($ris['OraRientro']));
-      $report['Password'] = $ris['Password'];
       $report['Data'] = date('d-m-Y', strtotime($ris['Data']));
       $report['Urgente'] = $ris['Urgente'];
       $report['OperazioniEseguite'] = $ris['OperazioniEseguite'];
@@ -22,7 +21,6 @@
       $report['FK_TipoChiamata'] = $ris['FK_TipoChiamata'];
       $report['FK_Responsabile'] = $ris['FK_Responsabile'];
       $report['FK_Compilatore'] = $ris['FK_Compilatore'];
-      $report['Password'] = $ris['Password'];
     }
     return $report;
   }

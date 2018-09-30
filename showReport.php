@@ -16,6 +16,10 @@
             flatAlert('Accesso', 'Impossibile connettersi al database', 'error', 'index.php');
         </script>";
       }
+      if (isset($_GET['id'])){
+        $rapporto = getReportData($_GET['id'], $db_conn);
+        print_r($rapporto);
+      }
      ?>
   </head>
   <body>
@@ -54,44 +58,28 @@
                 <form action="php/addReport.php" method="post" style="text-align:center;max-height:650px;overflow:auto">
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:60%">
-                         <input class="mdl-textfield__input" type="text" id="IdRapporto" name="rapporto" required="">
-                         <label class="mdl-textfield__label" for="IdRapporto">Inserisci id del rapporto</label>
-                      </div>
+                      <h6 class="style-gradient-text">ID Rapporto: <span class="mdl-color-text--black"><?php echo $rapporto['ID_Rapporto'] ?></span></h6>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idUrgente">
-                        <input type="checkbox" id="idUrgente" class="mdl-checkbox__input" name="urgente">
-                        <span class="mdl-checkbox__label">Urgente</span>
-                      </label>
+                      <h6 class="mdl-color-text--black">
+                        <?php
+                          if ($rapporto['Urgente'] == 0){
+                            echo "Intervento non urgente";
+                          }else{
+                            echo "Intervento urgente";
+                          }
+                        ?>
+                      </h6>
                     </div>
                   </div>
-                  <h6 class="style-gradient-text">Segnalazione pervenuta da:</h6>
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
-                    <?php
-                      $prov = getProvChiamata(null, $db_conn);
-                      print_r($prov);
-                      $rows = count($prov) / 2;
-                      if(!is_int($rows)){
-                        $rows = (int)$rows + 1;
-                      }
-                      $index = 0;
-                      for ($i=0; $i < $rows;$i++){
-                        for($j=0;$j < 2; $j++){
-                          if ($index < count($prov)){
-                            echo '
-                            <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="prov_'.$index.'">
-                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="prov" value="'.$prov[$index][0].'">
-                                <span class="mdl-radio__label">'.$prov[$index][1].'</span>
-                              </label>
-                            </div> ';
-                            $index++;
-                          }
-                        }
-                        echo "<br>";
-                      }
-                     ?>
+                    <h6 class="style-gradient-text">Segnalazione pervenuta da:
+                      <span class="mdl-color-text--black">
+                        <?php
+                          echo getProvChiamata($rapporto['FK_ProvChiamata'], $db_conn);
+                         ?>
+                       </span>
+                     </h6>
                   </div>
 
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">

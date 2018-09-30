@@ -97,8 +97,8 @@
           $reportExists = false;
           while($ris=mysqli_fetch_array($getAllReports)){
             $reportExists = true;
-            // SISTEMARE ONCLICK
-            echo '<tr onclick="">
+
+            echo '<tr onclick=" '.'location.href='."'showReport.php?id=".$ris["ID"]."'".' ">
                 <td>'.$ris['ID_Rapporto'].'</td>
                 <td>'.date('d-m-Y', strtotime($ris['Data'])).'</td>
                 <td>'.getCallType($ris['FK_TipoChiamata'], $db_conn).'</td>
