@@ -81,7 +81,7 @@
 
 
     addLocalita($via, $comune, $db_conn);
-    $FK_Localita = getLocalita($via, $comune, $db_conn);
+    $FK_Localita = getLocalita(null, $via, $comune, $db_conn);
 
     addGeneralitaColpito($nome, $cognome, $dataDiNascita, $residenza, $telefono, $cartaIdentita, $altro, $db_conn);
     $FK_GeneralitaColpito = getColpito($nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn);

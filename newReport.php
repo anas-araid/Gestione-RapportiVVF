@@ -70,7 +70,6 @@
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <?php
                       $prov = getProvChiamata(null, $db_conn);
-                      print_r($prov);
                       $rows = count($prov) / 2;
                       if(!is_int($rows)){
                         $rows = (int)$rows + 1;

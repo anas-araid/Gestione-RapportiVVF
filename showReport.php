@@ -57,56 +57,56 @@
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
                 <form action="php/addReport.php" method="post" style="text-align:center;max-height:650px;overflow:auto">
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                       <h6 class="style-gradient-text">ID Rapporto: <span class="mdl-color-text--black"><?php echo $rapporto['ID_Rapporto'] ?></span></h6>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                      <h6 class="mdl-color-text--black">
-                        <?php
-                          if ($rapporto['Urgente'] == 0){
-                            echo "Intervento non urgente";
-                          }else{
-                            echo "Intervento urgente";
-                          }
-                        ?>
-                      </h6>
+                      <?php
+                        $urg = ($rapporto['Urgente'] == 0) ? "Intervento non urgente" :"Intervento urgente";
+                        echo "<h6 class='mdl-color-text--black'>$urg</h6>";
+                      ?>
                     </div>
-                  </div>
-                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
-                    <h6 class="style-gradient-text">Segnalazione pervenuta da:
-                      <span class="mdl-color-text--black">
-                        <?php
-                          echo getProvChiamata($rapporto['FK_ProvChiamata'], $db_conn);
-                         ?>
-                       </span>
-                     </h6>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col" style="text-align:left">
+                      <h6 class="style-gradient-text">Segnalazione pervenuta da:
+                        <span class="mdl-color-text--black">
+                          <?php
+                            echo getProvChiamata($rapporto['FK_ProvChiamata'], $db_conn);
+                           ?>
+                         </span>
+                       </h6>
+                     </div>
                   </div>
 
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                        <select id="IdIntervento" class="mdl-textfield__input" name="intervento" required="">
-                          <?php
-                            $interventi = getCallType(null, $db_conn);
-                            for ($i =0; $i < count($interventi); $i++){
-                              echo '<option value="'.$interventi[$i][0].'">'.$interventi[$i][1].'</option>';
-                            }
-                           ?>
-                        </select>
-                        <label class="mdl-textfield__label" for="IdIntervento">Evento</label>
+                        <h6 class="style-gradient-text">Evento:
+                          <span class="mdl-color-text--black">
+                            <?php
+                              echo getCallType($rapporto['FK_TipoChiamata'], $db_conn);
+                             ?>
+                           </span>
+                        </h6>
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
-                         <input class="mdl-textfield__input" type="date" id="IdData" name="data" required="">
-                      </div>
+                      <h6 class="style-gradient-text">il:
+                        <span class="mdl-color-text--black">
+                          <?php
+                            echo $rapporto['Data'];
+                           ?>
+                         </span>
+                      </h6>
                     </div>
                     <br>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idVia" name="via" required="">
-                         <label class="mdl-textfield__label" for="idVia">Via</label>
-                      </div>
+                      <h6 class="style-gradient-text">in via:
+                        <span class="mdl-color-text--black">
+                          <?php
+                            echo getCallType($rapporto['FK_Localita'], $db_conn);
+                           ?>
+                         </span>
+                      </h6>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">

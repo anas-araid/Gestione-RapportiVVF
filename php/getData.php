@@ -166,17 +166,28 @@
     }
     return $soccorsi;
   }
-  function getLocalita($via, $comune, $db_conn){
-    $sql = "SELECT * FROM t_localita WHERE (Via='$via') and (FK_Comune='$comune')";
+  function getLocalita($id, $via, $comune, $db_conn){
+    if ($id == null){
+      $sql = "SELECT * FROM t_localita WHERE (Via='$via') and (FK_Comune='$comune')";
+    }else{
+      $sql = "SELECT * FROM t_localita WHERE (ID = '$id')";
+    }
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
     }
-    $id=null;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
-      $id = $ris['ID'];
+      if ($id == null){
+        $idLocalita = null;
+        $idLocalita = $ris['ID'];
+        return $idLocalita;
+      }else{
+        $localita = array();
+        $localita['via']= $ris['Via'];
+        $localita['comune']=$ris['FK_Comune'];
+        return $localita;
+      }
     }
-    return $id;
   }
   function getColpito($nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn){
     $sql = "SELECT * FROM t_generalitacolpiti WHERE (Nome='$nome') and (Cognome='$cognome') and (dataDiNascita='$dataDiNascita') and (NCartaIdentita='$cartaIdentita')";
