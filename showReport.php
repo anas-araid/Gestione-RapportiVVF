@@ -57,16 +57,8 @@
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
                 <form action="php/addReport.php" method="post" style="text-align:center;max-height:650px;overflow:auto">
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--8-col" style="text-align:left;padding:0px;margin:0px">
                       <h6 class="style-gradient-text">ID Rapporto: <span class="mdl-color-text--black"><?php echo $rapporto['ID_Rapporto'] ?></span></h6>
-                    </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                      <?php
-                        $urg = ($rapporto['Urgente'] == 0) ? "Intervento non urgente" :"Intervento urgente";
-                        echo "<h6 class='mdl-color-text--black'>$urg</h6>";
-                      ?>
-                    </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col" style="text-align:left">
                       <h6 class="style-gradient-text">Segnalazione pervenuta da:
                         <span class="mdl-color-text--black">
                           <?php
@@ -74,22 +66,41 @@
                            ?>
                          </span>
                        </h6>
-                     </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--4-col" style="text-align:left;padding:0px;margin:0px">
+                      <?php
+                        $urg = ($rapporto['Urgente'] == 0) ? "Intervento non urgente" :"Intervento urgente";
+                        echo "<h6 class='mdl-color-text--black'>$urg</h6>";
+                      ?>
+                    </div>
                   </div>
 
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                        <h6 class="style-gradient-text">Evento:
-                          <span class="mdl-color-text--black">
-                            <?php
-                              echo getCallType($rapporto['FK_TipoChiamata'], $db_conn);
-                             ?>
-                           </span>
-                        </h6>
-                      </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--8-col" style="text-align:left">
+                      <h6 class="style-gradient-text">Evento:
+                        <span class="mdl-color-text--black">
+                          <?php
+                            echo getCallType($rapporto['FK_TipoChiamata'], $db_conn);
+                           ?>
+                         </span>
+                      </h6>
+                      <h6 class="style-gradient-text">In via:
+                        <span class="mdl-color-text--black">
+                          <?php
+                            $localita = getLocalita($rapporto['FK_Localita'], null, null, $db_conn);
+                            echo $localita['via']
+                           ?>
+                         </span>
+                      </h6>
+                      <h6 class="style-gradient-text">Ora partenza:
+                        <span class="mdl-color-text--black">
+                          <?php
+                            echo $rapporto['OraUscita'];
+                           ?>
+                         </span>
+                      </h6>
                     </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--4-col" style="text-align:left">
                       <h6 class="style-gradient-text">il:
                         <span class="mdl-color-text--black">
                           <?php
@@ -97,43 +108,20 @@
                            ?>
                          </span>
                       </h6>
-                    </div>
-                    <br>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
-                      <h6 class="style-gradient-text">in via:
+                      <h6 class="style-gradient-text">Comune:
                         <span class="mdl-color-text--black">
                           <?php
-                            echo getCallType($rapporto['FK_Localita'], $db_conn);
+                            echo getComuni($localita['comune'], $db_conn);
                            ?>
                          </span>
                       </h6>
-                    </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                        <select id="IdComune" class="mdl-textfield__input" name="comune" required="">
+                      <h6 class="style-gradient-text">Ora di rientro:
+                        <span class="mdl-color-text--black">
                           <?php
-                            $comuni = getComuni(null, $db_conn);
-                            for ($i =0; $i < count($comuni); $i++){
-                              echo '<option value="'.$comuni[$i][0].'">'.$comuni[$i][1].'</option>';
-                            }
+                            echo $rapporto['OraRientro'];
                            ?>
-                        </select>
-                        <label class="mdl-textfield__label" for="IdComune">Comune</label>
-                      </div>
-                    </div>
-                    <br>
-
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                      <span>Ora di partenza &nbsp</span>
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
-                         <input class="mdl-textfield__input" type="time" id="IdOraUscita" name="oraUscita" required="">
-                      </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                      <span>Ora di rientro &nbsp</span>
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
-                         <input class="mdl-textfield__input" type="time" id="IdOraRientro" name="oraRientro" required="">
-                      </div>
+                         </span>
+                      </h6>
                     </div>
                   </div>
 
