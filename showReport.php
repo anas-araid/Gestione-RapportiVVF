@@ -62,7 +62,12 @@
                       <h6 class="style-gradient-text">Segnalazione pervenuta da:
                         <span class="mdl-color-text--black">
                           <?php
-                            echo getProvChiamata($rapporto['FK_ProvChiamata'], $db_conn);
+                            $provAllerta = getProvChiamata($rapporto['FK_ProvChiamata'], $db_conn);
+                            if ($provAllerta != null){
+                              echo $provAllerta;
+                            }else{
+                              echo "Dato non disponibile";
+                            }
                            ?>
                          </span>
                        </h6>
@@ -80,7 +85,12 @@
                       <h6 class="style-gradient-text">Evento:
                         <span class="mdl-color-text--black">
                           <?php
-                            echo getCallType($rapporto['FK_TipoChiamata'], $db_conn);
+                            $chiamata = getCallType($rapporto['FK_TipoChiamata'], $db_conn);
+                            if ($chiamata != null){
+                              echo $chiamata;
+                            }else{
+                              echo "Dato non disponibile";
+                            }
                            ?>
                          </span>
                       </h6>
@@ -88,14 +98,23 @@
                         <span class="mdl-color-text--black">
                           <?php
                             $localita = getLocalita($rapporto['FK_Localita'], null, null, $db_conn);
-                            echo $localita['via']
+                            if ($localita['via'] != null){
+                              echo $localita['via'];
+                            }else{
+                              echo "Dato non disponibile";
+                            }
                            ?>
                          </span>
                       </h6>
                       <h6 class="style-gradient-text">Ora partenza:
                         <span class="mdl-color-text--black">
                           <?php
-                            echo $rapporto['OraUscita'];
+                            $orarioUscita = $rapporto['OraUscita'];
+                            if ($orarioUscita != null){
+                              echo $orarioUscita;
+                            }else{
+                              echo "Dato non disponibile";
+                            }
                            ?>
                          </span>
                       </h6>
@@ -104,21 +123,36 @@
                       <h6 class="style-gradient-text">il:
                         <span class="mdl-color-text--black">
                           <?php
-                            echo $rapporto['Data'];
+                            $data = $rapporto['Data'];
+                            if ($data != null){
+                              echo $data;
+                            }else{
+                              echo "Dato non disponibile";
+                            }
                            ?>
                          </span>
                       </h6>
                       <h6 class="style-gradient-text">Comune:
                         <span class="mdl-color-text--black">
                           <?php
-                            echo getComuni($localita['comune'], $db_conn);
+                            $comune = getComuni($localita['comune'], $db_conn);
+                            if ($comune != null){
+                              echo $comune;
+                            }else{
+                              echo "Dato non disponibile";
+                            }
                            ?>
                          </span>
                       </h6>
                       <h6 class="style-gradient-text">Ora di rientro:
                         <span class="mdl-color-text--black">
                           <?php
-                            echo $rapporto['OraRientro'];
+                            $orarioRientro = $rapporto['OraRientro'];
+                            if ($orarioRientro != null){
+                              echo $orarioRientro;
+                            }else{
+                              echo "Dato non disponibile";
+                            }
                            ?>
                          </span>
                       </h6>
@@ -126,50 +160,102 @@
                   </div>
 
                   <h6 class="style-gradient-text">Generalità del colpito:</h6>
+                  <?php
+                    $colpito = getColpito($rapporto['FK_GeneralitaColpito'], null, null, null, null, $db_conn);
+                    //print_r($colpito);
+                   ?>
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idNome" name="nome">
-                         <label class="mdl-textfield__label style-gradient-text" for="idNome">Nome</label>
-                      </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
+                      <h6 class="style-gradient-text">Nome:
+                        <span class="mdl-color-text--black">
+                          <?php
+                            $nome = $colpito['Nome'];
+                            if ($nome != null){
+                              echo $nome;
+                            }else{
+                              echo "Dato non disponibile";
+                            }
+                           ?>
+                         </span>
+                      </h6>
+                      <h6 class="style-gradient-text">Residenza:
+                        <span class="mdl-color-text--black">
+                          <?php
+                            $residenza = $colpito['Residenza'];
+                            if ($residenza != null){
+                              echo $residenza;
+                            }else{
+                              echo "Dato non disponibile";
+                            }
+                           ?>
+                         </span>
+                      </h6>
+                      <h6 class="style-gradient-text">Telefono:
+                        <span class="mdl-color-text--black">
+                          <?php
+                            $telefono = $colpito['Telefono'];
+                            if ($telefono != 0 && $telefono != null){
+                              echo $telefono;
+                            }else{
+                              echo "Dato non disponibile";
+                            }
+                           ?>
+                         </span>
+                      </h6>
+                      <h6 class="style-gradient-text">Altro:
+                        <span class="mdl-color-text--black">
+                          <span class="mdl-color-text--black">
+                            <?php
+                              $altro = $colpito['Altro'];
+                              if ($altro != null){
+                                echo $altro;
+                              }else{
+                                echo "Dato non disponibile";
+                              }
+                             ?>
+                         </span>
+                      </h6>
                     </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idCognome" name="cognome">
-                         <label class="mdl-textfield__label style-gradient-text" for="idCognome">Cognome</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--9-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idResidenza" name="residenza" >
-                         <label class="mdl-textfield__label style-gradient-text" for="idResidenza">Residenza</label>
-                      </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--3-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80%">
-                         <input class="mdl-textfield__input" type="date" id="idDataDiNascita" name="dataDiNascita">
-                      </div>
-                    </div>
-                    <br>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="number" id="idTelefono" name="telefono">
-                         <label class="mdl-textfield__label style-gradient-text" for="idTelefono">Telefono</label>
-                      </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
-                         <input class="mdl-textfield__input" type="text" id="idCartaIdentita" name="cartaIdentita" >
-                         <label class="mdl-textfield__label style-gradient-text" for="idCartaIdentita">Carta d'identità</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
-                         <input class="mdl-textfield__input" type="text" id="idAltro" name="altro" >
-                         <label class="mdl-textfield__label style-gradient-text" for="idAltro">Altro</label>
-                      </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
+                      <h6 class="style-gradient-text">Cognome:
+                        <span class="mdl-color-text--black">
+                          <span class="mdl-color-text--black">
+                            <?php
+                              $cognome = $colpito['Cognome'];
+                              if ($cognome != null){
+                                echo $cognome;
+                              }else{
+                                echo "Dato non disponibile";
+                              }
+                             ?>
+                         </span>
+                      </h6>
+                      <h6 class="style-gradient-text">Data di nascita:
+                        <span class="mdl-color-text--black">
+                          <span class="mdl-color-text--black">
+                            <?php
+                              $dataDiNascita = $colpito['DataDiNascita'];
+                              if ($dataDiNascita != null){
+                                echo date_create($dataDiNascita)->format('d-m-Y');;
+                              }else{
+                                echo "Dato non disponibile";
+                              }
+                             ?>
+                         </span>
+                      </h6>
+                      <h6 class="style-gradient-text">Carta d'identita:
+                        <span class="mdl-color-text--black">
+                          <span class="mdl-color-text--black">
+                            <?php
+                            $cartaIdentita = $colpito['CartaIdentita'];
+                              if ($cartaIdentita != null){
+                                echo $cartaIdentita;
+                              }else{
+                                echo "Dato non disponibile";
+                              }
+                             ?>
+                         </span>
+                      </h6>
                     </div>
                   </div>
 

@@ -189,17 +189,32 @@
       }
     }
   }
-  function getColpito($nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn){
-    $sql = "SELECT * FROM t_generalitacolpiti WHERE (Nome='$nome') and (Cognome='$cognome') and (dataDiNascita='$dataDiNascita') and (NCartaIdentita='$cartaIdentita')";
+  function getColpito($id, $nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn){
+    if ($id == null){
+      $sql = "SELECT * FROM t_generalitacolpiti WHERE (Nome='$nome') and (Cognome='$cognome') and (dataDiNascita='$dataDiNascita') and (NCartaIdentita='$cartaIdentita')";
+    }else{
+      $sql ="SELECT * FROM t_generalitacolpiti WHERE (ID=$id)";
+    }
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
     }
-    $id=null;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
-      $id = $ris['ID'];
+      if ($id == null){
+        $id = $ris['ID'];
+        return $id;
+      }else{
+        $colpito = array();
+        $colpito['Nome']= $ris['Nome'];
+        $colpito['Cognome']=$ris['Cognome'];
+        $colpito['DataDiNascita']=$ris['DataDiNascita'];
+        $colpito['Residenza']=$ris['Residenza'];
+        $colpito['Telefono']=$ris['Telefono'];
+        $colpito['CartaIdentita']=$ris['NCartaIdentita'];
+        $colpito['Altro']=$ris['Altro'];
+        return $colpito;
+      }
     }
-    return $id;
   }
   function getRapporto($ID_Rapporto, $db_conn){
     $sql = "SELECT * FROM t_rapportiVVF WHERE (ID_Rapporto=$ID_Rapporto)";
