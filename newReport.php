@@ -55,7 +55,7 @@
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:60%">
-                         <input class="mdl-textfield__input" type="text" id="IdRapporto" name="rapporto" required="">
+                         <input class="mdl-textfield__input" type="text" id="IdRapporto" name="rapporto" required="" value="<?php echo getLastReportId($db_conn) + 1?>">
                          <label class="mdl-textfield__label" for="IdRapporto">Inserisci id del rapporto</label>
                       </div>
                     </div>

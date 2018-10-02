@@ -270,4 +270,16 @@
     }
     return $idVigili;
   }
+  function getLastReportId($db_conn){
+    $sql = "SELECT max(ID_Rapporto) as LastID FROM t_rapportiVVF";
+    $risultato = mysqli_query($db_conn, $sql);
+    $lastID = "";
+    if ($risultato == false){
+      die("errore getData.php: getLastReportId");
+    }
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $lastID = $ris['LastID'];
+    }
+    return $lastID;
+  }
 ?>
