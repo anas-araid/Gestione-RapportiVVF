@@ -232,7 +232,7 @@
     $sql = "SELECT * FROM t_mezziintervenuti WHERE (FK_RapportoVVF=$ID_Rapporto)";
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
-      die("errore getMezziByReport");
+      die("errore getData.php: getMezziByReport");
     }
     $idMezzi = array();
     $i=0;
@@ -241,5 +241,19 @@
       $i++;
     }
     return $idMezzi;
+  }
+  function getSoccorsiByReport($ID_Rapporto, $db_conn){
+    $sql = "SELECT * FROM t_soccorsiintervenuti WHERE (FK_RapportoVVF=$ID_Rapporto)";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("errore getData.php: getSoccorsiByReport");
+    }
+    $idSoccorsi = array();
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $idSoccorsi[$i] = $ris['FK_SoccorsiEsterni'];
+      $i++;
+    }
+    return $idSoccorsi;
   }
 ?>

@@ -80,7 +80,7 @@
                     </div>
                   </div>
 
-                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%;min-height:100px">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--8-col" style="text-align:left">
                       <h6 class="style-gradient-text">Evento:
                         <span class="mdl-color-text--black">
@@ -164,7 +164,7 @@
                     $colpito = getColpito($rapporto['FK_GeneralitaColpito'], null, null, null, null, $db_conn);
                     //print_r($colpito);
                    ?>
-                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%;min-height:100px">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                       <h6 class="style-gradient-text">Nome:
                         <span class="mdl-color-text--black">
@@ -263,7 +263,7 @@
 
 
                   <h6 class="style-gradient-text">Dettagli:</h6>
-                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%;min-height:100px">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--12-col" style="text-align:left">
                       <h6 class="style-gradient-text">Operazioni eseguite:
                         <span class="mdl-color-text--black">
@@ -297,7 +297,7 @@
 
 
                   <h6 class="style-gradient-text">Mezzi intervenuti:</h6>
-                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%;min-height:100px">
                     <?php
                       $idMezzi = getMezziByReport($rapporto['ID'], $db_conn);
                       if ($idMezzi != null){
@@ -324,29 +324,27 @@
 
 
                   <h6 class="style-gradient-text">Altri soccorsi:</h6>
-                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%;min-height:100px">
                     <?php
-                      $soccorsi = getSoccorsi(null, $db_conn);
-                      //print_r($prov);
-                      $rows = count($soccorsi) / 2;
-                      if(!is_int($rows)){
-                        $rows = (int)$rows + 1;
-                      }
-                      $index = 0;
-                      for ($i=0; $i < $rows;$i++){
-                        for($j=0;$j < 2; $j++){
-                          if ($index < count($soccorsi)){
-                            echo '
-                            <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idSoccorsi_'.$index.'">
-                                <input type="checkbox" id="idSoccorsi_'.$index.'" class="mdl-checkbox__input" name="soccorsi_'."$index".'" value="'.$soccorsi[$index][0].'">
-                                <span class="mdl-checkbox__label">'.$soccorsi[$index][1].'</span>
-                              </label>
-                            </div> ';
-                            $index++;
-                          }
+                      $idSoccorsi = getSoccorsiByReport($rapporto['ID'], $db_conn);
+                      if ($idSoccorsi != null){
+                        echo '<ul class="mdl-list">';
+                        for ($i=0; $i < count($idSoccorsi); $i++){
+
+                          ?>
+                            <li class="mdl-list__item">
+                              <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon">commute</i>
+                                <?php echo getSoccorsi($idSoccorsi["$i"], $db_conn);?>
+                              </span>
+                            </li>
+                          <?php
                         }
-                        echo "<br>";
+                        echo '</ul>';
+                      }else{
+                        echo "<div style='width:100%;text-align:center'>";
+                        echo "<h6 class='mdl-color-text--black'>Nessun soccorso esterno intervenuto</h6>";
+                        echo "</div>";
                       }
                      ?>
                   </div>
