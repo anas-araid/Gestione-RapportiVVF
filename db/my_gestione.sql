@@ -218,6 +218,3 @@ INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Taglio Pianta');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Altro');
 
 INSERT INTO t_comuni (Comune) VALUES ('Pergine Valsugana');
-
-
-INSERT INTO t_vigili (Nome, Cognome, Matricola) VALUES ('Anas', 'Araid', '341');
