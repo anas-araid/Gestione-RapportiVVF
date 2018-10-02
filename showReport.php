@@ -350,36 +350,37 @@
                   </div>
 
                   <h6 class="style-gradient-text">Vigili intervenuti:</h6>
-                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%;min-height:100px">
                     <?php
-                      $vigili = getFiremanData(null, $db_conn);
-                      //print_r($prov);
-                      $rows = count($vigili) / 2;
-                      if(!is_int($rows)){
-                        $rows = (int)$rows + 1;
-                      }
-                      $index = 0;
-                      for ($i=0; $i < $rows;$i++){
-                        for($j=0;$j < 2; $j++){
-                          if ($index < count($vigili)){
-                            echo '
-                            <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idVigile_'.$index.'">
-                                <input type="checkbox" id="idVigile_'.$index.'" class="mdl-checkbox__input" name="vigile_'."$index".'" value="'.$vigili[$index][0].'">
-                                <span class="mdl-checkbox__label">'.$vigili[$index][1].'</span>
-                              </label>
-                            </div> ';
-                            $index++;
-                          }
+                      $idVigili = getVigiliByReport($rapporto['ID'], $db_conn);
+                      if ($idVigili != null){
+                        echo '<ul class="mdl-list">';
+                        for ($i=0; $i < count($idVigili); $i++){
+
+                          ?>
+                            <li class="mdl-list__item">
+                              <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon">person</i>
+                                <?php
+                                  $vigile = getFiremanData($idVigili["$i"], $db_conn);
+                                  echo $vigile["Nome"]." ".$vigile["Cognome"];
+                                ?>
+                              </span>
+                            </li>
+                          <?php
                         }
-                        echo "<br>";
+                        echo '</ul>';
+                      }else{
+                        echo "<div style='width:100%;text-align:center'>";
+                        echo "<h6 class='mdl-color-text--black'>Nessun vigile intervenuto</h6>";
+                        echo "</div>";
                       }
                      ?>
                   </div>
 
                   <br>
 
-                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
+                  <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%;min-height:100px">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
                         <select id="IdRos" class="mdl-textfield__input" name="ros" required="">

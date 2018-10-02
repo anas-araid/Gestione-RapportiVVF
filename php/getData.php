@@ -256,4 +256,18 @@
     }
     return $idSoccorsi;
   }
+  function getVigiliByReport($ID_Rapporto, $db_conn){
+    $sql = "SELECT * FROM t_vigiliintervenuti WHERE (FK_RapportoVVF=$ID_Rapporto)";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("errore getData.php: getVigiliByReport");
+    }
+    $idVigili = array();
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $idVigili[$i] = $ris['FK_Vigile'];
+      $i++;
+    }
+    return $idVigili;
+  }
 ?>
