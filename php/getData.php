@@ -130,7 +130,7 @@
     }
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
-      die("error");
+      die("error getMezzi");
     }
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
@@ -227,5 +227,19 @@
       $id = $ris['ID'];
     }
     return $id;
+  }
+  function getMezziByReport($ID_Rapporto, $db_conn){
+    $sql = "SELECT * FROM t_mezziintervenuti WHERE (FK_RapportoVVF=$ID_Rapporto)";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("errore getMezziByReport");
+    }
+    $idMezzi = array();
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $idMezzi[$i] = $ris['FK_Mezzo'];
+      $i++;
+    }
+    return $idMezzi;
   }
 ?>

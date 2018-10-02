@@ -202,19 +202,6 @@
                            ?>
                          </span>
                       </h6>
-                      <h6 class="style-gradient-text">Altro:
-                        <span class="mdl-color-text--black">
-                          <span class="mdl-color-text--black">
-                            <?php
-                              $altro = $colpito['Altro'];
-                              if ($altro != null){
-                                echo $altro;
-                              }else{
-                                echo "Dato non disponibile";
-                              }
-                             ?>
-                         </span>
-                      </h6>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                       <h6 class="style-gradient-text">Cognome:
@@ -257,22 +244,53 @@
                          </span>
                       </h6>
                     </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col" style="text-align:left">
+                      <h6 class="style-gradient-text">Altro:
+                        <span class="mdl-color-text--black">
+                          <span class="mdl-color-text--black">
+                            <?php
+                              $altro = $colpito['Altro'];
+                              if ($altro != null){
+                                echo $altro;
+                              }else{
+                                echo "Dato non disponibile";
+                              }
+                             ?>
+                         </span>
+                      </h6>
+                    </div>
                   </div>
 
 
                   <h6 class="style-gradient-text">Dettagli:</h6>
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
-                      <div class="mdl-textfield mdl-js-textfield" style="width:90%">
-                        <textarea class="mdl-textfield__input" type="text" rows= "4" id="idOperazioni" name="operazioni" ></textarea>
-                        <label class="mdl-textfield__label style-gradient-text" for="idOperazioni">Operazioni eseguite</label>
-                      </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
-                      <div class="mdl-textfield mdl-js-textfield" style="width:90%">
-                        <textarea class="mdl-textfield__input " type="text" rows= "4" id="idOsservazioni" name="osservazioni"></textarea>
-                        <label class="mdl-textfield__label style-gradient-text" for="idOsservazioni">Osservazioni</label>
-                      </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col" style="text-align:left">
+                      <h6 class="style-gradient-text">Operazioni eseguite:
+                        <span class="mdl-color-text--black">
+                          <span class="mdl-color-text--black">
+                            <?php
+                              $opEseguite = $rapporto['OperazioniEseguite'];
+                              if ($opEseguite != null){
+                                echo $opEseguite;
+                              }else{
+                                echo "Dato non disponibile";
+                              }
+                             ?>
+                         </span>
+                      </h6>
+                      <h6 class="style-gradient-text">Osservazioni:
+                        <span class="mdl-color-text--black">
+                          <span class="mdl-color-text--black">
+                            <?php
+                              $osservazioni = $rapporto['Osservazioni'];
+                              if ($osservazioni != null){
+                                echo $osservazioni;
+                              }else{
+                                echo "Dato non disponibile";
+                              }
+                             ?>
+                         </span>
+                      </h6>
                     </div>
                   </div>
 
@@ -281,27 +299,25 @@
                   <h6 class="style-gradient-text">Mezzi intervenuti:</h6>
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <?php
-                      $mezzi = getMezzi(null, $db_conn);
-                      //print_r($mezzi);
-                      $rows = count($mezzi) / 2;
-                      if(!is_int($rows)){
-                        $rows = (int)$rows + 1;
-                      }
-                      $index = 0;
-                      for ($i=0; $i < $rows;$i++){
-                        for($j=0;$j < 2; $j++){
-                          if ($index < count($mezzi)){
-                            echo '
-                            <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idMezzi_'.$index.'">
-                                <input type="checkbox" id="idMezzi_'.$index.'" class="mdl-checkbox__input" name="mezzo_'."$index".'" value="'.$mezzi[$index][0].'">
-                                <span class="mdl-checkbox__label">'.$mezzi[$index][1].'</span>
-                              </label>
-                            </div> ';
-                            $index++;
-                          }
+                      $idMezzi = getMezziByReport($rapporto['ID'], $db_conn);
+                      if ($idMezzi != null){
+                        echo '<ul class="mdl-list">';
+                        for ($i=0; $i < count($idMezzi); $i++){
+
+                          ?>
+                            <li class="mdl-list__item">
+                              <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon">commute</i>
+                                <?php echo getMezzi($idMezzi["$i"], $db_conn);?>
+                              </span>
+                            </li>
+                          <?php
                         }
-                        echo "<br>";
+                        echo '</ul>';
+                      }else{
+                        echo "<div style='width:100%;text-align:center'>";
+                        echo "<h6 class='mdl-color-text--black'>Nessun mezzo intervenuto</h6>";
+                        echo "</div>";
                       }
                      ?>
                   </div>
