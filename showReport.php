@@ -222,8 +222,8 @@
                           <span class="mdl-color-text--black">
                             <?php
                               $dataDiNascita = $colpito['DataDiNascita'];
-                              if ($dataDiNascita != null){
-                                echo date_create($dataDiNascita)->format('d-m-Y');;
+                              if ($dataDiNascita != null && $dataDiNascita != date_create('1900-01-01')->format('Y-m-d')){
+                                echo date_create($dataDiNascita)->format('d-m-Y');
                               }else{
                                 echo "Dato non disponibile";
                               }

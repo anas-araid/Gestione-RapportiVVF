@@ -28,7 +28,7 @@
     $residenza = $_POST['residenza'];
     $dataDiNascita = $_POST['dataDiNascita'];
     if ($dataDiNascita == ''){
-      $dataDiNascita = date_create('1970-01-01')->format('Y-m-d');
+      $dataDiNascita = date_create('1900-01-01')->format('Y-m-d');
     }
     $telefono = $_POST['telefono'];
     $cartaIdentita = $_POST['cartaIdentita'];
