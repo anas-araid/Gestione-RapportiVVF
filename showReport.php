@@ -18,7 +18,7 @@
       }
       if (isset($_GET['id'])){
         $rapporto = getReportData($_GET['id'], $db_conn);
-        print_r($rapporto);
+        //print_r($rapporto);
       }
      ?>
   </head>
@@ -55,7 +55,7 @@
 
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
-                <form action="php/addReport.php" method="post" style="text-align:center;max-height:650px;overflow:auto">
+                <div style="text-align:center;max-height:650px;overflow:auto">
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--8-col" style="text-align:left;padding:0px;margin:0px">
                       <h6 class="style-gradient-text">ID Rapporto: <span class="mdl-color-text--black"><?php echo $rapporto['ID_Rapporto'] ?></span></h6>
@@ -244,7 +244,7 @@
                          </span>
                       </h6>
                     </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col" style="text-align:left">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col" style="text-align:left;">
                       <h6 class="style-gradient-text">Altro:
                         <span class="mdl-color-text--black">
                           <span class="mdl-color-text--black">
@@ -381,36 +381,40 @@
                   <br>
 
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%;min-height:100px">
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                        <select id="IdRos" class="mdl-textfield__input" name="ros" required="">
-                          <?php
-                            $ros = getFiremanData(null, $db_conn);
-                            for ($i =0; $i < count($ros); $i++){
-                              echo '<option value="'.$ros[$i][0].'">'.$ros[$i][1].'</option>';
-                            }
-                           ?>
-                        </select>
-                        <label class="mdl-textfield__label" for="IdRos">Responsabile Operazioni</label>
-                      </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
+                      <h6 class="style-gradient-text">Responsabile:
+                        <span class="mdl-color-text--black">
+                          <span class="mdl-color-text--black">
+                            <?php
+                              $ros = $rapporto['FK_Responsabile'];
+                              $vigileResponsabile = getFiremanData($ros, $db_conn);
+                              if ($ros != null && $vigileResponsabile != null){
+                                echo $vigileResponsabile["Nome"]." ".$vigileResponsabile["Cognome"];
+                              }else{
+                                echo "Dato non disponibile";
+                              }
+                             ?>
+                         </span>
+                      </h6>
                     </div>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                        <select id="IdCompilatore" class="mdl-textfield__input" name="compilatore" required="">
-                          <?php
-                            $compilatore = getFiremanData(null, $db_conn);
-                            for ($i =0; $i < count($compilatore); $i++){
-                              echo '<option value="'.$compilatore[$i][0].'">'.$compilatore[$i][1].'</option>';
-                            }
-                           ?>
-                        </select>
-                        <label class="mdl-textfield__label" for="IdCompilatore">Compilatore</label>
-                      </div>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
+                      <h6 class="style-gradient-text">Compilatore:
+                        <span class="mdl-color-text--black">
+                          <span class="mdl-color-text--black">
+                            <?php
+                              $compilatore = $rapporto['FK_Compilatore'];
+                              $vigileCompilatore = getFiremanData($compilatore, $db_conn);
+                              if ($ros != null && $vigileCompilatore != null){
+                                echo $vigileCompilatore["Nome"]." ".$vigileCompilatore["Cognome"];
+                              }else{
+                                echo "Dato non disponibile";
+                              }
+                             ?>
+                         </span>
+                      </h6>
                     </div>
                   </div>
-
                   <br>
-
                   <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
@@ -421,21 +425,21 @@
                              <i class="material-icons">cancel</i>
                       </button>
                     </div>
+                    <?php $idReport =  $rapporto["ID"]; ?>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
                               style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
-                              type="submit"
-                              id="btnSave"
-                              name="btnSave">
-                               Salva
-                             <i class="material-icons">save</i>
+                              id="btnEdit"
+                              name="btnEdit"
+                              onclick="location.href='php/edit.php?id=<?php echo $idReport ?>'">
+                               Modifica
+                             <i class="material-icons">edit</i>
                       </button>
                     </div>
                   </div>
-
                   <br>
                   <br>
-                </form>
+                </div>
               </div>
             </section>
           </div>
