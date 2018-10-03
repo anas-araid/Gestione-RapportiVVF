@@ -431,7 +431,7 @@
                               style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
                               id="btnEdit"
                               name="btnEdit"
-                              onclick="location.href='php/edit.php?id=<?php echo $idReport ?>'">
+                              onclick="location.href='editReport.php?id=<?php echo $idReport ?>'">
                                Modifica
                              <i class="material-icons">edit</i>
                       </button>
