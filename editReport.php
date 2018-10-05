@@ -170,7 +170,7 @@
                   <h6 class="style-gradient-text">Generalità del colpito:</h6>
                   <?php
                     $colpito = getColpito($rapporto['FK_GeneralitaColpito'], null, null, null, null, $db_conn);
-                    print_r($colpito);
+                    //print_r($colpito);
                    ?>
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
@@ -315,7 +315,7 @@
                           if ($index < count($vigili)){
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idVigile_'.$index.'">
+                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idVigile_'.$index.'" id="lblVigili_'.$vigili[$index][0].'">
                                 <input type="checkbox" id="idVigile_'.$index.'" class="mdl-checkbox__input" name="vigile_'."$index".'" value="'.$vigili[$index][0].'">
                                 <span class="mdl-checkbox__label">'.$vigili[$index][1].'</span>
                               </label>
@@ -337,6 +337,10 @@
                           <?php
                             $ros = getFiremanData(null, $db_conn);
                             for ($i =0; $i < count($ros); $i++){
+                              $selected = "";
+                              if ($rapporto['FK_Responsabile'] == $ros[$i][0]){
+                                $selected = "selected";
+                              }
                               echo '<option value="'.$ros[$i][0].'">'.$ros[$i][1].'</option>';
                             }
                            ?>
@@ -350,6 +354,10 @@
                           <?php
                             $compilatore = getFiremanData(null, $db_conn);
                             for ($i =0; $i < count($compilatore); $i++){
+                              $selected = "";
+                              if ($rapporto['FK_Compilatore'] == $compilatore[$i][0]){
+                                $selected = "selected";
+                              }
                               echo '<option value="'.$compilatore[$i][0].'">'.$compilatore[$i][1].'</option>';
                             }
                            ?>
@@ -420,6 +428,14 @@
                   $soccorsi = $arraySoccorsi[$i];
                   echo "
                     document.getElementById('lblSoccorsi_$soccorsi').classList.add('is-checked');
+                  ";
+                }
+                // attiva le checkbox dei vigili intervenuti
+                $arrayVigili = getVigiliByReport($rapporto['ID'], $db_conn);
+                for ($i=0; $i < count($arrayVigili); $i++){
+                  $vigili = $arrayVigili[$i];
+                  echo "
+                    document.getElementById('lblVigili_$vigili').classList.add('is-checked');
                   ";
                 }
                ?>
