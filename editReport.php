@@ -126,8 +126,11 @@
                     </div>
                     <br>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
+                      <?php
+                        $localita = getLocalita($rapporto['FK_Localita'], null, null, $db_conn);
+                      ?>
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idVia" name="via" required="">
+                         <input class="mdl-textfield__input" type="text" id="idVia" name="via" required="" value="<?php echo $localita['via'] ?>">
                          <label class="mdl-textfield__label" for="idVia">Via</label>
                       </div>
                     </div>
@@ -137,7 +140,11 @@
                           <?php
                             $comuni = getComuni(null, $db_conn);
                             for ($i =0; $i < count($comuni); $i++){
-                              echo '<option value="'.$comuni[$i][0].'">'.$comuni[$i][1].'</option>';
+                              $selected = "";
+                              if ($comuni[$i][1] == $localita['via']){
+                                $selected = "selected";
+                              }
+                              echo '<option value="'.$comuni[$i][0].'"'.$selected.' >'.$comuni[$i][1].'</option>';
                             }
                            ?>
                         </select>
@@ -149,77 +156,86 @@
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <span>Ora di partenza &nbsp</span>
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
-                         <input class="mdl-textfield__input" type="time" id="IdOraUscita" name="oraUscita" required="">
+                         <input class="mdl-textfield__input" type="time" id="IdOraUscita" name="oraUscita" required="" value="<?php echo $rapporto['OraUscita'] ?>">
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <span>Ora di rientro &nbsp</span>
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
-                         <input class="mdl-textfield__input" type="time" id="IdOraRientro" name="oraRientro" required="">
+                         <input class="mdl-textfield__input" type="time" id="IdOraRientro" name="oraRientro" required="" value="<?php echo $rapporto['OraRientro'] ?>">
                       </div>
                     </div>
                   </div>
 
                   <h6 class="style-gradient-text">Generalità del colpito:</h6>
+                  <?php
+                    $colpito = getColpito($rapporto['FK_GeneralitaColpito'], null, null, null, null, $db_conn);
+                    print_r($colpito);
+                   ?>
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idNome" name="nome">
+                         <input class="mdl-textfield__input" type="text" id="idNome" name="nome" value="<?php echo $colpito['Nome'] ?>">
                          <label class="mdl-textfield__label style-gradient-text" for="idNome">Nome</label>
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idCognome" name="cognome">
+                         <input class="mdl-textfield__input" type="text" id="idCognome" name="cognome" value="<?php echo $colpito['Cognome'] ?>">
                          <label class="mdl-textfield__label style-gradient-text" for="idCognome">Cognome</label>
                       </div>
                     </div>
                     <br>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--9-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="text" id="idResidenza" name="residenza" >
+                         <input class="mdl-textfield__input" type="text" id="idResidenza" name="residenza" value="<?php echo $colpito['Residenza'] ?>">
                          <label class="mdl-textfield__label style-gradient-text" for="idResidenza">Residenza</label>
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--3-col">
+                      <?php
+                        $dataDiNascita = '';
+                        if($colpito['DataDiNascita'] != date_create('1900-01-01')->format('Y-m-d')){
+                          $dataDiNascita = $colpito['DataDiNascita'];
+                        }
+                      ?>
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80%">
-                         <input class="mdl-textfield__input" type="date" id="idDataDiNascita" name="dataDiNascita">
+                         <input class="mdl-textfield__input" type="date" id="idDataDiNascita" name="dataDiNascita" value="<?php echo date_create($dataDiNascita)->format('Y-m-d'); ?>">
                       </div>
                     </div>
                     <br>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--8-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
-                         <input class="mdl-textfield__input" type="number" id="idTelefono" name="telefono">
+                         <input class="mdl-textfield__input" type="number" id="idTelefono" name="telefono" value="<?php echo $colpito['Telefono'] ?>">
                          <label class="mdl-textfield__label style-gradient-text" for="idTelefono">Telefono</label>
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
-                         <input class="mdl-textfield__input" type="text" id="idCartaIdentita" name="cartaIdentita" >
+                         <input class="mdl-textfield__input" type="text" id="idCartaIdentita" name="cartaIdentita" value="<?php echo $colpito['CartaIdentita'] ?>">
                          <label class="mdl-textfield__label style-gradient-text" for="idCartaIdentita">Carta d'identità</label>
                       </div>
                     </div>
                     <br>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
-                         <input class="mdl-textfield__input" type="text" id="idAltro" name="altro" >
+                         <input class="mdl-textfield__input" type="text" id="idAltro" name="altro" value="<?php echo $colpito['Altro'] ?>">
                          <label class="mdl-textfield__label style-gradient-text" for="idAltro">Altro</label>
                       </div>
                     </div>
                   </div>
 
-
                   <h6 class="style-gradient-text">Dettagli:</h6>
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
                       <div class="mdl-textfield mdl-js-textfield" style="width:90%">
-                        <textarea class="mdl-textfield__input" type="text" rows= "4" id="idOperazioni" name="operazioni" ></textarea>
+                        <textarea class="mdl-textfield__input" type="text" rows= "4" id="idOperazioni" name="operazioni"><?php echo $rapporto['OperazioniEseguite'] ?></textarea>
                         <label class="mdl-textfield__label style-gradient-text" for="idOperazioni">Operazioni eseguite</label>
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
                       <div class="mdl-textfield mdl-js-textfield" style="width:90%">
-                        <textarea class="mdl-textfield__input " type="text" rows= "4" id="idOsservazioni" name="osservazioni"></textarea>
+                        <textarea class="mdl-textfield__input " type="text" rows= "4" id="idOsservazioni" name="osservazioni"><?php echo $rapporto['Osservazioni'];?></textarea>
                         <label class="mdl-textfield__label style-gradient-text" for="idOsservazioni">Osservazioni</label>
                       </div>
                     </div>
@@ -373,34 +389,31 @@
               </div>
             </section>
           </div>
-          <?php
-            // attiva la checkbox urgente
-            if ($urgente == 1){
-              echo "
-                <script>
-                  window.onload = function() {
+          <script>
+            window.onload = function(){
+              <?php
+                // attiva la checkbox urgente
+                if ($urgente == 1){
+                  echo "
                     document.getElementById('lblUrgente').classList.add('is-checked');
-                  }
-                </script>
-              ";
-            }
-            // attiva il radio button della provenienza della chiamata
-            $radioBtn = $rapporto['FK_ProvChiamata'];
-            if ($radioBtn != null){
-              $radioProv = "'radioProv_$radioBtn'";
-              echo "
-              <script>
-              window.onload = function() {
-                document.getElementById($radioProv).classList.add('is-checked');
-              }
-              </script>
-              ";
-            }
+                  ";
+                }
+                // attiva il radio button della provenienza della chiamata
+                $radioBtn = $rapporto['FK_ProvChiamata'];
+                if ($radioBtn != null){
+                  $radioProv = "'radioProv_$radioBtn'";
+                  echo "
+                    document.getElementById($radioProv).classList.add('is-checked');
+                  ";
+                }
 
-            include "php/_footer.php";
-           ?>
+               ?>
+          }
+         </script>
+         <?php
+          include "php/_footer.php";
+         ?>
         </div>
-
       </main>
     </div>
   </body>
