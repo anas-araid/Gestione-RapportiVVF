@@ -11,3 +11,30 @@ function flatAlert(titolo, testo, icona, url){
     }
   });
 }
+function alertDeleteReport(id){
+  swal(
+    {
+      title: "Vuoi continuare?",
+      text: "Perderai tutti i dati relativi al rapporto d'intervento",
+      icon: "error",
+      buttons: {
+        cancel: {
+          text: "Annulla",
+          visible: true,
+        },
+        button: {
+          text: "Continua",
+          visible: true,
+        }
+      }
+    }
+  ).then(Elimina => {
+    if (Elimina){
+      swal(" ", "Rapporto eliminato con successo", "success").then(Elimina => {
+        location.href='php/deleteReport.php?id='+id;
+      });
+    }else{
+      swal.close();
+    }
+  });
+}

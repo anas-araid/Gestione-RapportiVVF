@@ -2,8 +2,8 @@
   session_start();
   include "dbConnection.php";
   include "getData.php";
-  include "addData.php";
   include "functions.php";
+  include "updateReport.php";
   if (isset($_POST['btnSave'])){
     $idRapporto = $_POST['rapporto'];
     if (isset($_POST['urgente'])){
@@ -80,16 +80,16 @@
     $FK_Compilatore = $_POST['compilatore'];
 
 
-    addLocalita($via, $comune, $db_conn);
+    updateLocalita($via, $comune, $db_conn);
     $FK_Localita = getLocalita(null, $via, $comune, $db_conn);
 
-    addGeneralitaColpito($nome, $cognome, $dataDiNascita, $residenza, $telefono, $cartaIdentita, $altro, $db_conn);
+    updateGeneralitaColpito($nome, $cognome, $dataDiNascita, $residenza, $telefono, $cartaIdentita, $altro, $db_conn);
     $FK_GeneralitaColpito = getColpito(null, $nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn);
-
     sleep(2);
+
+    
     // Section that send data to addData.php
-    $insertReport = "INSERT INTO t_rapportiVVF (ID_Rapporto, OraUscita, OraRientro, Data, Urgente, OperazioniEseguite, Osservazioni, FK_Localita, FK_GeneralitaColpito, FK_ProvChiamata, FK_TipoChiamata, FK_Responsabile, FK_Compilatore)
-                     VALUES ('$idRapporto', '$oraUscita', '$oraRientro', '$data', '$urgente', '$operazioniEseguite', '$osservazioni', '$FK_Localita', '$FK_GeneralitaColpito', '$FK_ProvChiamata', '$FK_TipoChiamata', '$FK_Responsabile', '$FK_Compilatore')";
+    $updateReport = "UPDATE t_rapportiVVF SET = ID_Rapporto='$idRapporto', OraUscita='$oraUscita', OraRientro='$oraRientro', Data='$data', Urgente='$urgente', OperazioniEseguite='$operazioniEseguite', Osservazioni='$osservazioni', FK_Localita='$FK_Localita', FK_GeneralitaColpito='$FK_GeneralitaColpito', FK_ProvChiamata='$FK_ProvChiamata', FK_TipoChiamata='$FK_TipoChiamata', FK_Responsabile='$FK_Responsabile', FK_Compilatore='$FK_Compilatore')";
 
     try {
       $saveReport = mysqli_query($db_conn, $insertReport);
@@ -98,29 +98,29 @@
       }
       $id = getRapporto($idRapporto, $db_conn);
 
-      // aggiunta mezzi
+      // aggiorno mezzi
       for($i=0; $i < count($arrayMezzi); $i++){
-        addMezziToRapporto($id, $arrayMezzi[$i], $db_conn);
+        updateMezziToRapporto($id, $arrayMezzi[$i], $db_conn);
       }
-      // aggiunta soccorsi
+      // aggiorno soccorsi
       for($i=0; $i < count($arraySoccorsi); $i++){
-        addSoccorsiToRapporto($id, $arraySoccorsi[$i], $db_conn);
+        updateSoccorsiToRapporto($id, $arraySoccorsi[$i], $db_conn);
       }
-      // aggiunta vigili
+      // aggiorno vigili
       for($i=0; $i < count($arrayVigili); $i++){
-        addVigileToRapporto($id, $arrayVigili[$i], $db_conn);
+        updateVigileToRapporto($id, $arrayVigili[$i], $db_conn);
       }
     } catch (Exception $e) {
       echo "
         <script>
-        alert('Errore relativo al salvataggio del rapporto: contatta l\'amministratore');
+        alert('Errore relativo all\'aggiornamento del rapporto: contatta l\'amministratore');
         alert('$e');
         //window.location.href = '../index.php';
         </script>";
     }
     echo "<script>window.location.href = '../index.php';</script>";
-  }else{
+    }else{
     echo "<script>alert('Errore sconosciuto')</script>";
-  }
+    }
 
- ?>
+    ?>
