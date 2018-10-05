@@ -258,7 +258,7 @@
                           if ($index < count($mezzi)){
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idMezzi_'.$index.'">
+                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idMezzi_'.$index.'" id="lblMezzi_'.$mezzi[$index][0].'">
                                 <input type="checkbox" id="idMezzi_'.$index.'" class="mdl-checkbox__input" name="mezzo_'."$index".'" value="'.$mezzi[$index][0].'">
                                 <span class="mdl-checkbox__label">'.$mezzi[$index][1].'</span>
                               </label>
@@ -287,7 +287,7 @@
                           if ($index < count($soccorsi)){
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
-                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idSoccorsi_'.$index.'">
+                              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="idSoccorsi_'.$index.'" id="lblSoccorsi_'.$soccorsi[$index][0].'">
                                 <input type="checkbox" id="idSoccorsi_'.$index.'" class="mdl-checkbox__input" name="soccorsi_'."$index".'" value="'.$soccorsi[$index][0].'">
                                 <span class="mdl-checkbox__label">'.$soccorsi[$index][1].'</span>
                               </label>
@@ -406,7 +406,22 @@
                     document.getElementById($radioProv).classList.add('is-checked');
                   ";
                 }
-
+                // attiva le checkbox dei mezzi
+                $arrayMezzi = getMezziByReport($rapporto['ID'], $db_conn);
+                for ($i=0; $i < count($arrayMezzi); $i++){
+                  $mezzo = $arrayMezzi[$i];
+                  echo "
+                    document.getElementById('lblMezzi_$mezzo').classList.add('is-checked');
+                  ";
+                }
+                // attiva le checkbox dei soccorsi
+                $arraySoccorsi = getSoccorsiByReport($rapporto['ID'], $db_conn);
+                for ($i=0; $i < count($arraySoccorsi); $i++){
+                  $soccorsi = $arraySoccorsi[$i];
+                  echo "
+                    document.getElementById('lblSoccorsi_$soccorsi').classList.add('is-checked');
+                  ";
+                }
                ?>
           }
          </script>
