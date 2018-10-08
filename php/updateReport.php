@@ -3,8 +3,10 @@
   include "dbConnection.php";
   include "getData.php";
   include "functions.php";
-  include "updateReport.php";
+  include "updateData.php";
   if (isset($_POST['btnSave'])){
+    $IdRapportoDB = $_SESSION['IdRapportoDB'];
+    echo $IdRapportoDB;
     $idRapporto = $_POST['rapporto'];
     if (isset($_POST['urgente'])){
       $urgente = $_POST['urgente'];
@@ -13,7 +15,7 @@
       $urgente = 0;
     }
 
-    $FK_ProvChiamata = $_POST['prov'];
+    $FK_ProvChiamata = $_POST['provChiamata'];
 
     $FK_TipoChiamata = $_POST['intervento'];
     $data = $_POST['data'];
@@ -87,28 +89,30 @@
     $FK_GeneralitaColpito = getColpito(null, $nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn);
     sleep(2);
 
-    
-    // Section that send data to addData.php
-    $updateReport = "UPDATE t_rapportiVVF SET = ID_Rapporto='$idRapporto', OraUscita='$oraUscita', OraRientro='$oraRientro', Data='$data', Urgente='$urgente', OperazioniEseguite='$operazioniEseguite', Osservazioni='$osservazioni', FK_Localita='$FK_Localita', FK_GeneralitaColpito='$FK_GeneralitaColpito', FK_ProvChiamata='$FK_ProvChiamata', FK_TipoChiamata='$FK_TipoChiamata', FK_Responsabile='$FK_Responsabile', FK_Compilatore='$FK_Compilatore')";
 
+    // Section that send data to addData.php
+    $updateReport = "UPDATE t_rapportiVVF SET = ID_Rapporto='$idRapporto', OraUscita='$oraUscita', OraRientro='$oraRientro', Data='$data', Urgente='$urgente', OperazioniEseguite='$operazioniEseguite', Osservazioni='$osservazioni', FK_Localita='$FK_Localita', FK_GeneralitaColpito='$FK_GeneralitaColpito', FK_ProvChiamata='$FK_ProvChiamata', FK_TipoChiamata='$FK_TipoChiamata', FK_Responsabile='$FK_Responsabile', FK_Compilatore='$FK_Compilatore')
+                     WHERE (ID = '$IdRapportoDB') ";
+    echo $updateReport;
     try {
       $saveReport = mysqli_query($db_conn, $insertReport);
       if ($saveReport == null){
         throw new Exception("Errore salvataggio rapporto", 1);
       }
-      $id = getRapporto($idRapporto, $db_conn);
-
       // aggiorno mezzi
+      deleteFromMezziIntervenuti($IdRapportoDB, $db_conn);
       for($i=0; $i < count($arrayMezzi); $i++){
-        updateMezziToRapporto($id, $arrayMezzi[$i], $db_conn);
+        addMezziToRapporto($IdRapportoDB, $arrayMezzi[$i], $db_conn);
       }
       // aggiorno soccorsi
+      deleteSoccorsiIntervenuti($IdRapportoDB, $db_conn);
       for($i=0; $i < count($arraySoccorsi); $i++){
-        updateSoccorsiToRapporto($id, $arraySoccorsi[$i], $db_conn);
+        addSoccorsiToRapporto($IdRapportoDB, $arraySoccorsi[$i], $db_conn);
       }
       // aggiorno vigili
+      deleteVigiliIntervenuti($IdRapportoDB, $db_conn);
       for($i=0; $i < count($arrayVigili); $i++){
-        updateVigileToRapporto($id, $arrayVigili[$i], $db_conn);
+        addVigileToRapporto($IdRapportoDB, $arrayVigili[$i], $db_conn);
       }
     } catch (Exception $e) {
       echo "
@@ -118,7 +122,7 @@
         //window.location.href = '../index.php';
         </script>";
     }
-    echo "<script>window.location.href = '../index.php';</script>";
+    //echo "<script>window.location.href = '../index.php';</script>";
     }else{
     echo "<script>alert('Errore sconosciuto')</script>";
     }

@@ -87,7 +87,7 @@
     $FK_GeneralitaColpito = getColpito(null, $nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn);
 
     sleep(2);
-    // Section that send data to addData.php
+    // Section that send data to addData.hhp
     $insertReport = "INSERT INTO t_rapportiVVF (ID_Rapporto, OraUscita, OraRientro, Data, Urgente, OperazioniEseguite, Osservazioni, FK_Localita, FK_GeneralitaColpito, FK_ProvChiamata, FK_TipoChiamata, FK_Responsabile, FK_Compilatore)
                      VALUES ('$idRapporto', '$oraUscita', '$oraRientro', '$data', '$urgente', '$operazioniEseguite', '$osservazioni', '$FK_Localita', '$FK_GeneralitaColpito', '$FK_ProvChiamata', '$FK_TipoChiamata', '$FK_Responsabile', '$FK_Compilatore')";
 

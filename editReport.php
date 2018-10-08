@@ -18,6 +18,7 @@
       }
       if (isset($_GET['id'])){
         $rapporto = getReportData($_GET['id'], $db_conn);
+        $_SESSION['IdRapportoDB'] = $_GET['id'];
         print_r($rapporto);
       }
      ?>
@@ -89,7 +90,7 @@
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                               <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="prov_'.$index.'" id="radioProv_'.$prov[$index][0].'" ">
-                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="prov" value="'.$prov[$index][0].'">
+                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="provChiamata" value="'.$prov[$index][0].'">
                                 <span class="mdl-radio__label">'.$prov[$index][1].'</span>
                               </label>
                             </div> ';
