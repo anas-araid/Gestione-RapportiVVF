@@ -4,9 +4,10 @@
   include "getData.php";
   include "functions.php";
   include "updateData.php";
+  include "addData.php";
+
   if (isset($_POST['btnSave'])){
-    $IdRapportoDB = $_SESSION['IdRapportoDB'];
-    echo $IdRapportoDB;
+    $IdRapportoDB = $_SESSION['rapporto']['ID'];
     $idRapporto = $_POST['rapporto'];
     if (isset($_POST['urgente'])){
       $urgente = $_POST['urgente'];
@@ -50,7 +51,6 @@
         $j++;
       }
     }
-    //print_r($arrayMezzi);
 
     // arraySoccorsi contiene gli id dei mezzi selezionati
     $arraySoccorsi = array();
@@ -87,15 +87,16 @@
 
     updateGeneralitaColpito($nome, $cognome, $dataDiNascita, $residenza, $telefono, $cartaIdentita, $altro, $db_conn);
     $FK_GeneralitaColpito = getColpito(null, $nome, $cognome, $dataDiNascita, $cartaIdentita, $db_conn);
+    if ($FK_GeneralitaColpito == null || $FK_GeneralitaColpito == "" || !isset($FK_GeneralitaColpito)){
+      $FK_GeneralitaColpito = $_SESSION['rapporto']['FK_GeneralitaColpito'];
+    }
     sleep(2);
 
-
     // Section that send data to addData.php
-    $updateReport = "UPDATE t_rapportiVVF SET = ID_Rapporto='$idRapporto', OraUscita='$oraUscita', OraRientro='$oraRientro', Data='$data', Urgente='$urgente', OperazioniEseguite='$operazioniEseguite', Osservazioni='$osservazioni', FK_Localita='$FK_Localita', FK_GeneralitaColpito='$FK_GeneralitaColpito', FK_ProvChiamata='$FK_ProvChiamata', FK_TipoChiamata='$FK_TipoChiamata', FK_Responsabile='$FK_Responsabile', FK_Compilatore='$FK_Compilatore')
+    $updateReport = "UPDATE t_rapportiVVF SET ID_Rapporto='$idRapporto', OraUscita='$oraUscita', OraRientro='$oraRientro', Data='$data', Urgente='$urgente', OperazioniEseguite='$operazioniEseguite', Osservazioni='$osservazioni', FK_Localita='$FK_Localita', FK_GeneralitaColpito='$FK_GeneralitaColpito', FK_ProvChiamata='$FK_ProvChiamata', FK_TipoChiamata='$FK_TipoChiamata', FK_Responsabile='$FK_Responsabile', FK_Compilatore='$FK_Compilatore'
                      WHERE (ID = '$IdRapportoDB') ";
-    echo $updateReport;
     try {
-      $saveReport = mysqli_query($db_conn, $insertReport);
+      $saveReport = mysqli_query($db_conn, $updateReport);
       if ($saveReport == null){
         throw new Exception("Errore salvataggio rapporto", 1);
       }
@@ -122,7 +123,7 @@
         //window.location.href = '../index.php';
         </script>";
     }
-    //echo "<script>window.location.href = '../index.php';</script>";
+    echo "<script>window.location.href = '../index.php';</script>";
     }else{
     echo "<script>alert('Errore sconosciuto')</script>";
     }

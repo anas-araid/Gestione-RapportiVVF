@@ -18,8 +18,7 @@
       }
       if (isset($_GET['id'])){
         $rapporto = getReportData($_GET['id'], $db_conn);
-        $_SESSION['IdRapportoDB'] = $_GET['id'];
-        print_r($rapporto);
+        $_SESSION['rapporto'] = $rapporto;
       }
      ?>
   </head>
@@ -87,10 +86,14 @@
                       for ($i=0; $i < $rows;$i++){
                         for($j=0;$j < 2; $j++){
                           if ($index < count($prov)){
+                            $checked = "";
+                            if ($rapporto['FK_ProvChiamata'] == $prov[$index][0]){
+                              $checked = "checked";
+                            }
                             echo '
                             <div class="mdl-cell mdl-cell--middle mdl-cell--6-col" style="text-align:left">
                               <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="prov_'.$index.'" id="radioProv_'.$prov[$index][0].'" ">
-                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="provChiamata" value="'.$prov[$index][0].'">
+                                <input type="radio" id="prov_'.$index.'" class="mdl-radio__button" name="provChiamata" value="'.$prov[$index][0].'" '.$checked.'>
                                 <span class="mdl-radio__label">'.$prov[$index][1].'</span>
                               </label>
                             </div> ';

@@ -35,7 +35,7 @@
   }
   function deleteFromMezziIntervenuti($ID_Rapporto, $db_conn){
     try{
-      $sql = "DELETE FROM t_mezziintervenuti WHERE ID='$ID_Rapporto'";
+      $sql = "DELETE FROM t_mezziintervenuti WHERE FK_RapportoVVF='$ID_Rapporto'";
       $deleteQuery = mysqli_query($db_conn, $sql);
       if ($deleteQuery == null){
         die("error");
@@ -51,7 +51,7 @@
   }
   function deleteSoccorsiIntervenuti($ID_Rapporto, $db_conn){
     try{
-      $sql = "DELETE FROM t_soccorsiintervenuti WHERE ID='$ID_Rapporto'";
+      $sql = "DELETE FROM t_soccorsiintervenuti WHERE FK_RapportoVVF='$ID_Rapporto'";
       $deleteQuery = mysqli_query($db_conn, $sql);
       if ($deleteQuery == null){
         die("error");
@@ -67,7 +67,7 @@
   }
   function deleteVigiliIntervenuti($ID_Rapporto, $db_conn){
     try{
-      $sql = "DELETE FROM t_vigiliIntervenuti WHERE ID='$ID_Rapporto'";
+      $sql = "DELETE FROM t_vigiliIntervenuti WHERE FK_RapportoVVF='$ID_Rapporto'";
       $deleteQuery = mysqli_query($db_conn, $sql);
       if ($deleteQuery == null){
         die("error");
