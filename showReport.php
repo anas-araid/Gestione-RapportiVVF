@@ -50,6 +50,15 @@
                   </mark>
                 </h3>
               </div>
+              <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
+                <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
+                        style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
+                        type="reset"
+                         onclick="location.href='index.php?back=true'">
+                         Indietro
+                       <i class="material-icons">cancel</i>
+                </button>
+              </div>
             </section>
 
 
@@ -416,7 +425,7 @@
                   </div>
                   <br>
                   <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col mdl-cell--hide-desktop">
                       <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
                               style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
                               type="reset"
@@ -426,7 +435,7 @@
                       </button>
                     </div>
                     <?php $idReport =  $rapporto["ID"]; ?>
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--12-col">
                       <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
                               style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
                               id="btnEdit"
