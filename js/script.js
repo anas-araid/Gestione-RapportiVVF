@@ -31,7 +31,7 @@ function alertDeleteReport(id){
   ).then(Elimina => {
     if (Elimina){
       swal(" ", "Rapporto eliminato con successo", "success").then(Elimina => {
-        location.href='php/deleteReport.php?id='+id;
+        location.href='core/deleteReport.php?id='+id;
       });
     }else{
       swal.close();

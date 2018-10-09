@@ -132,6 +132,8 @@
       $reportsByGeneralita[$i] = getReportsByGeneralita($colpitiID[$i], $db_conn);
     }
     print_r($reportsByGeneralita);
+
+
   }
 
 

@@ -11,14 +11,14 @@
     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
       <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
               style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
-               onclick="location.href='php/logout.php'">
+               onclick="location.href='core/logout.php'">
                Esci
              <i class="material-icons">account_circle</i>
       </button>
     </div>
   </div>
   <div>
-    <form action="php/search.php" method="POST" style="text-align:center">
+    <form action="core/search.php" method="POST" style="text-align:center">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:60%;">
         <input class="mdl-textfield__input style-gradient-text" style="border-bottom:1px solid #c5003e;color:grey" type="text" id="find" name="find" required="">
         <label class="mdl-textfield__label style-gradient-text" for="find">Cerca</label>
@@ -49,7 +49,7 @@
     </thead>
     <tbody>
       <?php
-        include "php/getData.php";
+        include "core/getData.php";
         $reportQuery = "SELECT * FROM t_rapportiVVF ORDER BY Data DESC";
         $getAllReports = mysqli_query($db_conn, $reportQuery);
         if ($getAllReports != false){

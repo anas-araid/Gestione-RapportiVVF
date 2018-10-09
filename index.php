@@ -1,22 +1,22 @@
 <html>
   <head>
     <?php
-      include "php/_header.php";
+      include "core/_header.php";
       session_start();
       try{
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         // error_reporting per togliere il notice quando non trova isLogged
         //error_reporting(0);
         if (isset($_GET['back'])) {
-          $_SESSION['include'] = 'php/reports.php';
+          $_SESSION['include'] = 'core/reports.php';
         }
         if (!$_SESSION['include']){
           $_SESSION = array();
-          $_SESSION['include'] = 'php/checkPassword.php';
+          $_SESSION['include'] = 'core/checkPassword.php';
         }
       }catch(Exception $e){
       }
-      include "php/dbConnection.php";
+      include "core/dbConnection.php";
       if ($error_message) {
         echo "
         <script>
@@ -60,7 +60,7 @@
               </div>
             </section>
           </div>
-          <?php include "php/_footer.php" ?>
+          <?php include "core/_footer.php" ?>
         </div>
       </main>
     </div>

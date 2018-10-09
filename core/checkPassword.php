@@ -9,18 +9,18 @@
   <div>
     <button class="style-button style-gradient" style="color:white;margin:10px;width:40%" type="submit">Entra</button>
     <br>
-    <button class="style-button style-gradient" style="color:white;margin:10px;width:40%" type="reset" onclick="location.href='php/logout.php'">Indietro</button>
+    <button class="style-button style-gradient" style="color:white;margin:10px;width:40%" type="reset" onclick="location.href='core/logout.php'">Indietro</button>
   </div>
 </form>
 
 <?php
 $_SESSION['warning'] = true;
 if(isset($_POST['password'])){
-    include 'php/functions.php';
+    include 'core/functions.php';
     $password = text_filter_encrypt($_POST["password"]);
     // caserma
     if ($password == 'b65959845f63d31058e1319f724bcaff'){
-      $_SESSION['include'] = 'php/reports.php';
+      $_SESSION['include'] = 'core/reports.php';
       echo "
       <script>
       flatAlert('Accesso eseguito con successo', '', 'success', 'index.php');

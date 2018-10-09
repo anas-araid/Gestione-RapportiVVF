@@ -1,14 +1,14 @@
 <html>
   <head>
     <?php
-      include "php/_header.php";
+      include "core/_header.php";
       session_start();
       //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       // error_reporting per togliere il notice quando non trova isLogged
       //error_reporting(0);
-      include "php/dbConnection.php";
-      include "php/getData.php";
-      include "php/functions.php";
+      include "core/dbConnection.php";
+      include "core/getData.php";
+      include "core/functions.php";
 
       if ($error_message) {
         echo "
@@ -60,7 +60,7 @@
 
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
-                <form action="php/addReport.php" method="post" style="text-align:center;max-height:650px;overflow:auto">
+                <form action="core/addReport.php" method="post" style="text-align:center;max-height:650px;overflow:auto">
                   <div class="mdl-grid mdl-card mdl-shadow--8dp style-card" style="width:90%">
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:60%">
@@ -370,7 +370,7 @@
               </div>
             </section>
           </div>
-          <?php include "php/_footer.php" ?>
+          <?php include "core/_footer.php" ?>
         </div>
       </main>
     </div>

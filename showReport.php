@@ -1,14 +1,14 @@
 <html>
   <head>
     <?php
-      include "php/_header.php";
+      include "core/_header.php";
       session_start();
       //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       // error_reporting per togliere il notice quando non trova isLogged
       //error_reporting(0);
-      include "php/dbConnection.php";
-      include "php/getData.php";
-      include "php/functions.php";
+      include "core/dbConnection.php";
+      include "core/getData.php";
+      include "core/functions.php";
 
       if ($error_message) {
         echo "
@@ -452,7 +452,7 @@
               </div>
             </section>
           </div>
-          <?php include "php/_footer.php" ?>
+          <?php include "core/_footer.php" ?>
         </div>
       </main>
     </div>
