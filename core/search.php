@@ -152,13 +152,22 @@
     }
     //print_r($reportByLocalita);
 
-    // DANTE
+    // LOCALITA
+    // $reportByLocalita è un array che contiene gli id dei rapporti nella specifica localita
     $reportByLocalita = array();
     for ($i=0; $i < count($localitaID); $i++){
       $reportByLocalita[$i] = getReportsByLocalita($localitaID[$i], $db_conn);
     }
-    print_r($reportByLocalita);
+    //print_r($reportByLocalita);
 
+
+    // MEZZI
+    // $reportByMezzi -> matrice: per ogni mezzo contiene la lista degli id dei rapportini
+    $reportByMezzi = array();
+    for ($i=0; $i<count($mezziID); $i++){
+      $reportByMezzi[$i] = getReportsByMezzi($mezziID[$i], $db_conn);
+    }
+    //print_r($reportByMezzi);
 
   }
 
