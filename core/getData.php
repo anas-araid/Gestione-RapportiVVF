@@ -322,12 +322,40 @@
     }
     return $reportsID;
   }
+  function getReportsByVigili($idVigile ,$db_conn){
+    $reportsID = array();
+    $sql = "SELECT FK_RapportoVVF FROM t_vigiliintervenuti WHERE FK_Vigile = $idVigile";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("errore getData.php: getReportsByVigili");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $reportsID[$i] = $ris['FK_RapportoVVF'];
+      $i++;
+    }
+    return $reportsID;
+  }
   function getReportsByLocalita($idLocalita ,$db_conn){
     $reportsID = array();
     $sql = "SELECT ID FROM t_rapportiVVF WHERE FK_Localita = $idLocalita";
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("errore getData.php: getReportsByLocalita");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $reportsID[$i] = $ris['ID'];
+      $i++;
+    }
+    return $reportsID;
+  }
+  function getReportsByTipologia($idChiamata ,$db_conn){
+    $reportsID = array();
+    $sql = "SELECT ID FROM t_rapportiVVF WHERE FK_TipoChiamata = $idChiamata";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("errore getData.php: getReportsByTipologia");
     }
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){

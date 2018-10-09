@@ -178,6 +178,24 @@
     }
     //print_r($reportBySoccorsi);
 
+
+    // TIPO CHIAMATA
+    // $reportByChiamata -> matrice: per ogni tipologia di intervento contiene la lista degli id dei rapportini
+    $reportByChiamata = array();
+    for ($i=0; $i < count($chiamataID); $i++){
+      $reportByChiamata[$i] = getReportsByTipologia($chiamataID[$i], $db_conn);
+    }
+    //print_r($reportByChiamata);
+
+
+    // VIGILI
+    // $reportByVigili -> matrice: per ogni vigile contiene la lista degli id dei rapporto
+    $reportByVigili = array();
+    for ($i=0; $i < count($vigiliID); $i++){
+      $reportByVigili[$i] = getReportsByVigili($vigiliID[$i], $db_conn);
+    }
+    print_r($reportByVigili);
+
   }
 
 
