@@ -28,6 +28,7 @@
       </button>
     </form>
   </div>
+
   <script>
     <?php
       if ($_SESSION['warning']){
@@ -50,8 +51,12 @@
     <tbody>
       <?php
         include "core/getData.php";
-        if (){
-          
+        if (isset($_SESSION['search'])){
+          if ($_SESSION['search'] == array()){
+            echo "<script>flatAlert('Attenzione', 'La ricerca non ha prodotto risultati.', 'warning', '#')</script>";
+          }else{
+            $_SESSION['include'] = 'core/searchReports.php';
+          }
         }
         $reportQuery = "SELECT * FROM t_rapportiVVF ORDER BY Data DESC";
         $getAllReports = mysqli_query($db_conn, $reportQuery);

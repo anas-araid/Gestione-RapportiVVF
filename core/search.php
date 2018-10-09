@@ -6,6 +6,7 @@
 
   if (isset($_POST['find'])){
     $searchKeyword = $_POST['find'];
+    $_SESSION['searchKeyword'] = $searchKeyword;
     $reportsID = array();
     $reportsIndex = 0;
 
@@ -257,7 +258,7 @@
     }
 
     if (empty($reportsID)){
-      $_SESSION['search'] = false;
+      $_SESSION['search'] = array();
     }else{
       $_SESSION['search'] = $reportsID;
     }

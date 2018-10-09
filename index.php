@@ -7,9 +7,9 @@
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         // error_reporting per togliere il notice quando non trova isLogged
         //error_reporting(0);
-        $_SESSION['search'] = null;
         if (isset($_GET['back'])) {
           $_SESSION['include'] = 'core/reports.php';
+          $_SESSION['search'] = null;
         }
         if (!$_SESSION['include']){
           $_SESSION = array();
