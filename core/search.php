@@ -127,14 +127,42 @@
     }
     //-----------------------------------------------------------------------------------
 
-    // Restituisce l'id del rapporto in base all'id del colpito 8, 7, 4
+    // COLPITI
+    // Restituisce l'id del rapporto in base all'id del colpito
     for ($i=0; $i < count($colpitiID); $i++){
       $reportsByGeneralita[$i] = getReportsByGeneralita($colpitiID[$i], $db_conn);
     }
-    print_r($reportsByGeneralita);
+    //print_r($reportsByGeneralita);
+
+
+
+    // COMUNE
+    // Restituisce l'id della/e localita in base all'id del comune per poi risalire agli id dei rapportini
+    // $reportByLocalita è una matrice per ogni via contiene gli id dei rapporti di riferimento
+    $localitaByComune = array();
+    for ($i=0; $i < count($comuniID); $i++){
+      $localitaByComune[$i] = getLocalitaByComune($comuniID[$i], $db_conn);
+    }
+    //print_r($localitaByComune);
+    $reportByComune = array();
+    for ($i=0; $i < count($localitaByComune); $i++){
+      for ($j=0; $j < count($localitaByComune[$i]); $j++){
+        $reportByComune[$j] = getReportsByLocalita($localitaByComune[$i][$j], $db_conn);
+      }
+    }
+    //print_r($reportByLocalita);
+
+    // DANTE
+    $reportByLocalita = array();
+    for ($i=0; $i < count($localitaID); $i++){
+      $reportByLocalita[$i] = getReportsByLocalita($localitaID[$i], $db_conn);
+    }
+    print_r($reportByLocalita);
 
 
   }
+
+
 
 
 ?>

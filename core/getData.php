@@ -294,4 +294,32 @@
     }
     return $reportsID;
   }
+  function getReportsByLocalita($idLocalita ,$db_conn){
+    $reportsID = array();
+    $sql = "SELECT ID FROM t_rapportiVVF WHERE FK_Localita = $idLocalita";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("errore getData.php: getReportsByLocalita");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $reportsID[$i] = $ris['ID'];
+      $i++;
+    }
+    return $reportsID;
+  }
+  function getLocalitaByComune($idComune ,$db_conn){
+    $localitaID = array();
+    $sql = "SELECT ID FROM t_localita WHERE FK_Comune = $idComune";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("errore getData.php: getLocalitaByComune");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $localitaID[$i] = $ris['ID'];
+      $i++;
+    }
+    return $localitaID;
+  }
 ?>
