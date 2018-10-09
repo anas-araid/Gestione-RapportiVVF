@@ -28,6 +28,14 @@
       </button>
     </form>
   </div>
+  <script>
+    <?php
+      if ($_SESSION['warning']){
+        $_SESSION['warning'] = false;
+        echo "flatAlert('Attenzione', 'L\'applicazione è ancora instabile: eventuali malfunzionamenti verranno risolti il più presto possibile.', 'warning', '#')";
+      }
+    ?>
+  </script>
   <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%">
     <thead>
       <tr style="text-align:left">

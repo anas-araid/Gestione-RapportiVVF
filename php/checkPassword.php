@@ -14,6 +14,7 @@
 </form>
 
 <?php
+$_SESSION['warning'] = true;
 if(isset($_POST['password'])){
     include 'php/functions.php';
     $password = text_filter_encrypt($_POST["password"]);
