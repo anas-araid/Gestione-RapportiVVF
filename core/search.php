@@ -169,6 +169,15 @@
     }
     //print_r($reportByMezzi);
 
+
+    // SOCCORSI
+    // $reportBySoccorsi -> matrice: per ogni soccorritore esterno contiene la lista degli id dei rapportini
+    $reportBySoccorsi = array();
+    for ($i=0; $i < count($soccorsiID); $i++){
+      $reportBySoccorsi[$i] = getReportsBySoccorsi($soccorsiID[$i], $db_conn);
+    }
+    //print_r($reportBySoccorsi);
+
   }
 
 

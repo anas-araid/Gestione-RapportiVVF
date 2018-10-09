@@ -308,6 +308,20 @@
     }
     return $reportsID;
   }
+  function getReportsBySoccorsi($idSoccorso ,$db_conn){
+    $reportsID = array();
+    $sql = "SELECT FK_RapportoVVF FROM t_soccorsiintervenuti WHERE FK_SoccorsiEsterni = $idSoccorso";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("errore getData.php: getReportsBySoccorsi");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $reportsID[$i] = $ris['FK_RapportoVVF'];
+      $i++;
+    }
+    return $reportsID;
+  }
   function getReportsByLocalita($idLocalita ,$db_conn){
     $reportsID = array();
     $sql = "SELECT ID FROM t_rapportiVVF WHERE FK_Localita = $idLocalita";
