@@ -18,9 +18,9 @@
     </div>
   </div>
   <div>
-    <form action="" method="POST" style="text-align:center">
+    <form action="php/search.php" method="POST" style="text-align:center">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:60%;">
-        <input class="mdl-textfield__input style-gradient-text" style="border-bottom:1px solid #c5003e;color:grey" type="text" id="find" name="find">
+        <input class="mdl-textfield__input style-gradient-text" style="border-bottom:1px solid #c5003e;color:grey" type="text" id="find" name="find" required="">
         <label class="mdl-textfield__label style-gradient-text" for="find">Cerca</label>
       </div>
       <button id="btn-search" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--white ">
