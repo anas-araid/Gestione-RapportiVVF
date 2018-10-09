@@ -50,6 +50,9 @@
     <tbody>
       <?php
         include "core/getData.php";
+        if (){
+          
+        }
         $reportQuery = "SELECT * FROM t_rapportiVVF ORDER BY Data DESC";
         $getAllReports = mysqli_query($db_conn, $reportQuery);
         if ($getAllReports != false){

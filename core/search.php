@@ -129,9 +129,17 @@
 
     // COLPITI
     // Restituisce l'id del rapporto in base all'id del colpito
+    $reportsByGeneralita = array();
     for ($i=0; $i < count($colpitiID); $i++){
       $reportsByGeneralita[$i] = getReportsByGeneralita($colpitiID[$i], $db_conn);
     }
+    for ($i=0; $i < count($reportsByGeneralita); $i++){
+      if (!in_array($reportsByGeneralita[$i], $reportsID)){
+        $reportsID[$reportsIndex] = $reportsByGeneralita[$i];
+        $reportsIndex++;
+      }
+    }
+    //print_r($reportsID);
     //print_r($reportsByGeneralita);
 
 
@@ -150,15 +158,35 @@
         $reportByComune[$j] = getReportsByLocalita($localitaByComune[$i][$j], $db_conn);
       }
     }
-    //print_r($reportByLocalita);
+
+    // inserisco all'interno di $reportsID tutti gli id univoci
+    for ($i=0; $i < count($reportByComune); $i++){
+      for ($j=0; $j < count($reportByComune[$i]); $j++){
+        if (!in_array($reportByComune[$i][$j], $reportsID)){
+          $reportsID[$reportsIndex] = $reportByComune[$i][$j];
+          $reportsIndex++;
+        }
+      }
+    }
+
 
     // LOCALITA
-    // $reportByLocalita è un array che contiene gli id dei rapporti nella specifica localita
+    // $reportByLocalita è una matrice che contiene gli id dei rapporti nella specifica localita
     $reportByLocalita = array();
     for ($i=0; $i < count($localitaID); $i++){
       $reportByLocalita[$i] = getReportsByLocalita($localitaID[$i], $db_conn);
     }
-    //print_r($reportByLocalita);
+
+    // inserisco all'interno di $reportsID tutti gli id univoci
+    for ($i=0; $i < count($reportByLocalita); $i++){
+      for ($j=0; $j < count($reportByLocalita[$i]); $j++){
+        if (!in_array($reportByLocalita[$i][$j], $reportsID)){
+          $reportsID[$reportsIndex] = $reportByLocalita[$i][$j];
+          $reportsIndex++;
+        }
+      }
+    }
+
 
 
     // MEZZI
@@ -167,7 +195,15 @@
     for ($i=0; $i<count($mezziID); $i++){
       $reportByMezzi[$i] = getReportsByMezzi($mezziID[$i], $db_conn);
     }
-    //print_r($reportByMezzi);
+    // inserisco all'interno di $reportsID tutti gli id univoci
+    for ($i=0; $i < count($reportByMezzi); $i++){
+      for ($j=0; $j < count($reportByMezzi[$i]); $j++){
+        if (!in_array($reportByMezzi[$i][$j], $reportsID)){
+          $reportsID[$reportsIndex] = $reportByMezzi[$i][$j];
+          $reportsIndex++;
+        }
+      }
+    }
 
 
     // SOCCORSI
@@ -176,8 +212,15 @@
     for ($i=0; $i < count($soccorsiID); $i++){
       $reportBySoccorsi[$i] = getReportsBySoccorsi($soccorsiID[$i], $db_conn);
     }
-    //print_r($reportBySoccorsi);
-
+    // inserisco all'interno di $reportsID tutti gli id univoci
+    for ($i=0; $i < count($reportBySoccorsi); $i++){
+      for ($j=0; $j < count($reportBySoccorsi[$i]); $j++){
+        if (!in_array($reportBySoccorsi[$i][$j], $reportsID)){
+          $reportsID[$reportsIndex] = $reportBySoccorsi[$i][$j];
+          $reportsIndex++;
+        }
+      }
+    }
 
     // TIPO CHIAMATA
     // $reportByChiamata -> matrice: per ogni tipologia di intervento contiene la lista degli id dei rapportini
@@ -185,7 +228,15 @@
     for ($i=0; $i < count($chiamataID); $i++){
       $reportByChiamata[$i] = getReportsByTipologia($chiamataID[$i], $db_conn);
     }
-    //print_r($reportByChiamata);
+    // inserisco all'interno di $reportsID tutti gli id univoci
+    for ($i=0; $i < count($reportByChiamata); $i++){
+      for ($j=0; $j < count($reportByChiamata[$i]); $j++){
+        if (!in_array($reportByChiamata[$i][$j], $reportsID)){
+          $reportsID[$reportsIndex] = $reportByChiamata[$i][$j];
+          $reportsIndex++;
+        }
+      }
+    }
 
 
     // VIGILI
@@ -194,7 +245,23 @@
     for ($i=0; $i < count($vigiliID); $i++){
       $reportByVigili[$i] = getReportsByVigili($vigiliID[$i], $db_conn);
     }
-    print_r($reportByVigili);
+    //print_r($reportByVigili);
+    // inserisco all'interno di $reportsID tutti gli id univoci
+    for ($i=0; $i < count($reportByVigili); $i++){
+      for ($j=0; $j < count($reportByVigili[$i]); $j++){
+        if (!in_array($reportByVigili[$i][$j], $reportsID)){
+          $reportsID[$reportsIndex] = $reportByVigili[$i][$j];
+          $reportsIndex++;
+        }
+      }
+    }
+
+    if (empty($reportsID)){
+      $_SESSION['search'] = false;
+    }else{
+      $_SESSION['search'] = $reportsID;
+    }
+    header("location:../index.php");
 
   }
 
