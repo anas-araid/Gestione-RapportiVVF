@@ -283,15 +283,15 @@
     return $lastID;
   }
   function getReportsByGeneralita($idColpito ,$db_conn){
-    $reportsID = array();
+    $reportsID = null;
     $sql = "SELECT ID FROM t_rapportiVVF WHERE FK_GeneralitaColpito = $idColpito";
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("errore getData.php: getReportByGeneralita");
     }
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
-      $lastID = $ris['LastID'];
+      $reportsID = $ris['ID'];
     }
-    return $lastID;
+    return $reportsID;
   }
 ?>
