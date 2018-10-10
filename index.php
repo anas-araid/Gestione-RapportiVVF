@@ -6,7 +6,7 @@
       try{
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         // error_reporting per togliere il notice quando non trova isLogged
-        //error_reporting(0);
+        error_reporting(0);
         if (isset($_GET['back'])) {
           $_SESSION['include'] = 'core/reports.php';
           $_SESSION['search'] = null;
@@ -14,6 +14,16 @@
         if (!$_SESSION['include']){
           $_SESSION = array();
           $_SESSION['include'] = 'core/checkPassword.php';
+        }
+        if ($_SESSION['reportCSV']){
+          $_SESSION['reportCSV'] = false;
+          echo "
+          <script>
+            location.href='Rapporti.csv';
+            setTimeout(function(){
+              location.reload();
+            }, 100);
+          </script>";
         }
       }catch(Exception $e){
       }

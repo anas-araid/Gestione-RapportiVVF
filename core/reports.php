@@ -26,6 +26,12 @@
       <button id="btn-search" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--white ">
         <i class="material-icons style-gradient-text">search</i>
       </button>
+      <button id="btn-download"
+              type="reset"
+              class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--white"
+              onclick="location.href='core/exportCSV.php'">
+        <i class="material-icons style-gradient-text">save</i>
+      </button>
     </form>
   </div>
 

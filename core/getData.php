@@ -24,6 +24,32 @@
     }
     return $report;
   }
+  function getReportFullData($ID, $db_conn){
+    $report = array();
+    $sql = "SELECT * FROM t_rapportiVVF WHERE (ID='$ID')";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $report['ID'] = $ris['ID'];
+      $report['ID_Rapporto'] = $ris['ID_Rapporto'];
+      $report['OraUscita'] = date('H:i', strtotime($ris['OraUscita']));
+      $report['OraRientro'] = date('H:i', strtotime($ris['OraRientro']));
+      $report['Data'] = date('d-m-Y', strtotime($ris['Data']));
+      $report['Urgente'] = $ris['Urgente'];
+      $report['OperazioniEseguite'] = $ris['OperazioniEseguite'];
+      $report['Osservazioni'] = $ris['Osservazioni'];
+      $report['FK_Localita'] = getLocalita($ris['FK_Localita'], null, null, $db_conn);
+      $report['Comune'] = getComuni($report['FK_Localita']['comune'], $db_conn);
+      $report['FK_GeneralitaColpito'] = getColpito($ris['FK_GeneralitaColpito'], null, null, null, null, $db_conn);
+      $report['FK_ProvChiamata'] = getProvChiamata($ris['FK_ProvChiamata'], $db_conn);
+      $report['FK_TipoChiamata'] = getCallType($ris['FK_TipoChiamata'], $db_conn);
+      $report['FK_Responsabile'] = getFiremanData($ris['FK_Responsabile'], $db_conn);
+      $report['FK_Compilatore'] = getFiremanData($ris['FK_Compilatore'], $db_conn);
+    }
+    return $report;
+  }
 
   function getCallType($ID, $db_conn){
     if ($ID == null){
