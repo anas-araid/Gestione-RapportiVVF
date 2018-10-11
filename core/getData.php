@@ -89,7 +89,7 @@
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
       if($ID == null){
-        $fireman["$i"] = array($ris['ID'], $ris['Nome']." ".$ris['Cognome']);
+        $fireman["$i"] = array($ris['ID'], $ris['Cognome']." ".$ris['Nome']);
         $i++;
       }else{
         $fireman['ID'] = $ris['ID'];

@@ -6,7 +6,7 @@ CREATE TABLE t_vigili (
   ID 		           BIGINT				NOT NULL 	AUTO_INCREMENT,
   Nome	 			     VARCHAR(50),
   Cognome			     VARCHAR(50),
-  Matricola		     VARCHAR(3)	UNIQUE NOT NULL,
+  Matricola		     VARCHAR(5)	UNIQUE NOT NULL,
   PRIMARY KEY(ID)
 ) ENGINE = InnoDB;
 
@@ -218,3 +218,47 @@ INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Taglio Pianta');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Altro');
 
 INSERT INTO t_comuni (Comune) VALUES ('Pergine Valsugana');
+INSERT INTO t_comuni (Comune) VALUES ('Ala');
+INSERT INTO t_comuni (Comune) VALUES ('Altopiano della Vigolana');
+INSERT INTO t_comuni (Comune) VALUES ('Andalo');
+INSERT INTO t_comuni (Comune) VALUES ('Arco');
+INSERT INTO t_comuni (Comune) VALUES ('Avio');
+INSERT INTO t_comuni (Comune) VALUES ('Baselga di Pine');
+INSERT INTO t_comuni (Comune) VALUES ('Bedollo');
+INSERT INTO t_comuni (Comune) VALUES ('Bocenago');
+INSERT INTO t_comuni (Comune) VALUES ('Bondone');
+INSERT INTO t_comuni (Comune) VALUES ('Borgo Valsugana');
+INSERT INTO t_comuni (Comune) VALUES ('Calceranica al Lago');
+INSERT INTO t_comuni (Comune) VALUES ('Caldonazzo');
+INSERT INTO t_comuni (Comune) VALUES ('Cavalese');
+INSERT INTO t_comuni (Comune) VALUES ('Civezzano');
+INSERT INTO t_comuni (Comune) VALUES ('Cles');
+INSERT INTO t_comuni (Comune) VALUES ('Fierozzo');
+INSERT INTO t_comuni (Comune) VALUES ('Fornace');
+INSERT INTO t_comuni (Comune) VALUES ('Frassilongo');
+INSERT INTO t_comuni (Comune) VALUES ('Grigno');
+INSERT INTO t_comuni (Comune) VALUES ('Levico Terme');
+INSERT INTO t_comuni (Comune) VALUES ('Mezzano');
+INSERT INTO t_comuni (Comune) VALUES ('Mezzocorona');
+INSERT INTO t_comuni (Comune) VALUES ('Mezzolombardo');
+INSERT INTO t_comuni (Comune) VALUES ('Moena');
+INSERT INTO t_comuni (Comune) VALUES ('Novaledo');
+INSERT INTO t_comuni (Comune) VALUES ('Ospedaletto');
+INSERT INTO t_comuni (Comune) VALUES ('Palu del Fersina');
+INSERT INTO t_comuni (Comune) VALUES ('Pieve Tesino');
+INSERT INTO t_comuni (Comune) VALUES ('Pinzolo');
+INSERT INTO t_comuni (Comune) VALUES ('Riva del Garda');
+INSERT INTO t_comuni (Comune) VALUES ('Roncegno Terme');
+INSERT INTO t_comuni (Comune) VALUES ('Ronchi Valsugana');
+INSERT INTO t_comuni (Comune) VALUES ('Rovereto');
+INSERT INTO t_comuni (Comune) VALUES ('San Michele all Adige');
+INSERT INTO t_comuni (Comune) VALUES ('Sant Orsola Terme');
+INSERT INTO t_comuni (Comune) VALUES ('Scurelle');
+INSERT INTO t_comuni (Comune) VALUES ('Segonzano');
+INSERT INTO t_comuni (Comune) VALUES ('Storo');
+INSERT INTO t_comuni (Comune) VALUES ('Telve');
+INSERT INTO t_comuni (Comune) VALUES ('Tenna');
+INSERT INTO t_comuni (Comune) VALUES ('Tione');
+INSERT INTO t_comuni (Comune) VALUES ('Torcegno');
+INSERT INTO t_comuni (Comune) VALUES ('Trento');
+INSERT INTO t_comuni (Comune) VALUES ('Vignola-Falesina');

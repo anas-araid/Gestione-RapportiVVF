@@ -5,7 +5,7 @@
               style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
                onclick="location.href='index.php?back=true'">
                Indietro
-             <i class="material-icons">note_add</i>
+             <i class="material-icons">cancel</i>
       </button>
     </div>
   </div>
