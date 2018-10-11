@@ -8,8 +8,6 @@
   <br>
   <div>
     <button class="style-button style-gradient" style="color:white;margin:10px;width:40%" type="submit">Entra</button>
-    <br>
-    <button class="style-button style-gradient" style="color:white;margin:10px;width:40%" type="reset" onclick="location.href='core/logout.php'">Indietro</button>
   </div>
 </form>
 

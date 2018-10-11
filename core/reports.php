@@ -43,52 +43,54 @@
       }
     ?>
   </script>
-  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%">
-    <thead>
-      <tr style="text-align:left">
-        <th>ID</th>
-        <th>Data</th>
-        <th>Evento</th>
-        <th>Responsabile</th>
-        <th></th>
-        <th></th
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-        include "core/getData.php";
-        if (isset($_SESSION['search'])){
-          if ($_SESSION['search'] == array()){
-            echo "<script>flatAlert('Attenzione', 'La ricerca non ha prodotto risultati.', 'warning', '#')</script>";
-          }else{
-            $_SESSION['include'] = 'core/searchReports.php';
-            echo "
-            <script>
-              location.reload();
-            </script>";
+  <div style="overflow:auto">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:95%;margin:10px">
+      <thead>
+        <tr style="text-align:left">
+          <th>ID</th>
+          <th>Data</th>
+          <th>Evento</th>
+          <th>Responsabile</th>
+          <th></th>
+          <th></th
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+          include "core/getData.php";
+          if (isset($_SESSION['search'])){
+            if ($_SESSION['search'] == array()){
+              echo "<script>flatAlert('Attenzione', 'La ricerca non ha prodotto risultati.', 'warning', '#')</script>";
+            }else{
+              $_SESSION['include'] = 'core/searchReports.php';
+              echo "
+              <script>
+                location.reload();
+              </script>";
+            }
           }
-        }
-        $reportQuery = "SELECT * FROM t_rapportiVVF ORDER BY Data DESC";
-        $getAllReports = mysqli_query($db_conn, $reportQuery);
-        if ($getAllReports != false){
-          $reportExists = false;
-          while($ris=mysqli_fetch_array($getAllReports)){
-            $reportExists = true;
-            // onclick=" '.'location.href='."'showReport.php?id=".$ris["ID"]."'".' "
-            echo '<tr>
-                <td>'.$ris['ID_Rapporto'].'</td>
-                <td>'.date('d-m-Y', strtotime($ris['Data'])).'</td>
-                <td>'.getCallType($ris['FK_TipoChiamata'], $db_conn).'</td>
-                <td>'.getFiremanData($ris['FK_Responsabile'], $db_conn)['Nome']." ".getFiremanData($ris['FK_Responsabile'], $db_conn)['Cognome'].'</td>
-                <td><a href="showReport.php?id='.$ris['ID'].'">Dettagli</a></td>
-                <td><a href="editReport.php?id='.$ris['ID'].'">Modifica</a></td>
-                <td><a href="#" onclick="alertDeleteReport('.$ris['ID'].')" style="color:red">Elimina</a></td>
-              </tr>';
+          $reportQuery = "SELECT * FROM t_rapportiVVF ORDER BY Data DESC";
+          $getAllReports = mysqli_query($db_conn, $reportQuery);
+          if ($getAllReports != false){
+            $reportExists = false;
+            while($ris=mysqli_fetch_array($getAllReports)){
+              $reportExists = true;
+              // onclick=" '.'location.href='."'showReport.php?id=".$ris["ID"]."'".' "
+              echo '<tr>
+                  <td>'.$ris['ID_Rapporto'].'</td>
+                  <td>'.date('d-m-Y', strtotime($ris['Data'])).'</td>
+                  <td>'.getCallType($ris['FK_TipoChiamata'], $db_conn).'</td>
+                  <td>'.getFiremanData($ris['FK_Responsabile'], $db_conn)['Nome']." ".getFiremanData($ris['FK_Responsabile'], $db_conn)['Cognome'].'</td>
+                  <td><a href="showReport.php?id='.$ris['ID'].'">Dettagli</a></td>
+                  <td><a href="editReport.php?id='.$ris['ID'].'">Modifica</a></td>
+                  <td><a href="#" onclick="alertDeleteReport('.$ris['ID'].')" style="color:red">Elimina</a></td>
+                </tr>';
+            }
           }
-        }
-       ?>
-    </tbody>
-  </table>
+         ?>
+      </tbody>
+    </table>
+  </div>
   <div style="text-align:center">
     <?php
     if(!$reportExists){

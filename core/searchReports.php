@@ -21,38 +21,40 @@
     </form>
   </div>
   <p>Risultati relativi alla ricerca <i>"<?php echo $_SESSION['searchKeyword'] ?> "</i></p>
-  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%">
-    <thead>
-      <tr style="text-align:left">
-        <th>ID</th>
-        <th>Data</th>
-        <th>Evento</th>
-        <th>Responsabile</th>
-        <th></th>
-        <th></th
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-        include "getData.php";
-        if ($_SESSION['search'] != false){
-          $reportsID = $_SESSION['search'];
-          for ($i=0; $i < count($reportsID); $i++){
-            $report = getReportData($reportsID[$i], $db_conn);
-            echo '<tr>
-                <td>'.$report['ID_Rapporto'].'</td>
-                <td>'.date('d-m-Y', strtotime($report['Data'])).'</td>
-                <td>'.getCallType($report['FK_TipoChiamata'], $db_conn).'</td>
-                <td>'.getFiremanData($report['FK_Responsabile'], $db_conn)['Nome']." ".getFiremanData($report['FK_Responsabile'], $db_conn)['Cognome'].'</td>
-                <td><a href="showReport.php?id='.$report['ID'].'">Dettagli</a></td>
-                <td><a href="editReport.php?id='.$report['ID'].'">Modifica</a></td>
-                <td><a href="#" onclick="alertDeleteReport('.$report['ID'].')" style="color:red">Elimina</a></td>
-              </tr>';
+  <div style="overflow:auto">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:95%;margin:10px"
+      <thead>
+        <tr style="text-align:left">
+          <th>ID</th>
+          <th>Data</th>
+          <th>Evento</th>
+          <th>Responsabile</th>
+          <th></th>
+          <th></th
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+          include "getData.php";
+          if ($_SESSION['search'] != false){
+            $reportsID = $_SESSION['search'];
+            for ($i=0; $i < count($reportsID); $i++){
+              $report = getReportData($reportsID[$i], $db_conn);
+              echo '<tr>
+                  <td>'.$report['ID_Rapporto'].'</td>
+                  <td>'.date('d-m-Y', strtotime($report['Data'])).'</td>
+                  <td>'.getCallType($report['FK_TipoChiamata'], $db_conn).'</td>
+                  <td>'.getFiremanData($report['FK_Responsabile'], $db_conn)['Nome']." ".getFiremanData($report['FK_Responsabile'], $db_conn)['Cognome'].'</td>
+                  <td><a href="showReport.php?id='.$report['ID'].'">Dettagli</a></td>
+                  <td><a href="editReport.php?id='.$report['ID'].'">Modifica</a></td>
+                  <td><a href="#" onclick="alertDeleteReport('.$report['ID'].')" style="color:red">Elimina</a></td>
+                </tr>';
+            }
+          }else{
+            echo "<script>flatAlert('Attenzione', 'La ricerca non ha prodotto risultati.', 'warning', '#')</script>";
           }
-        }else{
-          echo "<script>flatAlert('Attenzione', 'La ricerca non ha prodotto risultati.', 'warning', '#')</script>";
-        }
-       ?>
-    </tbody>
-  </table>
+         ?>
+      </tbody>
+    </table>
+  </div>
 <div>
