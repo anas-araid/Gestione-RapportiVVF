@@ -11,6 +11,19 @@ function flatAlert(titolo, testo, icona, url){
     }
   });
 }
+function flatAlertClose(titolo, testo, icona){
+  swal({
+    title: titolo,
+    text: testo,
+    icon: icona,
+  }).then(azione => {
+    if (azione){
+      window.close();
+    }else{
+      window.close();
+    }
+  });
+}
 function alertDeleteReport(id){
   swal(
     {

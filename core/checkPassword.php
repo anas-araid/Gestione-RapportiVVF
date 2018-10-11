@@ -12,23 +12,25 @@
 </form>
 
 <?php
-$_SESSION['warning'] = true;
-if(isset($_POST['password'])){
-    include 'core/functions.php';
-    $password = text_filter_encrypt($_POST["password"]);
-    // caserma
-    if ($password == 'b65959845f63d31058e1319f724bcaff'){
-      $_SESSION['include'] = 'core/reports.php';
-      echo "
-      <script>
-      flatAlert('Accesso eseguito con successo', '', 'success', 'index.php');
-      </script>";
-    }else{
-      echo "
-      <script>
-      flatAlert('Password errata', '', 'error', 'index.php');
-      </script>";
-    }
+if (!$error_message) {
+  $_SESSION['warning'] = true;
+  if(isset($_POST['password'])){
+      include 'core/functions.php';
+      $password = text_filter_encrypt($_POST["password"]);
+      // caserma
+      if ($password == 'b65959845f63d31058e1319f724bcaff'){
+        $_SESSION['include'] = 'core/reports.php';
+        echo "
+        <script>
+        flatAlert('Accesso eseguito con successo', '', 'success', 'index.php');
+        </script>";
+      }else{
+        echo "
+        <script>
+        flatAlert('Password errata', '', 'error', 'index.php');
+        </script>";
+      }
+  }
 }
 
 ?>

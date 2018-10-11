@@ -7,6 +7,7 @@
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         // error_reporting per togliere il notice quando non trova isLogged
         error_reporting(0);
+        include "core/dbConnection.php";
         if (isset($_GET['back'])) {
           $_SESSION['include'] = 'core/reports.php';
           $_SESSION['search'] = null;
@@ -26,13 +27,6 @@
           </script>";
         }
       }catch(Exception $e){
-      }
-      include "core/dbConnection.php";
-      if ($error_message) {
-        echo "
-        <script>
-            flatAlert('Accesso', 'Impossibile connettersi al database', 'error', 'index.php');
-        </script>";
       }
      ?>
   </head>
@@ -74,7 +68,17 @@
             </section>
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
-                <?php include $_SESSION['include'] ?>
+                <?php
+                if ($error_message) {
+                  echo "
+                    <script>
+                      window.onload = function(){
+                        flatAlertClose('Accesso', 'Impossibile connettersi al database', 'error');
+                      }
+                    </script>";
+                  }
+                  include $_SESSION['include'];
+                 ?>
               </div>
             </section>
           </div>
