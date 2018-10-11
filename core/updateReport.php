@@ -9,6 +9,10 @@
   if (isset($_POST['btnSave'])){
     $IdRapportoDB = $_SESSION['rapporto']['ID'];
     $idRapporto = $_POST['rapporto'];
+    $updateIdReport = "";
+    if ($idRapporto == getReportData($IdRapportoDB ,$db_conn)){
+      $updateIdReport = "ID_Rapporto='$idRapporto',";
+    }
     if (isset($_POST['urgente'])){
       $urgente = $_POST['urgente'];
       $urgente = 1;
@@ -36,7 +40,6 @@
     $telefono = $_POST['telefono'];
     $cartaIdentita = $_POST['cartaIdentita'];
     $altro = $_POST['altro'];
-
     $operazioniEseguite = text_filter(removeAccents(removeQuotes($_POST['operazioni'])));
     $osservazioni = text_filter(removeAccents(removeQuotes($_POST['osservazioni'])));
 
@@ -93,11 +96,12 @@
     sleep(2);
 
     // Section that send data to addData.php
-    $updateReport = "UPDATE t_rapportiVVF SET ID_Rapporto='$idRapporto', OraUscita='$oraUscita', OraRientro='$oraRientro', Data='$data', Urgente='$urgente', OperazioniEseguite='$operazioniEseguite', Osservazioni='$osservazioni', FK_Localita='$FK_Localita', FK_GeneralitaColpito='$FK_GeneralitaColpito', FK_ProvChiamata='$FK_ProvChiamata', FK_TipoChiamata='$FK_TipoChiamata', FK_Responsabile='$FK_Responsabile', FK_Compilatore='$FK_Compilatore'
+    $updateReport = "UPDATE t_rapportiVVF SET $updateIdReport OraUscita='$oraUscita', OraRientro='$oraRientro', Data='$data', Urgente='$urgente', OperazioniEseguite='$operazioniEseguite', Osservazioni='$osservazioni', FK_Localita='$FK_Localita', FK_GeneralitaColpito='$FK_GeneralitaColpito', FK_ProvChiamata='$FK_ProvChiamata', FK_TipoChiamata='$FK_TipoChiamata', FK_Responsabile='$FK_Responsabile', FK_Compilatore='$FK_Compilatore'
                      WHERE (ID = '$IdRapportoDB') ";
     try {
       $saveReport = mysqli_query($db_conn, $updateReport);
       if ($saveReport == null){
+        echo "<script>alert('Errore relativo all\'aggiornamento del rapporto: contatta l\'amministratore');</script>";
         throw new Exception("Errore salvataggio rapporto", 1);
       }
       // aggiorno mezzi
