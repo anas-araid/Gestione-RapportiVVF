@@ -6,7 +6,7 @@
       try{
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         // error_reporting per togliere il notice quando non trova isLogged
-        error_reporting(0);
+        //error_reporting(0);
         if (isset($_GET['back'])) {
           $_SESSION['include'] = 'core/reports.php';
           $_SESSION['search'] = null;
@@ -37,8 +37,15 @@
      ?>
   </head>
   <body>
+    <div id="loading-div">
+      <div  class="style-parent" style="height:100%;background-color:white;z-index:10000">
+        <div class="style-child">
+          <img src="loading.gif"></img>
+        </div>
+      </div>
+    </div>
     <div class="mdl-layout mdl-js-layout">
-      <main class="mdl-layout__content">
+      <main class="mdl-layout__content" id="main">
         <div class="page-content">
           <div class="mdl-grid">
             <section class="mdl-cell mdl-cell--middle mdl-cell--3-col mdl-cell--hide-phone mdl-cell--hide-tablet">
@@ -73,8 +80,36 @@
           </div>
           <?php include "core/_footer.php" ?>
         </div>
+
       </main>
     </div>
   </body>
+  <script>
+  // nasconde il contenuto della pagina per 2 secondi per mostrare il loading
+    document.getElementById("main").style.display = "none";
+    setTimeout(function(){
+      document.getElementById("loading-div").remove();
+      document.getElementById("main").style.display = "block";
+    }, 1500);
+    // nasconde il contenuto della pagina per 2 secondi per mostrare il loading
+    /*
+    var loading  = document.getElementById("loading-div");
+    loading.style.display = "none";
+    loading.setAttribute('style', 'display:none !important')
+    function loadingFX(){
+      window.onload= function(){
+        loading.style.display = "block";
+        loading.setAttribute('style', 'display:block !important')
+
+        document.getElementById("main").style.display = "none";
+        setTimeout(function(){
+          loading.remove();
+          document.getElementById("main").style.display = "block";
+        }, 1000);
+      };
+    }
+    loadingFX();
+    */
+  </script>
 
 </html>

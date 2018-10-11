@@ -6,14 +6,14 @@ html {
   background-size: cover;
 }
 .style-parent{
-  display:table;
-  height: 100%;
-  width: 100%;
+  display:table!important;
+  height: 100%!important;
+  width: 100%!important;
 }
 .style-child{
-  display:table-cell;
-  vertical-align: middle;
-  text-align: center;
+  display:table-cell!important;
+  vertical-align: middle!important;
+  text-align: center!important;
 }
 .style-card{
   border:none;

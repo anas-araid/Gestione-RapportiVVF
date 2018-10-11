@@ -62,6 +62,10 @@
             echo "<script>flatAlert('Attenzione', 'La ricerca non ha prodotto risultati.', 'warning', '#')</script>";
           }else{
             $_SESSION['include'] = 'core/searchReports.php';
+            echo "
+            <script>
+              location.reload();
+            </script>";
           }
         }
         $reportQuery = "SELECT * FROM t_rapportiVVF ORDER BY Data DESC";
