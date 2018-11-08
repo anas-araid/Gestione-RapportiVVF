@@ -32,6 +32,12 @@
               onclick="location.href='core/exportCSV.php'">
         <i class="material-icons style-gradient-text">save</i>
       </button>
+      <button id="btn-stats"
+              type="reset"
+              class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--white"
+              onclick="location.href='stats.php'">
+        <i class="material-icons style-gradient-text">save</i>
+      </button>
     </form>
   </div>
 
