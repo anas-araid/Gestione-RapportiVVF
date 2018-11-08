@@ -8,6 +8,7 @@
       //error_reporting(0);
       include "core/dbConnection.php";
       include "core/getData.php";
+      include "core/getStats.php";
       include "core/functions.php";
 
       if ($error_message) {
@@ -61,6 +62,25 @@
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
                 <div style="text-align:center">
+                  <ul class="mdl-list">
+                    <?php
+                      $interventi = getInterventi($db_conn);
+                      //print_r($interventi);
+                      for ($i=0; $i < sizeOf($interventi); $i++){
+                        if($interventi[$i][1]==1){
+                          $inter = "intervento";
+                        }else{
+                          $inter = "interventi";
+                        }
+                        echo '
+                        <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                          <b>'.$interventi[$i][0].':</b> '.$interventi[$i][1].' '.$inter.'
+                        </span>
+                        </li>';
+                      }
+                     ?>
+                  </ul>
                   <!--
                   <canvas id="myChart" style="max-height:300px;max-width:300px"></canvas>
                   <script>
@@ -95,7 +115,7 @@
                     });
                   </script>
                 -->
-                
+
                 </div>
 
               </div>
