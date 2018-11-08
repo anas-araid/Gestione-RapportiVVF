@@ -15,3 +15,4 @@
 <script src="js/script.js"></script>
 <script src="js/sweetalert.js"></script>
 <script src="js/tingle.js"></script>
+<script src="js/chart.js"></script>
