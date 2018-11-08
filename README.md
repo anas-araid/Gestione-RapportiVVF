@@ -21,7 +21,9 @@ These instructions will get you a copy of the project to running on your local m
 * Start the XAMPP control panel (xampp-control.exe)
 * From the control panel, start Apache and MySQL
 * Click "Admin" for MySQL or navigate to localhost/phpmyadmin in your browser
-* Copy "Gestione-RapportiVVF/db/my_gestione.sql" file into SQL tab and run
+* Copy "Gestione-RapportiVVF/db/my_gestione.sql" file into SQL tab
+* Add your firefighters data into t_vigili table and run
+
 
 ```
 In your browser, navigate to localhost/Gestione-RapportiVVF and start archiving reports...

@@ -60,7 +60,7 @@
 
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
-
+                
               </div>
             </section>
           </div>

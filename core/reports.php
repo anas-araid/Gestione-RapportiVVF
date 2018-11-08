@@ -36,7 +36,7 @@
               type="reset"
               class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--white"
               onclick="location.href='stats.php'">
-        <i class="material-icons style-gradient-text">save</i>
+        <i class="material-icons style-gradient-text">bar_chart</i>
       </button>
     </form>
   </div>
