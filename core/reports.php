@@ -39,6 +39,14 @@
         <i class="material-icons style-gradient-text">bar_chart</i>
       </button>
     </form>
+    <div class="mdl-tooltip mdl-tooltip--large" for="btn-search">
+      Cerca
+    </div>
+    <div class="mdl-tooltip mdl-tooltip--large" for="btn-download">
+      Salva
+    </div><div class="mdl-tooltip mdl-tooltip--large" for="btn-stats">
+      Statistiche
+    </div>
   </div>
 
   <script>
