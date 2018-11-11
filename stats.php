@@ -67,29 +67,15 @@
                   <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
                           style="width:200px;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
                           type="reset"
-                           onclick="location.href='index.php?back=true'">
+                           onclick="allInterventi.open()">
                            Tutti gli interventi
                          <i class="material-icons">cancel</i>
                   </button>
-                  <ul class="mdl-list">
-                    <?php
-                      $interventi = getInterventi($db_conn);
-                      //print_r($interventi);
-                      for ($i=0; $i < sizeOf($interventi); $i++){
-                        if($interventi[$i][1]==1){
-                          $inter = "intervento";
-                        }else{
-                          $inter = "interventi";
-                        }
-                        echo '
-                        <li class="mdl-list__item">
-                        <span class="mdl-list__item-primary-content">
-                          <b>'.$interventi[$i][0].':</b> '.$interventi[$i][1].' '.$inter.'
-                        </span>
-                        </li>';
-                      }
-                     ?>
-                  </ul>
+                  <?php
+                    $interventi = getInterventi($db_conn);
+                    //print_r($interventi);
+
+                   ?>
                   <!--
                   <canvas id="myChart" style="max-height:300px;max-width:300px"></canvas>
                   <script>
@@ -141,6 +127,46 @@
           </div>
           <?php include "core/_footer.php" ?>
         </div>
+        <?php
+          $tuttiInterventi = "'";
+          for ($i=0; $i < sizeOf($interventi); $i++){
+            if($interventi[$i][1]==1){
+              $inter = "intervento";
+            }else{
+              $inter = "interventi";
+            }
+            //print_r($interventi);
+            $tipoIntervento = $interventi[$i][0];
+            $totInterventi = $interventi[$i][1];
+            $tuttiInterventi .= "<b>$tipoIntervento: </b> $totInterventi $inter <br>";
+          }
+          $tuttiInterventi .= "'";
+        ?>
+        <script>
+        var allInterventi = new tingle.modal({
+                  closeMethods: ['overlay', 'button', 'escape'],
+                  closeLabel: "Chiudi",
+                  cssClass: ['custom-class-1', 'custom-class-2'],
+                  onOpen: function() {
+                      console.log('modal open');
+                  },
+                  onClose: function() {
+                      console.log('modal closed');
+                  },
+                  beforeClose: function() {
+                      return true; // close the modal
+                      return false; // nothing happens
+                  }
+              });
+          allInterventi.setContent(
+            '<h2 class="style-gradient-text">Tutti gli interventi<h2>'+
+            '<div>'+
+            '<ul class="mdl-list">'+
+            <?php echo $tuttiInterventi ?> +
+            '</ul>'+
+            '</div>'
+          );
+        </script>
       </main>
     </div>
   </body>
