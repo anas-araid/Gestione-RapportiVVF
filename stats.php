@@ -72,14 +72,23 @@
                          <i class="material-icons">cancel</i>
                   </button>
                   <?php
-                    $interventi = getInterventi($db_conn);
-                    //print_r($interventi);
-
+                    $interventi = getInterventi($db_conn, false);
+                    $chartData = array();
+                    $chartLabel = array();
+                    // creo due array contenenti uno il nome dell'intervento, e l'altro il numero
+                    for ($i=0; $i<count($interventi);$i++){
+                      $chartData[$i] = $interventi[$i][1];
+                      $chartLabel[$i] = $interventi[$i][0];
+                    }
+                    // conversione da array php a qullo javscript
+                    $chartLabel = json_encode($chartLabel);
+                    $chartData = json_encode($chartData);
                    ?>
-                  <!--
+
                   <canvas id="myChart" style="max-height:300px;max-width:300px"></canvas>
                   <script>
                     // lista colori
+                    /*
                     chartColors = {
                     	1: 'rgb(255, 99, 132)',
                     	2: 'rgb(255, 159, 64)',
@@ -88,17 +97,26 @@
                     	5: 'rgb(54, 162, 235)',
                     	6: 'rgb(153, 102, 255)',
                     	7: 'rgb(201, 203, 207)'
+                    };*/
+                    chartColors = {
+                      1: '#e74c3c',
+                      2: '#e67e22',
+                      3: '#2ecc71',
+                      4: '#f1c40f',
+                      5: '#3498db',
+                      6: '#9b59b6',
+                      7: '#34495e'
                     };
-                    var data = [10, 20, 30]
-                    console.log(data.length);
+                    var colors = Array();
+                    for (var i=0; i < <?php echo $chartData ?>.length;i++){
+                      colors[i]= chartColors[i+1];
+                    }
                     var ctx = document.getElementById("myChart").getContext('2d');
                     var data = {
-                      labels: ["Red", "Blue", "Yellow"],
+                      labels: <?php echo $chartLabel ?>,
                       datasets: [{
-                        data: [10, 20, 30],
-                        backgroundColor: [
-
-                          ],
+                        data: <?php echo $chartData ?>,
+                        backgroundColor: colors,
                        }],
                     }
                     var myDoughnutChart = new Chart(ctx, {
@@ -109,7 +127,6 @@
                   			}
                     });
                   </script>
-                -->
 
                 </div>
                 <br>

@@ -1,7 +1,11 @@
 <?php
-  function getInterventi($db_conn){
+  function getInterventi($db_conn, $isFrequent){
+    $frequent = "";
+    if ($isFrequent){
+      $frequent = " ORDER BY n_inter DESC LIMIT 5";
+    }
     $report = array();
-    $sql = "SELECT FK_TipoChiamata as Intervento, count(FK_TipoChiamata) as n_inter FROM t_rapportiVVF group by FK_TipoChiamata";
+    $sql = "SELECT FK_TipoChiamata AS Intervento, COUNT(FK_TipoChiamata) AS n_inter FROM t_rapportiVVF GROUP BY FK_TipoChiamata".$frequent;
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
@@ -13,6 +17,7 @@
     }
     return $report;
   }
+
   //$report['Intervento'] = getCallType($ris['Intervento'], $db_conn);
   //$report['N_intervento'] = $ris['n_inter'];
 ?>
