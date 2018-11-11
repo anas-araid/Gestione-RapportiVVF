@@ -354,7 +354,7 @@
                               if ($rapporto['FK_Responsabile'] == $ros[$i][0]){
                                 $selected = "selected";
                               }
-                              echo '<option value="'.$ros[$i][0].'">'.$ros[$i][1].'</option>';
+                              echo '<option value="'.$ros[$i][0].'" '.$selected.'>'.$ros[$i][1].'</option>';
                             }
                            ?>
                         </select>
@@ -371,7 +371,7 @@
                               if ($rapporto['FK_Compilatore'] == $compilatore[$i][0]){
                                 $selected = "selected";
                               }
-                              echo '<option value="'.$compilatore[$i][0].'">'.$compilatore[$i][1].'</option>';
+                              echo '<option value="'.$compilatore[$i][0].'" '.$selected.'>'.$compilatore[$i][1].'</option>';
                             }
                            ?>
                         </select>
