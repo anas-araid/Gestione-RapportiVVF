@@ -61,7 +61,16 @@
 
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
-                <div style="text-align:center">
+                <div>
+                  <h3 style="text-align:center" class="style-gradient-text">Statistiche</h3>
+                  <br>
+                  <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
+                          style="width:200px;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
+                          type="reset"
+                           onclick="location.href='index.php?back=true'">
+                           Tutti gli interventi
+                         <i class="material-icons">cancel</i>
+                  </button>
                   <ul class="mdl-list">
                     <?php
                       $interventi = getInterventi($db_conn);
@@ -117,7 +126,16 @@
                 -->
 
                 </div>
-
+                <br>
+                <div class="mdl-cell mdl-cell--middle mdl-cell--12-col mdl-cell--hide-desktop" style="100%">
+                  <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
+                  style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
+                  type="reset"
+                  onclick="location.href='index.php?back=true'">
+                  Indietro
+                  <i class="material-icons">cancel</i>
+                </button>
+              </div>
               </div>
             </section>
           </div>
