@@ -59,7 +59,7 @@
             </section>
 
 
-            <section class="mdl-cell mdl-cell--middle mdl-cell--9-col">
+            <section class="mdl-cell mdl-cell--middle mdl-cell--9-col" style="max-height:650px;overflow:auto">
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
                 <div>
                   <h3 style="text-align:center" class="style-gradient-text">Statistiche</h3>
@@ -72,8 +72,6 @@
                          <i class="material-icons">cancel</i>
                   </button>
                   <?php
-                    $anno = getInterventiAnnuali(2018, $db_conn);
-                    print_r($anno);
                     $interventi = getInterventi($db_conn, false);
                     $chartData = array();
                     $chartLabel = array();
@@ -87,19 +85,11 @@
                     $chartData = json_encode($chartData);
                    ?>
 
-                  <canvas id="myChart" style="max-height:300px;max-width:300px"></canvas>
+
+                   <!-- ###      GRAFICO INTERVENTI FREQUENTI         ### -->
+                  <canvas id="chartInterventiFrequenti" style="max-height:300px;max-width:300px"></canvas>
                   <script>
                     // lista colori
-                    /*
-                    chartColors = {
-                    	1: 'rgb(255, 99, 132)',
-                    	2: 'rgb(255, 159, 64)',
-                    	3: 'rgb(255, 205, 86)',
-                    	4: 'rgb(75, 192, 192)',
-                    	5: 'rgb(54, 162, 235)',
-                    	6: 'rgb(153, 102, 255)',
-                    	7: 'rgb(201, 203, 207)'
-                    };*/
                     chartColors = {
                       1: '#e74c3c',
                       2: '#e67e22',
@@ -113,7 +103,7 @@
                     for (var i=0; i < <?php echo $chartData ?>.length;i++){
                       colors[i]= chartColors[i+1];
                     }
-                    var ctx = document.getElementById("myChart").getContext('2d');
+                    var ctx = document.getElementById("chartInterventiFrequenti").getContext('2d');
                     var data = {
                       labels: <?php echo $chartLabel ?>,
                       datasets: [{
@@ -121,7 +111,7 @@
                         backgroundColor: colors,
                        }],
                     }
-                    var myDoughnutChart = new Chart(ctx, {
+                    var chartFrequenti = new Chart(ctx, {
                         type: 'doughnut',
                         data: data,
                         options: {
@@ -129,6 +119,52 @@
                   			}
                     });
                   </script>
+
+                  <!-- ###      GRAFICO INTERVENTI ANNUALI         ### -->
+
+                  <?php
+                    $anno = getInterventiAnnuali(2018, $db_conn);
+                    $chartMese = array();
+                    $chartInterventi = array();
+                    // creo due array contenenti uno il nome dell'intervento, e l'altro il numero
+                    for ($i=0; $i<count($anno);$i++){
+                      $chartMese[$i] = $anno[$i][0];
+                      $chartInterventi[$i] = $anno[$i][1];
+                    }
+                    // conversione da array php a qullo javscript
+                    $maxInterventiAlMese = max($chartInterventi);
+                    $chartMese = json_encode($chartMese);
+                    $chartInterventi = json_encode($chartInterventi);
+                   ?>
+
+                  <canvas id="chartInterventiAnnuali" style="max-height:auto;max-width:100%"></canvas>
+                  <script>
+                  var ctx = document.getElementById("chartInterventiAnnuali").getContext('2d');
+                  var chartAnnuali = new Chart(ctx, {
+                      type: 'line',
+                      data: {
+                          datasets: [{
+                              label: 'Interventi: ',
+                              data: <?php echo $chartInterventi ?>,
+                              backgroundColor: "rgba(231, 77, 60, 0.49)",
+                              borderColor: "#e74c3c",
+                          }],
+                          labels: <?php echo $chartMese ?>
+                      },
+                      options: {
+                          scales: {
+                              yAxes: [{
+                                  ticks: {
+                                      suggestedMin: 0,
+                                      suggestedMax: <?php echo $maxInterventiAlMese ?>
+                                  }
+                              }]
+                          }
+                      }
+                  });
+
+                  </script>
+
 
                 </div>
                 <br>
