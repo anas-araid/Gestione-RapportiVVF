@@ -144,7 +144,7 @@
                       ?>
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:90%">
                          <input class="mdl-textfield__input" type="text" id="idVia" name="via" required="" value="<?php echo $localita['via'] ?>">
-                         <label class="mdl-textfield__label" for="idVia">Via</label>
+                         <label class="mdl-textfield__label" for="idVia">Via*</label>
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--4-col">
@@ -167,13 +167,13 @@
                     <br>
 
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                      <span>Ora di partenza &nbsp</span>
+                      <span>Ora di partenza* &nbsp</span>
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
                          <input class="mdl-textfield__input" type="time" id="IdOraUscita" name="oraUscita" required="" value="<?php echo $rapporto['OraUscita'] ?>">
                       </div>
                     </div>
                     <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                      <span>Ora di rientro &nbsp</span>
+                      <span>Ora di rientro* &nbsp</span>
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50%">
                          <input class="mdl-textfield__input" type="time" id="IdOraRientro" name="oraRientro" required="" value="<?php echo $rapporto['OraRientro'] ?>">
                       </div>

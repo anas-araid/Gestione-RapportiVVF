@@ -60,7 +60,7 @@
 
 
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col" style="max-height:650px;overflow:auto">
-              <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
+              <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%;text-align:center">
                 <div>
                   <h3 style="text-align:center" class="style-gradient-text">Statistiche</h3>
                   <br>
