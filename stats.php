@@ -72,6 +72,8 @@
                          <i class="material-icons">cancel</i>
                   </button>
                   <?php
+                    $anno = getInterventiAnnuali(2018, $db_conn);
+                    print_r($anno);
                     $interventi = getInterventi($db_conn, false);
                     $chartData = array();
                     $chartLabel = array();
