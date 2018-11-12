@@ -46,7 +46,6 @@
     fwrite($csv, "Compilatore");
     for ($i=0; $i<count($report); $i++){
       $currentReport = $report[$i];
-      print_r($currentReport);
       fwrite($csv, "\n");
       fwrite($csv, $currentReport['ID'].",");
       fwrite($csv, $currentReport['ID_Rapporto'].",");
