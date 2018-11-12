@@ -72,7 +72,7 @@
                          <i class="material-icons">cancel</i>
                   </button>
                   <?php
-                    $interventi = getInterventi($db_conn, false);
+                    $interventi = getInterventi(2018, $db_conn, true);
                     $chartData = array();
                     $chartLabel = array();
                     // creo due array contenenti uno il nome dell'intervento, e l'altro il numero

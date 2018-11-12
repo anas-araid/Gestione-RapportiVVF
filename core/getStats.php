@@ -1,11 +1,14 @@
 <?php
-  function getInterventi($db_conn, $isFrequent){
+  function getInterventi($anno, $db_conn, $isFrequent){
     $frequent = "";
     if ($isFrequent){
       $frequent = " ORDER BY n_inter DESC LIMIT 5";
     }
+    if ($anno != ""){
+      $anno = "WHERE YEAR(Data) = '$anno'";
+    }
     $report = array();
-    $sql = "SELECT FK_TipoChiamata AS Intervento, COUNT(FK_TipoChiamata) AS n_inter FROM t_rapportiVVF GROUP BY FK_TipoChiamata".$frequent;
+    $sql = "SELECT FK_TipoChiamata AS Intervento, COUNT(FK_TipoChiamata) AS n_inter FROM t_rapportiVVF $anno GROUP BY FK_TipoChiamata".$frequent;
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
@@ -18,11 +21,11 @@
     return $report;
   }
   function getInterventiAnnuali($anno, $db_conn){
-    if ($anno == ""){
-      $anno = "2018";
+    if ($anno != ""){
+      $anno = "WHERE YEAR(Data) = '$anno'";
     }
     $report = array();
-    $sql = "SELECT COUNT(FK_TipoChiamata) AS num_inter, MONTH(Data) as mese  FROM t_rapportiVVF WHERE YEAR(Data) = '$anno' GROUP BY MONTH(Data)";
+    $sql = "SELECT COUNT(FK_TipoChiamata) AS num_inter, MONTH(Data) as mese  FROM t_rapportiVVF $anno GROUP BY MONTH(Data)";
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
@@ -33,7 +36,7 @@
     }
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
-      $report[$ris["mese"]-1][1] = $ris["num_inter"]; 
+      $report[$ris["mese"]-1][1] = $ris["num_inter"];
       $i++;
     }
     return $report;
