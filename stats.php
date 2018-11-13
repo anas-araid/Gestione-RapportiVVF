@@ -64,11 +64,15 @@
                 <div style="max-height:650px;overflow:auto;text-align:center">
                   <h3 style="text-align:center" class="style-gradient-text">Statistiche</h3>
                   <br>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" style="width:60%" data-upgraded=",MaterialTextfield">
+                    <select id="anno" class="mdl-textfield__input" style="outline:none"></select>
+                    <label class="mdl-textfield__label" for="anno">Seleziona anno</label>
+                  </div>
                   <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
                           style="width:200px;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
                           type="reset"
                            onclick="allInterventi.open()">
-                           Tutti gli interventi
+                           Riepilogo interventi
                          <i class="material-icons">cancel</i>
                   </button>
                   <?php

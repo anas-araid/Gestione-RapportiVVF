@@ -41,7 +41,13 @@
     }
     return $report;
   }
-
+  function getReportYears($db_conn){
+    $sql = "SELECT YEAR(Data) as anno FROM t_rapportiVVF GROUP BY anno";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+  }
   //$report['Intervento'] = getCallType($ris['Intervento'], $db_conn);
   //$report['N_intervento'] = $ris['n_inter'];
 ?>
