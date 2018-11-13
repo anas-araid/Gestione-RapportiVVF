@@ -64,8 +64,38 @@
                 <div style="max-height:650px;overflow:auto;text-align:center">
                   <h3 style="text-align:center" class="style-gradient-text">Statistiche</h3>
                   <br>
+                  <script>
+                    function updateYears() {
+                        var select = document.getElementById("anno").value;
+                        if (select == 1){
+                            window.location.href= '?year=""'
+                        }else{
+                          window.location.href= '?year=' + select;
+                        }
+                    }
+                  </script>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" style="width:60%" data-upgraded=",MaterialTextfield">
-                    <select id="anno" class="mdl-textfield__input" style="outline:none"></select>
+                    <select id="anno" onchange="updateYears()" class="mdl-textfield__input" style="outline:none">
+                      <option value="1">TUTTI</option>
+                      <?php
+                        $years = getReportYears($db_conn);
+                        $annoSelezionato = "";
+                        if (isset($_GET['year'])){
+                          $annoSelezionato = $_GET['year'];
+                          if (!in_array($annoSelezionato, $years)){
+                            $annoSelezionato = "";
+                          }
+                        }
+                        for ($i=0; $i < count($years); $i++){
+                          $selected = "";
+                          if ($annoSelezionato == $years[$i]){
+                            $selected = "selected";
+                          }
+                          echo '<option value="'.$years[$i].'"  '.$selected.'>'.$years[$i].'</option>';
+                        }
+
+                      ?>
+                    </select>
                     <label class="mdl-textfield__label" for="anno">Seleziona anno</label>
                   </div>
                   <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
@@ -76,7 +106,7 @@
                          <i class="material-icons">cancel</i>
                   </button>
                   <?php
-                    $interventi = getInterventi(2018, $db_conn, true);
+                    $interventi = getInterventi($annoSelezionato, $db_conn, true);
                     $chartData = array();
                     $chartLabel = array();
                     // creo due array contenenti uno il nome dell'intervento, e l'altro il numero
@@ -130,7 +160,7 @@
                 <!-- ###      GRAFICO INTERVENTI ANNUALI         ### -->
 
                 <?php
-                  $anno = getInterventiAnnuali(2018, $db_conn);
+                  $anno = getInterventiAnnuali($annoSelezionato, $db_conn);
                   $chartMese = array();
                   $chartInterventi = array();
                   // creo due array contenenti uno il nome dell'intervento, e l'altro il numero

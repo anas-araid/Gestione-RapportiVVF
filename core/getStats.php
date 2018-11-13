@@ -47,6 +47,13 @@
     if ($risultato == false){
       die("error");
     }
+    $years = array();
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $years[$i] = $ris["anno"];
+      $i++;
+    }
+    return $years;
   }
   //$report['Intervento'] = getCallType($ris['Intervento'], $db_conn);
   //$report['N_intervento'] = $ris['n_inter'];
