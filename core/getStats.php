@@ -55,6 +55,21 @@
     }
     return $years;
   }
-  //$report['Intervento'] = getCallType($ris['Intervento'], $db_conn);
-  //$report['N_intervento'] = $ris['n_inter'];
+  function getHours($anno, $db_conn){
+      if ($anno != ""){
+        $anno = "WHERE YEAR(Data) = '$anno'";
+      }
+      $sql = "SELECT HOUR(OraUscita) as ora, count(FK_TipoChiamata) as n_inter FROM `t_rapportivvf` $anno GROUP BY ora";
+      $risultato = mysqli_query($db_conn, $sql);
+      if ($risultato == false){
+        die("error");
+      }
+      $hours = array();
+      for ($i=0; $i < 24; $i++){
+        $hours[$i] = 0;
+      }
+      while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+        $hours[$ris['ora']] = $ris['n_inter'];
+      }
+  }
 ?>

@@ -203,6 +203,51 @@
                     </script>
                  </div>
                  <br>
+                 <!-- ###      GRAFICO FASCIE ORARIE         ### -->
+
+                 <?php
+                   $interventiOrari = getHours($annoSelezionato, $db_conn);
+                   $chartOra = array();
+                   $chartInterventiPerOra = array();
+                   // creo due array contenenti uno il nome dell'intervento, e l'altro il numero
+                   for ($i=0; $i<count($anno);$i++){
+                     $chartMese[$i] = $anno[$i][0];
+                     $chartInterventi[$i] = $anno[$i][1];
+                   }
+                   // conversione da array php a qullo javscript
+                   $maxInterventiAlMese = max($chartInterventi);
+                   $chartMese = json_encode($chartMese);
+                   $chartInterventi = json_encode($chartInterventi);
+                  ?>
+                  <h5 class="style-gradient-text" style="text-align:left">Numeri di interventi nell'anno:</h5>
+
+                  <canvas id="chartInterventiAnnuali" style="max-height:auto;max-width:100%"></canvas>
+                  <script>
+                  var ctx = document.getElementById("chartInterventiAnnuali").getContext('2d');
+                  var chartAnnuali = new Chart(ctx, {
+                         type: 'line',
+                         data: {
+                             datasets: [{
+                                 label: 'Interventi: ',
+                                 data: <?php echo $chartInterventi ?>,
+                                 backgroundColor: "rgba(231, 77, 60, 0.49)",
+                                 borderColor: "#e74c3c",
+                             }],
+                             labels: <?php echo $chartMese ?>
+                         },
+                         options: {
+                             scales: {
+                                 yAxes: [{
+                                     ticks: {
+                                         suggestedMin: 0,
+                                         suggestedMax: <?php echo $maxInterventiAlMese ?>
+                                     }
+                                 }]
+                             }
+                         }
+                     });
+                     </script>
+                  </div>
                  <div class="mdl-cell mdl-cell--middle mdl-cell--12-col mdl-cell--hide-desktop" style="100%">
                    <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
                       style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
