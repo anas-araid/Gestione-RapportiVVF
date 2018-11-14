@@ -16,3 +16,4 @@
 <script src="js/sweetalert.js"></script>
 <script src="js/tingle.js"></script>
 <script src="js/chart.js"></script>
+<script src="js/jquery.min.js"></script>

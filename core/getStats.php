@@ -71,5 +71,6 @@
       while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
         $hours[$ris['ora']] = $ris['n_inter'];
       }
+      return $hours;
   }
 ?>

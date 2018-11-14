@@ -61,7 +61,7 @@
 
             <section class="mdl-cell mdl-cell--middle mdl-cell--9-col" >
               <div class="mdl-card mdl-shadow--8dp style-card" style="width:100%">
-                <div style="max-height:650px;overflow:auto;text-align:center">
+                <div id="stats-container" style="max-height:650px;overflow:auto;text-align:center;padding-bottom:30px">
                   <h3 style="text-align:center" class="style-gradient-text">Statistiche</h3>
                   <br>
                   <script>
@@ -194,60 +194,62 @@
                                 yAxes: [{
                                     ticks: {
                                         suggestedMin: 0,
-                                        suggestedMax: <?php echo $maxInterventiAlMese ?>
+                                        suggestedMax: <?php echo $maxInterventiAlMese + 1  ?>
                                     }
                                 }]
                             }
                         }
                     });
                     </script>
+                    <!-- ###      GRAFICO FASCIE ORARIE         ### -->
+
+                    <?php
+                      $interventiOrari = getHours($annoSelezionato, $db_conn);
+                      $chartOra = array();
+                      $chartInterventiPerOra = array();
+                      // creo due array contenenti uno l'ora dell'intervento, e l'altro il numero
+                      for ($i=0; $i<count($interventiOrari);$i++){
+                        $chartOra[$i] = "$i".".00";
+                        $chartInterventiPerOra[$i] = $interventiOrari[$i];
+                      }
+                      // conversione da array php a qullo javscript
+                      $maxInterventiPerOra = max($chartInterventiPerOra);
+                      $chartOra = json_encode($chartOra);
+                      $chartInterventiPerOra = json_encode($chartInterventiPerOra);
+                     ?>
+                     <h5 class="style-gradient-text" style="text-align:left">Fascie orarie:</h5>
+
+                     <canvas id="chartFascieOrarie" style="max-height:auto;max-width:100%"></canvas>
+                     <script>
+                     var ctx = document.getElementById("chartFascieOrarie").getContext('2d');
+                     var chartFascieOrarieOrari = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                datasets: [{
+                                    label: 'Interventi ogni ora: ',
+                                    data: <?php echo $chartInterventiPerOra ?>,
+                                    backgroundColor: "rgba(231, 77, 60, 0.49)",
+                                    borderColor: "#e74c3c",
+                                }],
+                                labels: <?php echo $chartOra ?>
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            suggestedMin: 0,
+                                            suggestedMax: <?php echo $maxInterventiPerOra +1 ?>
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        </script>
+                     </div>
                  </div>
                  <br>
-                 <!-- ###      GRAFICO FASCIE ORARIE         ### -->
-
-                 <?php
-                   $interventiOrari = getHours($annoSelezionato, $db_conn);
-                   $chartOra = array();
-                   $chartInterventiPerOra = array();
-                   // creo due array contenenti uno il nome dell'intervento, e l'altro il numero
-                   for ($i=0; $i<count($anno);$i++){
-                     $chartMese[$i] = $anno[$i][0];
-                     $chartInterventi[$i] = $anno[$i][1];
-                   }
-                   // conversione da array php a qullo javscript
-                   $maxInterventiAlMese = max($chartInterventi);
-                   $chartMese = json_encode($chartMese);
-                   $chartInterventi = json_encode($chartInterventi);
-                  ?>
-                  <h5 class="style-gradient-text" style="text-align:left">Numeri di interventi nell'anno:</h5>
-
-                  <canvas id="chartInterventiAnnuali" style="max-height:auto;max-width:100%"></canvas>
-                  <script>
-                  var ctx = document.getElementById("chartInterventiAnnuali").getContext('2d');
-                  var chartAnnuali = new Chart(ctx, {
-                         type: 'line',
-                         data: {
-                             datasets: [{
-                                 label: 'Interventi: ',
-                                 data: <?php echo $chartInterventi ?>,
-                                 backgroundColor: "rgba(231, 77, 60, 0.49)",
-                                 borderColor: "#e74c3c",
-                             }],
-                             labels: <?php echo $chartMese ?>
-                         },
-                         options: {
-                             scales: {
-                                 yAxes: [{
-                                     ticks: {
-                                         suggestedMin: 0,
-                                         suggestedMax: <?php echo $maxInterventiAlMese ?>
-                                     }
-                                 }]
-                             }
-                         }
-                     });
-                     </script>
-                  </div>
+                 <br>
+                 <br>
                  <div class="mdl-cell mdl-cell--middle mdl-cell--12-col mdl-cell--hide-desktop" style="100%">
                    <button class="mdl-button mdl-js-button mdl-button--raised style-gradient style-button"
                       style="width:100%;height:35px;color:white;border:none;border-radius:20px;;text-align:center;margin-bottom:15px"
@@ -301,6 +303,7 @@
             '</ul>'+
             '</div>'
           );
+          jQuery('stats-container').css('max-height', jQuery(document).height() - '100px');
         </script>
       </main>
     </div>
