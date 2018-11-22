@@ -42,7 +42,7 @@
     return $report;
   }
   function getReportYears($db_conn){
-    $sql = "SELECT YEAR(Data) as anno FROM t_rapportiVVF GROUP BY anno";
+    $sql = "SELECT YEAR(Data) as anno FROM t_rapportiVVF GROUP BY anno DESC";
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
