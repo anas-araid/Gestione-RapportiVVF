@@ -14,7 +14,7 @@
         }
         if (!$_SESSION['include']){
           $_SESSION = array();
-          $_SESSION['include'] = 'core/checkPassword.php';
+          $_SESSION['include'] = 'core/checkMatricola.php';
         }
         if ($_SESSION['reportCSV']){
           $_SESSION['reportCSV'] = false;
