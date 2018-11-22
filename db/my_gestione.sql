@@ -8,6 +8,7 @@ CREATE TABLE t_vigili (
   Cognome			     VARCHAR(50),
   Matricola		     VARCHAR(5)	UNIQUE NOT NULL,
   Password         CHAR(64),
+  User             BOOLEAN,
   PRIMARY KEY(ID)
 ) ENGINE = InnoDB;
 

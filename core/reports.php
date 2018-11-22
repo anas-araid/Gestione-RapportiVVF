@@ -49,14 +49,7 @@
     </div>
   </div>
 
-  <script>
-    <?php
-      if ($_SESSION['warning']){
-        $_SESSION['warning'] = false;
-        echo "flatAlert('Attenzione', 'L\'applicazione è ancora instabile: eventuali malfunzionamenti verranno risolti il più presto possibile.', 'warning', '#')";
-      }
-    ?>
-  </script>
+
   <div style="overflow:auto">
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:95%;margin:10px">
       <thead>
@@ -71,7 +64,6 @@
       </thead>
       <tbody>
         <?php
-          include "core/getData.php";
           if (isset($_SESSION['search'])){
             if ($_SESSION['search'] == array()){
               echo "<script>flatAlert('Attenzione', 'La ricerca non ha prodotto risultati.', 'warning', '#')</script>";

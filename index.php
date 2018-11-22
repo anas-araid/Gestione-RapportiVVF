@@ -2,6 +2,7 @@
   <head>
     <?php
       include "core/_header.php";
+      include "core/getData.php";
       session_start();
       try{
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -14,7 +15,7 @@
         }
         if (!$_SESSION['include']){
           $_SESSION = array();
-          $_SESSION['include'] = 'core/checkMatricola.php';
+          $_SESSION['include'] = 'core/selectFireman.php';
         }
         if ($_SESSION['reportCSV']){
           $_SESSION['reportCSV'] = false;

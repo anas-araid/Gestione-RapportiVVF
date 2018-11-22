@@ -89,13 +89,15 @@
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
       if($ID == null){
-        $fireman["$i"] = array($ris['ID'], $ris['Cognome']." ".$ris['Nome']);
+        $fireman["$i"] = array($ris['ID'], $ris['Cognome']." ".$ris['Nome'], $ris['Password'], $ris['User']);
         $i++;
       }else{
         $fireman['ID'] = $ris['ID'];
         $fireman['Nome'] = $ris['Nome'];
         $fireman['Cognome'] = $ris['Cognome'];
         $fireman['Matricola'] = $ris['Matricola'];
+        $fireman['Password'] = $ris['Password'];
+        $fireman['User'] = $ris['User'];
       }
     }
     return $fireman;
