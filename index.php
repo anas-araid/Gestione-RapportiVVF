@@ -39,6 +39,32 @@
         </div>
       </div>
     </div>
+    <script>
+    // nasconde il contenuto della pagina per 2 secondi per mostrare il loading
+      setTimeout(function(){
+        document.getElementById("loading-div").remove();
+        document.getElementById("main").style.display = "block";
+      }, 1500);
+      // nasconde il contenuto della pagina per 2 secondi per mostrare il loading
+      /*
+      var loading  = document.getElementById("loading-div");
+      loading.style.display = "none";
+      loading.setAttribute('style', 'display:none !important')
+      function loadingFX(){
+        window.onload= function(){
+          loading.style.display = "block";
+          loading.setAttribute('style', 'display:block !important')
+
+          document.getElementById("main").style.display = "none";
+          setTimeout(function(){
+            loading.remove();
+            document.getElementById("main").style.display = "block";
+          }, 1000);
+        };
+      }
+      loadingFX();
+      */
+    </script>
     <div class="mdl-layout mdl-js-layout">
       <main class="mdl-layout__content" id="main">
         <div class="page-content">
@@ -89,32 +115,6 @@
       </main>
     </div>
   </body>
-  <script>
-  // nasconde il contenuto della pagina per 2 secondi per mostrare il loading
-    document.getElementById("main").style.display = "none";
-    setTimeout(function(){
-      document.getElementById("loading-div").remove();
-      document.getElementById("main").style.display = "block";
-    }, 1500);
-    // nasconde il contenuto della pagina per 2 secondi per mostrare il loading
-    /*
-    var loading  = document.getElementById("loading-div");
-    loading.style.display = "none";
-    loading.setAttribute('style', 'display:none !important')
-    function loadingFX(){
-      window.onload= function(){
-        loading.style.display = "block";
-        loading.setAttribute('style', 'display:block !important')
 
-        document.getElementById("main").style.display = "none";
-        setTimeout(function(){
-          loading.remove();
-          document.getElementById("main").style.display = "block";
-        }, 1000);
-      };
-    }
-    loadingFX();
-    */
-  </script>
 
 </html>
