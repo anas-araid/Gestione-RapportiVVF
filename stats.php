@@ -250,13 +250,13 @@
                     <!-- ###      GRAFICO MEZZI FREQUENTI         ### -->
 
                     <?php
-                      $interventi = getMezziIntervenuti($annoSelezionato, $db_conn, true);
+                      $mezziIntervenuti = getMezziIntervenuti($annoSelezionato, $db_conn, true);
                       $chartData = array();
                       $chartLabel = array();
                       // creo due array contenenti uno il nome dell'intervento, e l'altro il numero
-                      for ($i=0; $i<count($interventi);$i++){
-                        $chartData[$i] = $interventi[$i][1];
-                        $chartLabel[$i] = $interventi[$i][0];
+                      for ($i=0; $i<count($mezziIntervenuti);$i++){
+                        $chartData[$i] = $mezziIntervenuti[$i][1];
+                        $chartLabel[$i] = $mezziIntervenuti[$i][0];
                       }
                       // conversione da array php a qullo javscript
                       $chartLabel = json_encode($chartLabel);
@@ -326,7 +326,7 @@
             }else{
               $inter = "interventi";
             }
-            //print_r($interventi);
+            print_r($interventi);
             $tipoIntervento = $interventi[$i][0];
             $totInterventi = $interventi[$i][1];
             $tuttiInterventi .= "<b>$tipoIntervento: </b> $totInterventi $inter <br>";

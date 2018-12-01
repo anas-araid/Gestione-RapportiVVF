@@ -217,6 +217,7 @@ INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Soccorso tecnico generico');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Sopralluogo incendio');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Supporto elicottero');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Taglio Pianta');
+INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Maltempo');
 INSERT INTO t_tipoChiamata (Tipologia) VALUES ('Altro');
 
 INSERT INTO t_comuni (Comune) VALUES ('Pergine Valsugana');
