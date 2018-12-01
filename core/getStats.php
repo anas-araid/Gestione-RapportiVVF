@@ -8,14 +8,14 @@
       $anno = "WHERE YEAR(Data) = '$anno'";
     }
     $report = array();
-    $sql = "SELECT FK_TipoChiamata AS Intervento, COUNT(FK_TipoChiamata) AS n_inter FROM t_rapportiVVF $anno GROUP BY FK_TipoChiamata".$frequent;
+    $sql = "SELECT FK_TipoChiamata AS Intervento, COUNT(FK_TipoChiamata) AS n_inter, ID_Rapporto AS id FROM t_rapportiVVF $anno GROUP BY FK_TipoChiamata".$frequent;
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
     }
     $i=0;
     while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
-      $report[$i] = array(getCallType($ris['Intervento'], $db_conn), $ris['n_inter']);
+      $report[$i] = array(getCallType($ris['Intervento'], $db_conn), $ris['n_inter'], $ris['id']);
       $i++;
     }
     return $report;
@@ -72,5 +72,35 @@
         $hours[$ris['ora']] = $ris['n_inter'];
       }
       return $hours;
+  }
+  function getMezziIntervenuti($anno, $db_conn, $isFrequent){
+    $interventi = getInterventi($anno, $db_conn, false);
+    if (!isset($interventi)){
+      return;
+    }
+    $frequent = "";
+    if ($isFrequent){
+      $frequent = " ORDER BY n_inter DESC LIMIT 5";
+    }
+    $rapporto ="";
+    $or = "or";
+    for ($i=0;$i<count($interventi);$i++){
+      if ($i == count($interventi) -1){
+        $or = "";
+      }
+      $rapporto .= "FK_RapportoVVF = ".$interventi[$i][2]." $or ";
+    }
+    $mezzi = array();
+    $sql = "SELECT FK_Mezzo, COUNT(FK_Mezzo) AS n_inter FROM t_mezziintervenuti WHERE $rapporto GROUP BY FK_Mezzo LIMIT 5";
+    $risultato = mysqli_query($db_conn, $sql);
+    if ($risultato == false){
+      die("error");
+    }
+    $i=0;
+    while($ris = mysqli_fetch_array ($risultato, MYSQLI_ASSOC)){
+      $mezzi[$i] = array(getMezzi($ris['FK_Mezzo'], $db_conn), $ris['n_inter']);
+      $i++;
+    }
+    return $mezzi;
   }
 ?>

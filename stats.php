@@ -107,6 +107,7 @@
                   </button>
                   <?php
                     $interventi = getInterventi($annoSelezionato, $db_conn, true);
+                    //print_r($interventi);
                     $chartData = array();
                     $chartLabel = array();
                     // creo due array contenenti uno il nome dell'intervento, e l'altro il numero
@@ -244,9 +245,62 @@
                                 }
                             }
                         });
-                        </script>
-                     </div>
-                 </div>
+                    </script>
+
+                    <!-- ###      GRAFICO MEZZI FREQUENTI         ### -->
+
+                    <?php
+                      $interventi = getMezziIntervenuti($annoSelezionato, $db_conn, true);
+                      $chartData = array();
+                      $chartLabel = array();
+                      // creo due array contenenti uno il nome dell'intervento, e l'altro il numero
+                      for ($i=0; $i<count($interventi);$i++){
+                        $chartData[$i] = $interventi[$i][1];
+                        $chartLabel[$i] = $interventi[$i][0];
+                      }
+                      // conversione da array php a qullo javscript
+                      $chartLabel = json_encode($chartLabel);
+                      $chartData = json_encode($chartData);
+                    ?>
+
+
+                  <div style="text-align:center">
+                    <h5 class="style-gradient-text" style="text-align:left">Mezzi più utilizzati:</h5>
+                    <canvas id="chartMezziUsati" style="max-height:300px;max-width:300px;display:unset"></canvas>
+                  </div>
+                  <script>
+                    // lista colori
+                    chartColors = {
+                      1: '#e74c3c',
+                      2: '#e67e22',
+                      3: '#2ecc71',
+                      4: '#f1c40f',
+                      5: '#3498db',
+                      6: '#9b59b6',
+                      7: '#34495e'
+                    };
+                    var colors = Array();
+                    for (var i=0; i < <?php echo $chartData ?>.length;i++){
+                      colors[i]= chartColors[i+1];
+                    }
+                    var ctx = document.getElementById("chartMezziUsati").getContext('2d');
+                    var data = {
+                      labels: <?php echo $chartLabel ?>,
+                      datasets: [{
+                        data: <?php echo $chartData ?>,
+                        backgroundColor: colors,
+                       }],
+                    }
+                    var chartFrequenti = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data,
+                        options: {
+                  				responsive: true
+                  			}
+                    });
+                  </script>
+
+                  </div>
                  <br>
                  <br>
                  <br>
