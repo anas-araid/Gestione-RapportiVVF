@@ -7,7 +7,7 @@
       try{
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         // error_reporting per togliere il notice quando non trova isLogged
-        error_reporting(0);
+        //error_reporting(0);
         include "core/dbConnection.php";
         if (isset($_GET['back'])) {
           $_SESSION['include'] = 'core/reports.php';

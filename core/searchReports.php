@@ -35,7 +35,6 @@
       </thead>
       <tbody>
         <?php
-          include "getData.php";
           if ($_SESSION['search'] != false){
             $reportsID = $_SESSION['search'];
             for ($i=0; $i < count($reportsID); $i++){

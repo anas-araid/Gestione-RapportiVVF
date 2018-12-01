@@ -8,7 +8,7 @@
       $anno = "WHERE YEAR(Data) = '$anno'";
     }
     $report = array();
-    $sql = "SELECT FK_TipoChiamata AS Intervento, COUNT(FK_TipoChiamata) AS n_inter, ID_Rapporto AS id FROM t_rapportiVVF $anno GROUP BY FK_TipoChiamata".$frequent;
+    $sql = "SELECT FK_TipoChiamata AS Intervento, COUNT(FK_TipoChiamata) AS n_inter, ID AS id FROM t_rapportiVVF $anno GROUP BY FK_TipoChiamata".$frequent;
     $risultato = mysqli_query($db_conn, $sql);
     if ($risultato == false){
       die("error");
