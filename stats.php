@@ -326,7 +326,7 @@
             }else{
               $inter = "interventi";
             }
-            print_r($interventi);
+
             $tipoIntervento = $interventi[$i][0];
             $totInterventi = $interventi[$i][1];
             $tuttiInterventi .= "<b>$tipoIntervento: </b> $totInterventi $inter <br>";
