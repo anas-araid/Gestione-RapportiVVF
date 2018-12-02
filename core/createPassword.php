@@ -49,7 +49,7 @@
       $_SESSION['include'] = 'core/reports.php';
       echo "
       <script>
-      flatAlert('Accesso eseguito con successo', '', 'success', 'index.php');
+      flatAlert('Accesso eseguito con successo', '', 'success', 'core/log.php');
       </script>";
     }
 
