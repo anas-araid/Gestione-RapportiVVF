@@ -34,6 +34,7 @@
         $_SESSION['include'] = 'core/checkPassword.php';
       }else{
         $_SESSION['include'] = 'core/createPassword.php';
+        header("location:core/checkIdentity.php");
       }
       echo "<script>location.href='index.php'</script>";
     }
